@@ -12,7 +12,7 @@ class DetailScreen extends React.Component {
     axios.get('http://101.101.161.189/api/index.php/linkb_event/select_event_detail', 
       {
         headers: {
-          'apikey': 'starthub'
+          'apikey': 'starthub'        
         },
         params:{
           'event_idx':this.props.route.params.event_idx
