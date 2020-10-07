@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, View } from 'react-native';
+import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import IntroScreen from './app/screens/IntroScreen';
@@ -12,6 +12,8 @@ import Join4Screen from './app/screens/Join4Screen';
 import DrawerStack from './app/routers/DrawerStack';
 
 const Stack = createStackNavigator();
+
+StatusBar.setHidden(true, 'none');
 
 function MyStack() {
   return (
