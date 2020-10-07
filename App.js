@@ -15,7 +15,7 @@ const Stack = createStackNavigator();
 
 function MyStack() {
   return (
-    <Stack.Navigator headerMode='none'>
+    <Stack.Navigator headerMode='none'>  
       <Stack.Screen name="Intro" component={IntroScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="JoinSelect" component={JoinSelectScreen} />
