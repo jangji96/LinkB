@@ -1,137 +1,37 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-import 'react-native-gesture-handler';
-import React, { Component } from 'react';
-
+import * as React from 'react';
+import { Button, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createAppContainer, TabRouter } from 'react-navigation';
-import { createStackNavigator, HeaderBackground } from 'react-navigation-stack';
-import {
-  StatusBar
-} from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
 import IntroScreen from './app/screens/IntroScreen';
 import LoginScreen from './app/screens/LoginScreen';
-import TabStack from "./app/routers/TabStack";
-import DrawerStack from "./app/routers/DrawerStack";
-import Join1Screen from "./app/screens/Join1Screen";
-import Join2Screen from "./app/screens/Join2Screen";
-import Join3Screen from "./app/screens/Join3Screen";
-import Join4Screen from "./app/screens/Join4Screen";
-import JoinSelectScreen from "./app/screens/JoinSelectScreen";
+import JoinSelectScreen from './app/screens/JoinSelectScreen';
+import Join1Screen from './app/screens/Join1Screen';
+import Join2Screen from './app/screens/Join2Screen';
+import Join3Screen from './app/screens/Join3Screen';
+import Join4Screen from './app/screens/Join4Screen';
+import DrawerStack from './app/routers/DrawerStack';
 
-StatusBar.setHidden(true, 'none');
+const Stack = createStackNavigator();
 
-const RootStack = createStackNavigator( 
-  {
-    Intro: {
-      screen:IntroScreen,
-      navigationOptions: {
-        headerShown: false ,
-        borderBottomWidth:0,
-      }
-    },
-    Login: {
-      screen:LoginScreen,
-      navigationOptions: {
-        headerTintColor:'white',
-        title: "LinkB",
-        headerTitleAlign:'center',
-        borderBottomWidth:0,
-        headerStyle: {
-          elevation: 0,
-          backgroundColor: '#704591',
-        }
-      }
-    },
-    JoinSelect: {
-      screen : JoinSelectScreen,
-      navigationOptions: {
-        animationEnabled:false,
-        headerTintColor:'white',
-        title: "LinkB",
-        headerTitleAlign:'center',
-        borderBottomWidth:0,
-        headerStyle: {
-          elevation: 0,
-          backgroundColor: '#704591',
-        }
-      }
-    },
-    Join1: {
-      screen : Join1Screen,
-      navigationOptions: {
-        animationEnabled:false,
-        headerTintColor:'white',
-        title: "LinkB",
-        headerTitleAlign:'center',
-        borderBottomWidth:0,
-        headerStyle: {
-          elevation: 0,
-          backgroundColor: '#704591',
-        }
-      }
-    },
-    Join2: {
-      screen : Join2Screen,
-      navigationOptions: {
-        animationEnabled:false,
-        headerTintColor:'white',
-        title: "LinkB",
-        headerTitleAlign:'center',
-        borderBottomWidth:0,
-        headerStyle: {
-          elevation: 0,
-          backgroundColor: '#704591',
-        }
-      }
-    },
-    Join3: {
-      screen : Join3Screen,
-      navigationOptions: {
-        animationEnabled:false,
-        headerTintColor:'white',
-        title: "LinkB",
-        headerTitleAlign:'center',
-        borderBottomWidth:0,
-        headerStyle: {
-          elevation: 0,
-          backgroundColor: '#704591',
-        }
-      }
-    },
-    Join4: {
-      screen : Join4Screen,
-      navigationOptions: {
-        animationEnabled:false,
-        headerTintColor:'white',
-        title: "LinkB",
-        headerTitleAlign:'center',
-        borderBottomWidth:0,
-        headerStyle: {
-          elevation: 0,
-          backgroundColor: '#704591',
-        }
-      }
-    },
-    Drawer: {
-      screen : DrawerStack,
-      navigationOptions: {
-        headerShown: false ,
-        borderBottomWidth:0,
-      }
-    }
-  }
-)
+function MyStack() {
+  return (
+    <Stack.Navigator headerMode='none'>  
+      <Stack.Screen name="Intro" component={IntroScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="JoinSelect" component={JoinSelectScreen} />
+      <Stack.Screen name="Join1" component={Join1Screen} />
+      <Stack.Screen name="Join2" component={Join2Screen} />
+      <Stack.Screen name="Join3" component={Join3Screen} />
+      <Stack.Screen name="Join4" component={Join4Screen} />
+      <Stack.Screen name="Drawer" component={DrawerStack} />
+    </Stack.Navigator>
+  );
+}
 
-const AppContainer = createAppContainer(RootStack);
-
-export default class App extends React.Component {
-  render() {
-    return <AppContainer />;
-  }
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
 }
