@@ -7,7 +7,8 @@ import {
     Text,
     Dimensions,
     Image,
-    StatusBar
+    StatusBar,
+    TouchableOpacity
 } from 'react-native';
 import {
     LearnMoreLinks,
@@ -15,85 +16,232 @@ import {
     DebugInstructions,
     ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import Swiper from 'react-native-swiper'
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { color } from "react-native-reanimated";
+
+const SCREEM_WIDTH = Dimensions.get("window").width;
 
 class MainScreenPresenter extends React.Component {
 
     render() {
-        const { width } = Dimensions.get("window");
-        const height = width * 0.6;
         return (
             <ScrollView style={{ flex: 1, flexDirection: 'column' }}>
-                <View>
-                    <Header style={{ backgroundColor: '#704591' }}>
-                        <Left style={{ flex: 1 }}>
-                            <Button transparent onPress={() => this.props.navigation.toggleDrawer()}>
-                                <Icon color='white' name='menu' size={30} />
-                            </Button>
-                        </Left>
-                        <Body style={{ flex: 1, alignItems: 'center' }}>
-                            <Title>LinkB</Title>
-                        </Body>
-                        <Right style={{ flex: 1 }}>
-                        </Right>
-                    </Header>
+                <View style={styles.select_cover_layout}>
+                    <View style={{ marginTop: 23 }}>
+                        <Header style={{ backgroundColor: '#311957' }}>
+                            <Left style={{ flex: 1 }}>
+                                <Button transparent onPress={() => this.props.navigation.toggleDrawer()}>
+                                    <Icon color='white' name='menu' size={30} />
+                                </Button>
+                            </Left>
+                            <Body style={{ flex: 1, alignItems: 'center' }}>
+                                <Text style={styles.Logo_text_1}>LINKB</Text>
+                                <Text style={styles.Logo_text_2}>WE LINK BUSINESS</Text>
+                            </Body>
+                            <Right style={{ flex: 1 }}>
+                                <Button transparent>
+                                    <Icon color='white' name='refresh' size={30} />
+                                </Button>
+                            </Right>
+                        </Header>
+                    </View>
+                    <View style={{ flex: 1, width: SCREEM_WIDTH, backgroundColor: '#311957', }}>
+                        <Swiper
+                            key={this.props.select_cover_list.length}
+                            autoplay={true}
+                            autoplayTimeout={5}
+                            dot={
+                                <View style={styles.cover_swiper_dot} />
+                            }
+                            activeDot={
+                                <View style={styles.cover_swiper_activeDot} />
+                            }
+                            paginationStyle={{
+                                bottom: (SCREEM_WIDTH) * 0.76 * 0.07,
+                                left: 1,
+                                right: 1,
+                            }}>
+                            {this.props.select_cover_list.map(cover_image =>
+                                <View key={cover_image.cover_idx} style={styles.select_cover_view}>
+                                    <Image source={{ uri: cover_image.cover_mobile }} style={styles.select_cover_image}></Image>
+                                </View>
+                            )}
+                        </Swiper>
+                    </View>
                 </View>
-                <View backgroundColor='#704591' style={{ height, backgroundColor: '#704591' }}>
-                    <ScrollView
-                        pagingEnabled
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={true}
-                        onMomentumScrollEnd={
-                            () => { console.log('Scrolling is End') }
-                        }
-                        style={{ width, height }}
-                    >
-                        {this.props.select_cover_list.map(cover_image =>
-                            <View key={cover_image.cover_idx} style={{ width, height, resizMode: 'cover' }}>
-                                <Image source={{ uri: cover_image.cover_mobile }} style={{ width: "100%", height: 200, resizeMode: 'contain', borderRadius: 30 }}></Image>
+                <View style={{ flex: 1 }}>
+                    <View style={{ height: 300, margin: 5 }}>
+                        <Text style={styles.small_title}># 당신에게 꼭 맞는 추천행사!</Text>
+                        <ScrollView
+                            horizontal={true}
+                            showsHorizontalScrollIndicator={false}>
+                            {this.props.recommend_event_list.map(recommend_event =>
+                                <View key={recommend_event.event_idx} style={styles.recommend_event_view}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail', { event_idx: recommend_event.event_idx })}>
+                                        <View style={{ width: "100%", height: "100%", alignItems: "center" }}>
+                                            <Image source={{ uri: recommend_event.event_image }} style={styles.recommend_event_image} />
+                                            <Text style={{ fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginTop: 5 }}>{recommend_event.event_name}</Text>
+                                            <Text
+                                                style={{ fontSize: 11, fontFamily: "NotoSans-Light", color: 'gray', marginTop: -3 }}>
+                                                {(recommend_event.event_start_date.slice(0, -9)).replace(/-/gi, ".")}~{(recommend_event.event_end_date.slice(0, -9)).replace(/-/gi, ".")}
+                                            </Text>
+                                        </View>
+                                        <Text style={styles.recommend_event_Dday_text}>
+                                            D{Dday((recommend_event.event_start_date.slice(0, -9)).replace(/-/gi, "."))}
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
+                            )}
+                        </ScrollView>
+                    </View>
+                    <View style={{ height: "100%", margin: 5 }}>
+                        <Text style={styles.small_title}># 다양한 행사들을 확인하세요</Text>
+                        <ScrollView
+                            showsHorizontalScrollIndicator={false}>
+                            <View style={styles.event}>
+                                {this.props.event_list.map(event =>
+                                    <View key={event.event_idx} style={styles.event_view}>
+                                        <TouchableOpacity style={{width:'100%',height:'100%'}} onPress={() => this.props.navigation.navigate('Detail', { event_idx: event.event_idx })}>
+                                            <Image source={{ uri: event.event_image }} style={styles.event_image} />
+                                            <View style={styles.event_text_view}>
+                                                <Text style={{
+                                                    textAlignVertical: "center", fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginLeft: 5,
+                                                }}>{event.event_name}</Text>
+                                                <Text
+                                                    style={{
+                                                        textAlignVertical: "center", fontSize: 11, fontFamily: "NotoSans-Light", color: 'gray', marginTop: -3, marginLeft: 5,
+                                                    }}>
+                                                    {(event.event_start_date.slice(0, -9)).replace(/-/gi, ".")}~{(event.event_end_date.slice(0, -9)).replace(/-/gi, ".")}
+                                                </Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    </View>
+                                )}
                             </View>
-                        )}
-                    </ScrollView>
-
-                </View>
-                <View style={{ height: '100%' }}>
-                    <Text># 당신에게 꼭 맞는 추천행사!</Text>
-                    <ScrollView
-                    style={{height:120}}
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={true}
-                        onMomentumScrollEnd={
-                            () => { console.log('Scrolling is End') }
-                        }
-                    >
-                        {this.props.recommend_event_list.map(recommend_event =>
-                            
-                            <View key={recommend_event.event_idx} style={{ width: 150, height: 220 }}>
-                                <Image source={{ uri: recommend_event.event_image }} style={{ width: "100%", height: 200 }} />
-                                <Text style={{ width: "100%", height: 20 }}>{recommend_event.event_name}</Text>
-                            </View>
-                        )}
-                    </ScrollView>
-                    <Text># 다양한 행사들을 확인하세요</Text>
-                    <ScrollView
-                        style={{marginBottom:'40%'}}
-                        showsHorizontalScrollIndicator={true}
-                        onMomentumScrollEnd={
-                            () => { console.log('Scrolling is End') }
-                        }
-                    >
-                        {this.props.event_list.map(event =>
-                            <View key={event.event_idx} style={{ width: 150, height: 220 }}>
-                                <Image source={{ uri: event.event_image }} style={{ width: "100%", height: 200 }} />
-                                <Text style={{ width: "100%", height: 20 }}>{event.event_name}</Text>
-                            </View>
-                        )}
-                    </ScrollView>
+                        </ScrollView>
+                    </View>
                 </View>
             </ScrollView>
         )
     }
 }
+
+const Dday = (start) => {
+    var s = start.split('.');
+    var today = new Date();
+    var start_day = new Date(s[0], s[1] - 1, s[2]);
+    var num = today.getTime() - start_day.getTime();
+    var dday = Math.floor(num / (1000 * 60 * 60 * 24));
+
+    return dday;
+}
+
+const styles = StyleSheet.create({
+    select_cover_layout: {
+        backgroundColor: '#311957',
+        width: SCREEM_WIDTH,
+        height: SCREEM_WIDTH * 0.76,
+    },
+    select_cover_view: {
+        width: SCREEM_WIDTH,
+        flex: 1,
+        alignItems: "center",
+        marginTop: 2,
+    },
+    select_cover_image: {
+        width: SCREEM_WIDTH * 0.85,
+        height: SCREEM_WIDTH * 0.45,
+        resizeMode: 'cover',
+        borderRadius: 15,
+    },
+    cover_swiper_dot: {
+        backgroundColor: '#695884',
+        width: 25,
+        height: 3,
+        marginLeft: 2,
+        marginRight: 2,
+        marginTop: 3,
+    },
+    cover_swiper_activeDot: {
+        backgroundColor: '#FFFFFF',
+        width: 25,
+        height: 3,
+        marginLeft: 2,
+        marginRight: 2,
+        marginTop: 3,
+    },
+    recommend_event_view: {
+        width: 170,
+        height: 250,
+        margin: 5,
+    },
+    recommend_event_image: {
+        width: "100%",
+        height: 200,
+        borderRadius: 12,
+        resizeMode: 'cover',
+    },
+    recommend_event_Dday_text: {
+        width: 60,
+        height: 36,
+        backgroundColor: "black",
+        color: "white",
+        fontFamily: "NotoSans-Medium",
+        fontSize: 14,
+        textAlign: 'center',
+        textAlignVertical: "center",
+        borderTopLeftRadius: 12,
+        borderBottomRightRadius: 12,
+        position: 'absolute',
+    },
+    event: {
+        flexDirection: "row",
+        flexWrap: "wrap",
+    },
+    event_view: {
+        width: "50%",
+        height: ((SCREEM_WIDTH - 10) * 0.47) + 5,
+        alignItems: "center",
+        padding: 5,
+        paddingBottom: 10
+    },
+    event_image: {
+        width: "100%",
+        height: "100%",
+        borderRadius: 12,
+        resizeMode: 'cover',
+    },
+    event_text_view: {
+        width: "100%",
+        height: (SCREEM_WIDTH - 10) * 0.15,
+        backgroundColor: "white",
+        position: 'absolute',
+        justifyContent: 'center',
+        borderBottomLeftRadius: 12,
+        borderBottomRightRadius: 12,
+        marginTop: ((SCREEM_WIDTH - 10) * 0.47) - ((SCREEM_WIDTH - 10) * 0.15 + 5),
+    },
+    Logo_text_1: {
+        fontFamily: "NotoSans-ExtraBold",
+        color: 'white',
+        fontSize: 21,
+    },
+    Logo_text_2: {
+        fontFamily: "NotoSans-Regular",
+        color: 'white',
+        fontSize: 7,
+        marginTop: -7,
+    },
+    small_title: {
+        marginTop: 25,
+        marginLeft: 5,
+        marginRight: 5,
+        fontSize: 16,
+        color: 'black',
+        fontFamily: 'NotoSans-Bold',
+    }
+});
 
 export default MainScreenPresenter;

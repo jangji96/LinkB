@@ -17,11 +17,11 @@ import {
     ReloadInstructions,
   }from 'react-native/Libraries/NewAppScreen';
 
-const MessengerScreen = ({navigation,route}) => {
+const SearchScreen = ({navigation,route}) => {
     return (
         <View>
             <Text>서치이이이</Text>
         </View>
     )        
 }
-export default MessengerScreen;
+export default SearchScreen;

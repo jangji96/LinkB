@@ -10,7 +10,7 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator tabBarOptions={{}}>
       <Tab.Screen name="Main" component={MainScreen} />
       <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="Notice" component={NoticeScreen} />
