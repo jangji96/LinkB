@@ -63,6 +63,9 @@ function Join2Screen({ route, navigation }) {
         <Text style={{ marginTop: SCREEN_HEIGHT * 0.1, color: 'white', fontFamily: "NotoSans-Regular", }} onPress={() => navigation.navigate('Join3', { email: email, password: password, name: name, phoneNum: phoneNum, activeArea: activeArea })}>다음단계로</Text>
       </View>
       <View style={styles.JoinContainer3}></View>
+      <StatusBar
+        backgroundColor="black"
+        style={{ color: "white" }}></StatusBar>
     </View>
   )
 }

@@ -61,6 +61,9 @@ const JoinSelectScreen = ({ navigation, route }) => {
           <Text style={styles.button_text}>기업 회원가입</Text>
         </Text>
       </View>
+      <StatusBar
+        backgroundColor="black"
+        style={{ color: "white" }}></StatusBar>
     </View>
   )
 }

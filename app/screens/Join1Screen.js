@@ -64,6 +64,9 @@ const Join1Screen = ({ navigation, route }) => {
           onPress={() => navigation.navigate('Join2', { email: email, password: password })}>다음단계로</Text>
       </View>
       <View style={styles.JoinContainer3}></View>
+      <StatusBar
+        backgroundColor="black"
+        style={{ color: "white" }}></StatusBar>
     </View>
   )
 }

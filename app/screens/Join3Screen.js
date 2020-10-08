@@ -103,6 +103,9 @@ const Join3Screen = ({ navigation, route }) => {
         <Text style={styles.ButtonStyle} onPress={join}>가입완료!</Text>
       </View>
       <View style={styles.JoinContainer3}></View>
+      <StatusBar
+        backgroundColor="black"
+        style={{ color: "white" }}></StatusBar>
     </View>
   )
 }
