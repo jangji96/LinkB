@@ -13,7 +13,6 @@ import DrawerStack from './app/routers/DrawerStack';
 
 const Stack = createStackNavigator();
 
-StatusBar.setHidden(true, 'none');
 
 function MyStack() {
   return (

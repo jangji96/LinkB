@@ -6,14 +6,15 @@ import axios from 'axios';
 class DetailScreen extends React.Component {
   state = {
     event_name:'',
-    event_image:'',
+    event_image:'empty',
     event_start_date:'',
     event_end_date:'',
     cnt:'',
     event_host:'',
     event_map:'',
     event_introduce:'',
-    company_name:''    
+    company_name:'',
+    recommend_event_list:[]
   }
   componentDidMount = () => {
     //select_event_detail 받아오기
@@ -50,6 +51,16 @@ class DetailScreen extends React.Component {
         // response.data.event[0].event_map,
         // response.data.event[0].event_introduce,
         // response.data.company[0].company_name);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      axios.get('http://101.101.161.189/api/index.php/linkb_event/select_recommend_event_list', { headers: { 'apikey': 'starthub' } })
+      .then((response) => {
+        // console.log('이거임?2', response.data.event_list);
+        this.setState({
+          recommend_event_list: response.data.event_list
+        })
       })
       .catch(function (error) {
         console.log(error);
