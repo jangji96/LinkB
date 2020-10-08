@@ -123,6 +123,10 @@ class LoginScreen extends React.Component {
         </View>
         <View style={styles.logincContainer1}>
         </View>
+        <StatusBar
+          backgroundColor="black"
+          style={{ color: "white" }}>
+        </StatusBar>
       </View>
     )
   }

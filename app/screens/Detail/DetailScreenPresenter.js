@@ -53,7 +53,7 @@ class DetailScreenPresenter extends React.Component {
                         <Icon name='person-outline' size={20} style={{ marginTop: 20, marginLeft: '10%' }}>  {this.props.cnt}명 / 150명</Icon>
                         <Icon name='location-outline' size={20} style={{ marginTop: 20, marginLeft: '10%' }}>  {this.props.event_host}</Icon>
                         <Text style={{ width: '80%', height: 50, alignSelf: 'center', borderColor: 'black', borderWidth: 1.5, backgroundColor: 'white', borderRadius: 12, textAlign: 'center', paddingStart: 5, textAlignVertical: "center", fontSize: 18, marginTop: 20, marginBottom: 20 }} onPress={this.handleClick}>지도보기</Text>
-                        <View style={{ borderTopWidth: 1, paddingTop: 40, paddingBottom: 40 ,borderTopColor:'#dddddd'}}>
+                        <View style={{ borderTopWidth: 1, paddingTop: 40, paddingBottom: 40, borderTopColor: '#dddddd' }}>
                             <Text style={{ marginLeft: '10%' }}>{this.props.event_introduce.substr(5, 7)}</Text>
                         </View>
                         <View backgroundColor='#dddddd' style={{ paddingTop: 10, paddingBottom: 10 }}>
@@ -85,11 +85,14 @@ class DetailScreenPresenter extends React.Component {
                                 </ScrollView>
                             </View>
                         </View>
-                        <View backgroundColor='#311957' style={{alignContent:'center'}}>
-                            <Text style={{ color:'white',textAlign:'center',paddingTop:15,paddingBottom:15,fontSize:20,fontWeight:'bold'}}>참가하기</Text>
+                        <View backgroundColor='#311957' style={{ alignContent: 'center' }}>
+                            <Text style={{ color: 'white', textAlign: 'center', paddingTop: 15, paddingBottom: 15, fontSize: 20, fontWeight: 'bold' }}>참가하기</Text>
                         </View>
                     </View>
                 </View>
+                <StatusBar
+                    backgroundColor="black"
+                    style={{ color: "white" }}></StatusBar>
             </ScrollView>
         )
     }
