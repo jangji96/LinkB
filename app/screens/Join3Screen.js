@@ -4,23 +4,21 @@ import {
   ScrollView,
   View,
   Text,
+  Dimensions,
   Image,
-  Button,
   StatusBar
 } from 'react-native';
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import { TextInput } from "react-native-gesture-handler";
+import { Container, Header, Left, Body, Button, Right, Title } from 'native-base';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import axios from 'axios';
 
+const SCREEN_WIDTH = Dimensions.get("window").width;
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+
 const Join3Screen = ({ navigation, route }) => {
-  const params = navigation.state.params
+  const params = route.params
   const email = params.email;
   const password = params.password;
   const name = params.name;
@@ -66,27 +64,43 @@ const Join3Screen = ({ navigation, route }) => {
   };
   return (
     <View style={styles.container}>
+      <View style={{ marginTop: 23 }}>
+        <Header style={{ backgroundColor: '#311957' }}>
+          <Left style={{ flex: 1 }}>
+            <Button transparent onPress={() => navigation.goBack()}>
+              <AntDesign color='white' name='left' size={25} />
+            </Button>
+          </Left>
+          <Body style={{ flex: 1, alignItems: 'center' }}>
+            <Text style={[styles.title_text, { fontSize: 18, }]}>회원가입</Text>
+          </Body>
+          <Right style={{ flex: 1 }}></Right>
+        </Header>
+      </View>
       <View style={styles.JoinContainer1}></View>
       <View style={styles.JoinContainer2}>
-        <TextInput 
+        <TextInput
           style={styles.TextInputStyle}
           placeholder='근무회사'
           placeholderTextColor='white'
+          color='white'
           value={company}
           onChangeText={company => setCompany(company)}></TextInput>
         <TextInput
           style={styles.TextInputStyle}
           placeholder='근무부서'
           placeholderTextColor='white'
+          color='white'
           value={department}
           onChangeText={department => setDepartment(department)}></TextInput>
         <TextInput
           style={styles.TextInputStyle}
           placeholder='직급'
           placeholderTextColor='white'
+          color='white'
           value={position}
           onChangeText={position => setPosition(position)}></TextInput>
-        <Text style={{ marginTop: 50, color: 'white' }} onPress={join}>다음단계로</Text>
+        <Text style={styles.ButtonStyle} onPress={join}>가입완료!</Text>
       </View>
       <View style={styles.JoinContainer3}></View>
     </View>
@@ -96,21 +110,26 @@ const Join3Screen = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: '#311957',
+  },
+  title_text: {
+    fontFamily: "NotoSans-Bold",
+    color: 'white',
   },
   JoinContainer1: {
-    backgroundColor: '#704591',
-    flex: 2,
+    backgroundColor: '#311957',
+    flex: 3,
     alignItems: "center"
   },
   JoinContainer2: {
-    backgroundColor: '#704591',
+    backgroundColor: '#311957',
     justifyContent: "center",
     flex: 8,
     alignItems: "center"
   },
   JoinContainer3: {
-    backgroundColor: '#704591',
+    backgroundColor: '#311957',
     justifyContent: "center",
     flex: 3,
     alignItems: "center"
@@ -120,7 +139,20 @@ const styles = StyleSheet.create({
     width: '78%',
     borderBottomColor: 'white',
     borderBottomWidth: 1,
-    paddingLeft: 15
+    fontFamily: "NotoSans-Regular",
+    paddingLeft: 10
+  },
+  ButtonStyle: {
+    color: 'white',
+    marginTop: SCREEN_HEIGHT * 0.1,
+    width: '25%',
+    height: SCREEN_HEIGHT * 0.05,
+    borderColor: 'white',
+    borderRadius: 100,
+    borderWidth: 1,
+    textAlign: 'center',
+    fontFamily: "NotoSans-Regular",
+    textAlignVertical: "center",
   }
 });
 export default Join3Screen;
