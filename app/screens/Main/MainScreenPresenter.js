@@ -123,6 +123,9 @@ class MainScreenPresenter extends React.Component {
                         </ScrollView>
                     </View>
                 </View>
+                <StatusBar
+                    backgroundColor="black"
+                    style={{ color: "white" }}></StatusBar>
             </ScrollView>
         )
     }
