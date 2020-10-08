@@ -6,14 +6,15 @@ import {
   Image,
   Text,
   Dimensions,
-  TextInput
+  TextInput,
+  StatusBar
 } from 'react-native';
 import axios from 'axios';
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 
 
-const SCREEM_WIDTH = Dimensions.get("window").width;
-const SCREEM_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
+const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 class LoginScreen extends React.Component {
   state = {
@@ -76,19 +77,19 @@ class LoginScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{ marginTop: 23 ,flex:4.6}}>
-        <Header style={{ backgroundColor: '#311957' }}>
-          <Left style={{ flex: 1 }}>
+        <View style={{ marginTop: 23, flex: 4.6 }}>
+          <Header style={{ backgroundColor: '#311957' }}>
+            <Left style={{ flex: 1 }}>
 
-          </Left>
-          <Body style={{ flex: 1, alignItems: 'center' }}>
-            <Text style={styles.Logo_text_1}>LINKB</Text>
-            <Text style={styles.Logo_text_2}>WE LINK BUSINESS</Text>
-          </Body>
-          <Right style={{ flex: 1 }}>
+            </Left>
+            <Body style={{ flex: 1, alignItems: 'center' }}>
+              <Text style={styles.Logo_text_1}>LINKB</Text>
+              <Text style={styles.Logo_text_2}>WE LINK BUSINESS</Text>
+            </Body>
+            <Right style={{ flex: 1 }}>
 
-          </Right>
-        </Header>
+            </Right>
+          </Header>
         </View>
         <View style={styles.logincContainer2}>
           <View style={styles.login_type_view}>
@@ -112,8 +113,8 @@ class LoginScreen extends React.Component {
             onChangeText={password => this.setPassword(password)} />
           <Text style={{ color: 'white', fontFamily: "NotoSans-Medium", }} onPress={this.login}>로그인</Text>
           <View style={{ flexDirection: 'row', marginTop: 30 }}>
-            <Image source={require("./image/naver.png")} style={{ width: SCREEM_HEIGHT * 0.07, height: SCREEM_HEIGHT * 0.07, margin: 5, borderRadius: 30 }} />
-            <Image source={require("./image/kakaotalk.png")} style={{ width: SCREEM_HEIGHT * 0.07, height: SCREEM_HEIGHT * 0.07, margin: 5, borderRadius: 30, }} />
+            <Image source={require("./image/naver.png")} style={{ width: SCREEN_HEIGHT * 0.07, height: SCREEN_HEIGHT * 0.07, margin: 5, borderRadius: 30 }} />
+            <Image source={require("./image/kakaotalk.png")} style={{ width: SCREEN_HEIGHT * 0.07, height: SCREEN_HEIGHT * 0.07, margin: 5, borderRadius: 30, }} />
           </View>
           <View style={{ flexDirection: 'row', marginTop: 20 }}>
             <Text style={{ fontFamily: "NotoSans-Regular", marginRight: '50%', color: 'white', fontSize: 12 }} onPress={() => this.props.navigation.navigate('JoinSelect')}>회원가입</Text>
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#311957' 
+    backgroundColor: '#311957'
   },
   logincContainer1: {
     backgroundColor: '#311957',
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
     width: 125,
     backgroundColor: "white",
     flexDirection: 'row',
-    marginBottom: SCREEM_HEIGHT * 0.045,
+    marginBottom: SCREEN_HEIGHT * 0.045,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 25,
