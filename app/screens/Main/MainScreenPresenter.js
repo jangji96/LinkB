@@ -103,7 +103,7 @@ class MainScreenPresenter extends React.Component {
                             <View style={styles.event}>
                                 {this.props.event_list.map(event =>
                                     <View key={event.event_idx} style={styles.event_view}>
-                                        <TouchableOpacity style={{width:'100%',height:'100%'}} onPress={() => this.props.navigation.navigate('Detail', { event_idx: event.event_idx })}>
+                                        <TouchableOpacity style={{ width: '100%', height: '100%' }} onPress={() => this.props.navigation.navigate('Detail', { event_idx: event.event_idx })}>
                                             <Image source={{ uri: event.event_image }} style={styles.event_image} />
                                             <View style={styles.event_text_view}>
                                                 <Text style={{

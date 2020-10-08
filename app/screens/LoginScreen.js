@@ -6,7 +6,8 @@ import {
   Image,
   Text,
   Dimensions,
-  TextInput
+  TextInput,
+  StatusBar
 } from 'react-native';
 import axios from 'axios';
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
