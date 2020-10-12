@@ -19,7 +19,7 @@ const SCREEN_HEIGHT = Dimensions.get("window").height;
 const JoinSelectScreen = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
-      <View style={{ marginTop: 23 }}>
+      <View>
         <Header style={{ backgroundColor: '#311957' }}>
           <Left style={{ flex: 1 }}>
             <Button transparent onPress={() => navigation.goBack()}>
@@ -62,8 +62,8 @@ const JoinSelectScreen = ({ navigation, route }) => {
         </Text>
       </View>
       <StatusBar
-        backgroundColor="black"
-        style={{ color: "white" }}></StatusBar>
+          backgroundColor="#311957"
+          style={{ color: "white" }}></StatusBar>
     </View>
   )
 }
@@ -91,13 +91,13 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   button: {
-    width: '85%',
-    height: SCREEN_HEIGHT * 0.1,
+    width: '75%',
+    height: SCREEN_HEIGHT * 0.08,
     backgroundColor: 'white',
     textAlign: 'center',
     textAlignVertical: "center",
-    borderRadius: 25,
-    margin: 6,
+    borderRadius: 20,
+    margin: 7,
     flexDirection: 'row',
   },
   button_text: {

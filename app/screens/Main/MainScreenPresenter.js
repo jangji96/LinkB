@@ -29,7 +29,7 @@ class MainScreenPresenter extends React.Component {
         return (
             <ScrollView style={{ flex: 1, flexDirection: 'column' }}>
                 <View style={styles.select_cover_layout}>
-                    <View style={{ marginTop: 23 }}>
+                    <View>
                         <Header style={{ backgroundColor: '#311957' }}>
                             <Left style={{ flex: 1 }}>
                                 <Button transparent onPress={() => this.props.navigation.toggleDrawer()}>
@@ -124,7 +124,7 @@ class MainScreenPresenter extends React.Component {
                     </View>
                 </View>
                 <StatusBar
-                    backgroundColor="black"
+                    backgroundColor="#311957"
                     style={{ color: "white" }}></StatusBar>
             </ScrollView>
         )
