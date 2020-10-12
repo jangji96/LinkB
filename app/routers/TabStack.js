@@ -2,7 +2,7 @@ import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MainScreen from "../screens/Main/MainScreen";
-import SearchScreen from "../screens/SearchScreen";
+import SearchScreen from "../screens/Search/SearchScreen";
 import NoticeScreen from "../screens/NoticeScreen";
 import MessengerScreen from "../screens/MessengerScreen";
 

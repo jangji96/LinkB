@@ -91,13 +91,13 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   button: {
-    width: '85%',
-    height: SCREEN_HEIGHT * 0.1,
+    width: '75%',
+    height: SCREEN_HEIGHT * 0.08,
     backgroundColor: 'white',
     textAlign: 'center',
     textAlignVertical: "center",
-    borderRadius: 25,
-    margin: 6,
+    borderRadius: 20,
+    margin: 7,
     flexDirection: 'row',
   },
   button_text: {

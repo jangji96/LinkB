@@ -1,23 +1,6 @@
 import React from "react";
 import MainScreenPresenter from './MainScreenPresenter'
 
-import {
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  Dimensions,
-  Image,
-  StatusBar
-} from 'react-native';
-import {
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
-import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 
 
@@ -56,7 +39,7 @@ class MainScreen extends React.Component {
     // Event List 받아오기 
     axios.get('http://101.101.161.189/api/index.php/linkb_event/select_event_list', { headers: { 'apikey': 'starthub' } })
       .then((response) => {
-         console.log('이거임?3', response.data.event_list[0].event_image);
+        //  console.log('이거임?3', response.data.event_list[0].event_image);
         this.setState({
           event_list: response.data.event_list
         })
