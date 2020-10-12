@@ -29,7 +29,7 @@ class MessengerDetailScreenPresenter extends React.Component {
             <View>
                 <Header style={{ backgroundColor: '#311957' }}>
                     <Left style={{ flex: 1 }}>
-                        <Button transparent onPress={() => this.props.navigation.toggleDrawer()}>
+                        <Button transparent onPress={() => this.props.navigation.navigate("Messenger")}>
                             <Icon color='white' name='chevron-back-outline' size={30} />
                         </Button>
                     </Left>
