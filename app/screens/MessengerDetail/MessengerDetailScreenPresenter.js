@@ -34,7 +34,7 @@ class MessengerDetailScreenPresenter extends React.Component {
                         </Button>
                     </Left>
                     <Body style={{ flex: 1, alignItems: 'center' }}>
-                        <Text style={styles.Header_text}>스타트허브</Text>
+                        <Text style={styles.Header_text}>스타트허브2</Text>
                     </Body>
                     <Right style={{ flex: 1 }}>
                         <Button transparent>
