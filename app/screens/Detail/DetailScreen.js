@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 class DetailScreen extends React.Component {
-  state = {
+  state = { 
     event_name:'',
     event_image:'empty',
     event_start_date:'',

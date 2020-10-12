@@ -1,23 +1,6 @@
 import React from "react";
 import MainScreenPresenter from './MainScreenPresenter'
 
-import {
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  Dimensions,
-  Image,
-  StatusBar
-} from 'react-native';
-import {
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
-import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 
 

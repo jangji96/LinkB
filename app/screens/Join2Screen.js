@@ -24,7 +24,7 @@ function Join2Screen({ route, navigation }) {
   const [activeArea, setActiveArea] = React.useState('');
   return (
     <View style={styles.container}>
-      <View style={{ marginTop: 23 }}>
+      <View>
         <Header style={{ backgroundColor: '#311957' }}>
           <Left style={{ flex: 1 }}>
             <Button transparent onPress={() => navigation.goBack()}>
@@ -64,8 +64,8 @@ function Join2Screen({ route, navigation }) {
       </View>
       <View style={styles.JoinContainer3}></View>
       <StatusBar
-        backgroundColor="black"
-        style={{ color: "white" }}></StatusBar>
+          backgroundColor="#311957"
+          style={{ color: "white" }}></StatusBar>
     </View>
   )
 }

@@ -13,7 +13,6 @@ import DrawerStack from './app/routers/DrawerStack';
 
 const Stack = createStackNavigator();
 
-
 function MyStack() {
   return (
     <Stack.Navigator headerMode='none'>  
