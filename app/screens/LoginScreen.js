@@ -77,7 +77,7 @@ class LoginScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{ marginTop: 23, flex: 4.6 }}>
+        <View style={{flex: 4.6 }}>
           <Header style={{ backgroundColor: '#311957' }}>
             <Left style={{ flex: 1 }}>
 
@@ -124,9 +124,8 @@ class LoginScreen extends React.Component {
         <View style={styles.logincContainer1}>
         </View>
         <StatusBar
-          backgroundColor="black"
-          style={{ color: "white" }}>
-        </StatusBar>
+          backgroundColor="#311957"
+          style={{ color: "white" }}></StatusBar>
       </View>
     )
   }

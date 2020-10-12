@@ -77,6 +77,8 @@ class IntroScreen extends React.Component {
             </View>
           </Swiper>
         </View>
+        <StatusBar
+          backgroundColor="#311957"></StatusBar>
       </View>
     );
   }

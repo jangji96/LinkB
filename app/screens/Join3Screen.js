@@ -29,42 +29,42 @@ const Join3Screen = ({ navigation, route }) => {
   const [position, setPosition] = React.useState('');
 
   const join = async () => {
-    var data = new FormData();
-    data.append('email', email);
-    data.append('password', password);
-    data.append('name', name);
-    data.append('phone', phoneNum);
-    data.append('work_place', activeArea);
-    data.append('work_company', company);
-    data.append('work_team', department);
-    data.append('work_position', position);
-    console.log(data);
-    var config = {
-      method: 'post',
-      url: 'http://101.101.161.189/api/index.php/linkb_member/insert_member',
-      headers: {
-        'apikey': 'starthub',
-      },
-      data: data
-    }
-    axios(config)
-      .then(function (response) {
-        if (response.data.code.code == '200') {
+    // var data = new FormData();
+    // data.append('email', email);
+    // data.append('password', password);
+    // data.append('name', name);
+    // data.append('phone', phoneNum);
+    // data.append('work_place', activeArea);
+    // data.append('work_company', company);
+    // data.append('work_team', department);
+    // data.append('work_position', position);
+    // console.log(data);
+    // var config = {
+    //   method: 'post',
+    //   url: 'http://101.101.161.189/api/index.php/linkb_member/insert_member',
+    //   headers: {
+    //     'apikey': 'starthub',
+    //   },
+    //   data: data
+    // }
+    // axios(config)
+    //   .then(function (response) {
+    //     if (response.data.code.code == '200') {
           navigation.navigate('Join4')
-        } else if (response.data.code.code == '207') {
-          console.log('실패');
-        } else {
-          console.log(response.data.code.code);
-          console.log('음?');
-        }
-      })
-      .catch(function (error) {
-        console.log('에러러러', error);
-      });
+    //     } else if (response.data.code.code == '207') {
+    //       console.log('실패');
+    //     } else {
+    //       console.log(response.data.code.code);
+    //       console.log('음?');
+    //     }
+    //   })
+    //   .catch(function (error) {
+    //     console.log('에러러러', error);
+    //   });
   };
   return (
     <View style={styles.container}>
-      <View style={{ marginTop: 23 }}>
+      <View>
         <Header style={{ backgroundColor: '#311957' }}>
           <Left style={{ flex: 1 }}>
             <Button transparent onPress={() => navigation.goBack()}>
