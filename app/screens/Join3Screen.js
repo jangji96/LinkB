@@ -104,8 +104,8 @@ const Join3Screen = ({ navigation, route }) => {
       </View>
       <View style={styles.JoinContainer3}></View>
       <StatusBar
-        backgroundColor="black"
-        style={{ color: "white" }}></StatusBar>
+          backgroundColor="#311957"
+          style={{ color: "white" }}></StatusBar>
     </View>
   )
 }
