@@ -11,11 +11,18 @@ import {
 import { Container, Header, Left, Body, Button, Right, Title } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
+import Snackbar from 'react-native-snackbar'
+
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 const SettingScreen = ({ navigation, route }) => {
   const logout = () => {
+    Snackbar.show({
+      text: 'Logout... Good bye!',
+      duration: Snackbar.LENGTH_LONG,
+      fontFamily: "NotoSans-Medium",
+    });
     navigation.navigate('Login')
   }
 
