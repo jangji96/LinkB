@@ -34,7 +34,7 @@ class DetailScreenPresenter extends React.Component {
             <ScrollView backgroundColor='white'>
                 <View>
                     <ImageBackground source={{ uri: this.props.event_image }} style={styles.event_image_layout}>
-                        <Header style={{ backgroundColor: '#00000040' }}>
+                        <Header transparent style={{ backgroundColor: '#00000040' }}>
                             <Left style={{ flex: 1 }}>
                                 <Button transparent onPress={() => this.props.navigation.goBack()}>
                                     <AntDesign color='white' name='left' size={25} />
@@ -85,15 +85,13 @@ class DetailScreenPresenter extends React.Component {
                                 </ScrollView>
                             </View>
                         </View>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Apply')}>
-                            <View backgroundColor='#311957' style={{ alignContent: 'center' }}>
-                                <Text style={{ color: 'white', textAlign: 'center', paddingTop: 15, paddingBottom: 15, fontSize: 20, fontWeight: 'bold' }}>참가하기</Text>
-                            </View>
-                        </TouchableOpacity>
+                        <View backgroundColor='#311957' style={{ alignContent: 'center' }}>
+                            <Text style={{ color: 'white', textAlign: 'center', paddingTop: 15, paddingBottom: 15, fontSize: 20, fontWeight: 'bold' }}>참가하기</Text>
+                        </View>
                     </View>
                 </View>
                 <StatusBar
-                    backgroundColor="#311957"
+                    backgroundColor="black"
                     style={{ color: "white" }}></StatusBar>
             </ScrollView>
         )

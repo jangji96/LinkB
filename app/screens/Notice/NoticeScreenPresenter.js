@@ -38,7 +38,7 @@ class NoticeScreenPresenter extends React.Component {
                     </Right>
                 </Header>
                 <ScrollView style={{ alignSelf: 'center', marginTop: 20, width: '90%', height: '100%' }}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('MessengerDetail')}>
+                    <TouchableOpacity>
                         <View style={{ flexDirection: 'row' }}>
                             <Image style={{ width: SCREEM_WIDTH * 0.14, height: SCREEM_WIDTH * 0.14 }} source={require("../image/user.png")}></Image>
                             <Text numberOfLines={1} style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%' }}>스타트허브 님의 메세지가 도착했습니다.</Text>
