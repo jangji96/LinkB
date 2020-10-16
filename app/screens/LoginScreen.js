@@ -12,6 +12,8 @@ import {
 import axios from 'axios';
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 
+import Snackbar from 'react-native-snackbar'
+
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
@@ -54,6 +56,11 @@ class LoginScreen extends React.Component {
     axios(config)
       .then(function (response) {
         if (response.data.code.code == '200') {
+          Snackbar.show({
+            text: 'Login success',
+            duration: Snackbar.LENGTH_LONG,
+            fontFamily: "NotoSans-Medium",
+          });
           navigation.navigate('Drawer')
         } else if (response.data.code.code == '207') {
           console.log('실패');
@@ -77,7 +84,7 @@ class LoginScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{flex: 4.6 }}>
+        <View style={{ flex: 4.6 }}>
           <Header style={{ backgroundColor: '#311957' }}>
             <Left style={{ flex: 1 }}>
 

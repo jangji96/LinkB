@@ -18,6 +18,7 @@ const SCREEN_HEIGHT = Dimensions.get("window").height;
 const Join1Screen = ({ navigation, route }) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  console.log('test',isEmail('foo@bar.com'),isLength('foo', { min: 4, max: 15 }),isAlphanumeric('foo123'))
   return (
     <View style={styles.container}>
       <View>
