@@ -48,16 +48,16 @@ class DetailScreenPresenter extends React.Component {
                         </Header>
                     </ImageBackground>
                     <View style={{ backgroundColor: 'white', width: '100%', height: '100%' }}>
-                        <Icon name='calendar-outline' size={20} style={{ marginTop: 25, marginLeft: '10%' }}>  {this.props.event_start_date.substr(0, 10)} ~ {this.props.event_end_date.substr(0, 10)}</Icon>
-                        <Icon name='time-outline' size={20} style={{ marginTop: 20, marginLeft: '10%' }}>  {this.props.event_start_date.substr(11)} ~ {this.props.event_end_date.substr(11)}</Icon>
-                        <Icon name='person-outline' size={20} style={{ marginTop: 20, marginLeft: '10%' }}>  {this.props.cnt}명 / 150명</Icon>
-                        <Icon name='location-outline' size={20} style={{ marginTop: 20, marginLeft: '10%' }}>  {this.props.event_host}</Icon>
-                        <Text style={{ width: '80%', height: 50, alignSelf: 'center', borderColor: 'black', borderWidth: 1.5, backgroundColor: 'white', borderRadius: 12, textAlign: 'center', paddingStart: 5, textAlignVertical: "center", fontSize: 18, marginTop: 20, marginBottom: 20 }} onPress={this.handleClick}>지도보기</Text>
+                        <Icon name='calendar-outline' size={16} style={{ marginTop: 25, marginLeft: '10%' }}>  {this.props.event_start_date.substr(0, 10)} ~ {this.props.event_end_date.substr(0, 10)}</Icon>
+                        <Icon name='time-outline' size={16} style={{ marginTop: 20, marginLeft: '10%' }}>  {this.props.event_start_date.substr(11)} ~ {this.props.event_end_date.substr(11)}</Icon>
+                        <Icon name='person-outline' size={16} style={{ marginTop: 20, marginLeft: '10%' }}>  {this.props.cnt}명 / 150명</Icon>
+                        <Icon name='location-outline' size={16} style={{ marginTop: 20, marginLeft: '10%' }}>  {this.props.event_host}</Icon>
+                        <Text style={{ width: '70%', height: 40, alignSelf: 'center', borderColor: 'black', borderWidth: 1.5, backgroundColor: 'white', borderRadius: 12, textAlign: 'center', paddingStart: 5, textAlignVertical: "center", fontSize: 14, marginTop: 20, marginBottom: 20 }} onPress={this.handleClick}>지도보기</Text>
                         <View style={{ borderTopWidth: 1, paddingTop: 40, paddingBottom: 40, borderTopColor: '#dddddd' }}>
-                            <Text style={{ marginLeft: '10%' }}>{this.props.event_introduce.substr(5, 7)}</Text>
+                            <Text style={{ marginLeft: '10%' , fontSize:12 }}>{this.props.event_introduce.substr(5, 7)}</Text>
                         </View>
                         <View backgroundColor='#dddddd' style={{ paddingTop: 10, paddingBottom: 10 }}>
-                            <Text style={{ height: 70, backgroundColor: 'white', textAlignVertical: "center", paddingLeft: '10%' }}>{this.props.company_name}</Text>
+                            <Text style={{ height: 70, backgroundColor: 'white', textAlignVertical: "center", paddingLeft: '10%', fontSize:12 }}>{this.props.company_name}</Text>
                         </View>
                         <View>
                             <View style={{ height: 300, margin: 5 }}>
@@ -109,7 +109,7 @@ const Dday = (start) => {
 const styles = StyleSheet.create({
     event_image_layout: {
         width: SCREEM_WIDTH,
-        height: SCREEM_HEIGHT * 0.6,
+        height: SCREEM_HEIGHT * 0.5,
     },
     small_title: {
         marginTop: 25,
