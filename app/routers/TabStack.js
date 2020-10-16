@@ -22,6 +22,8 @@ export default function App() {
         return true;
       case 'MessengerDetail':
         return false;
+      case 'Apply':
+        return false;
     }
   }
   return (
