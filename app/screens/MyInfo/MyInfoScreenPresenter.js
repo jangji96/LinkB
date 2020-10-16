@@ -15,23 +15,20 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 const SCREEM_WIDTH = Dimensions.get("window").width;
 
-class MessengerDetailScreenPresenter extends React.Component {
+class MyInfoScreenPresenter extends React.Component {
     render() {
         return (
             <View>
                 <Header style={{ backgroundColor: '#311957' }}>
                     <Left style={{ flex: 1 }}>
-                        <Button transparent onPress={() => this.props.navigation.navigate("Messenger")}>
+                        <Button transparent onPress={() => this.props.navigation.goBack()}>
                             <Icon color='white' name='chevron-back-outline' size={30} />
                         </Button>
                     </Left>
                     <Body style={{ flex: 1, alignItems: 'center' }}>
-                        <Text style={styles.Header_text}>스타트허브</Text>
+                        <Text style={styles.Header_text}>내 정보</Text>
                     </Body>
                     <Right style={{ flex: 1 }}>
-                        <Button transparent>
-                            <Icon color='white' name='ellipsis-vertical' size={20} />
-                        </Button>
                     </Right>
 
                 </Header>
@@ -51,4 +48,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default MessengerDetailScreenPresenter;
+export default MyInfoScreenPresenter;
