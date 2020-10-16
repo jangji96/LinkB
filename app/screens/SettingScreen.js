@@ -6,8 +6,7 @@ import {
   Text,
   Dimensions,
   Image,
-  StatusBar,
-  TouchableOpacity
+  StatusBar
 } from 'react-native';
 import { Container, Header, Left, Body, Button, Right, Title } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -29,7 +28,7 @@ const SettingScreen = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <View>
+      <View style={{ marginTop: 23, marginBottom: 10 }}>
         <Header style={{ backgroundColor: '#311957' }}>
           <Left style={{ flex: 1 }}>
             <Button transparent onPress={() => navigation.goBack()}>
@@ -44,12 +43,8 @@ const SettingScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.setting_container}>
         <View style={styles.button_view}>
-          <TouchableOpacity onPress={() => navigation.navigate('MyInfo')}>
-            <Text style={[styles.button_text, { color: 'black', marginTop: 25, }]}>내 정보</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Announcement')}>
+          <Text style={[styles.button_text, { color: 'black', marginTop: 25, }]}>내 정보</Text>
           <Text style={[styles.button_text, { color: 'black', marginBottom: 25 }]}>공지사항</Text>
-          </TouchableOpacity>
           <View style={styles.line_style_1}></View>
           <View style={styles.line_style_2}></View>
           <View style={styles.line_style_1}></View>
@@ -57,13 +52,12 @@ const SettingScreen = ({ navigation, route }) => {
           <View style={styles.line_style_1}></View>
           <View style={styles.line_style_2}></View>
           <View style={styles.line_style_1}></View>
-
           <Text style={[styles.button_text, { color: 'gray', marginTop: 25, }]} onPress={logout}>로그아웃</Text>
-
+          <Text style={[styles.button_text, { color: 'gray', marginBottom: 25 }]}>회원탈퇴</Text>
         </View>
       </View>
       <StatusBar
-        backgroundColor="#311957"
+        backgroundColor="black"
         style={{ color: "white" }}></StatusBar>
     </View>
   )

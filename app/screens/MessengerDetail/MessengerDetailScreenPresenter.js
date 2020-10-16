@@ -10,8 +10,16 @@ import {
     StatusBar,
     TouchableOpacity
 } from 'react-native';
+import {
+    LearnMoreLinks,
+    Colors,
+    DebugInstructions,
+    ReloadInstructions,
+} from 'react-native/Libraries/NewAppScreen';
+import Swiper from 'react-native-swiper'
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { color } from "react-native-reanimated";
 
 const SCREEM_WIDTH = Dimensions.get("window").width;
 
