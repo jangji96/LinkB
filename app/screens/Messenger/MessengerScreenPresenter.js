@@ -25,8 +25,7 @@ const SCREEM_WIDTH = Dimensions.get("window").width;
 
 class MessengerScreenPresenter extends React.Component {
     render() {
-        return (
-            
+        return (            
             <View>
                 <Header style={{ backgroundColor: '#311957' }}>
                     <Body style={{ marginLeft: '5%' }}>
