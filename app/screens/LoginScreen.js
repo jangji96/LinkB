@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
-
+import AsyncStorage from '@react-native-community/async-storage'
 import Snackbar from 'react-native-snackbar'
 
 
@@ -20,10 +20,28 @@ const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 class LoginScreen extends React.Component {
   state = {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     color1: '#311957',
     color2: '#ffffff',
+  }
+
+  componentDidMount = () => {
+
+    AsyncStorage.getItem('token').then((result) => {
+      const UserInfo = JSON.parse(result);
+
+      this.setState({
+        email: UserInfo.email,
+        password: UserInfo.password,
+      })
+      console.log("getItem");
+      console.log("email:" + UserInfo.email);
+      console.log("password:" + UserInfo.password);
+      this.login();
+    }).catch(function (error) {
+      console.log('get Error ' + error);
+    });;
   }
 
   setEmail = (str) => {
@@ -40,8 +58,10 @@ class LoginScreen extends React.Component {
 
   login = async () => {
     var data = new FormData();
-    data.append('email', this.state.email);
-    data.append('password', this.state.password);
+    var email = this.state.email;
+    var password = this.state.password;
+    data.append('email', email);
+    data.append('password', password);
 
     var config = {
       method: 'post',
@@ -60,6 +80,11 @@ class LoginScreen extends React.Component {
             text: 'Login success',
             duration: Snackbar.LENGTH_LONG,
             fontFamily: "NotoSans-Medium",
+          });
+          AsyncStorage.setItem('token', JSON.stringify({ 'email': email, 'password': password })).then(() => {
+            console.log("setItem");
+          }).catch(function (error) {
+            console.log('set Error ' + error);
           });
           navigation.navigate('Drawer')
         } else if (response.data.code.code == '207') {
@@ -83,8 +108,7 @@ class LoginScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={{ flex: 4.6 }}>
+      <ScrollView style={{backgroundColor:'#311957'}}>
           <Header style={{ backgroundColor: '#311957' }}>
             <Left style={{ flex: 1 }}>
 
@@ -97,7 +121,6 @@ class LoginScreen extends React.Component {
 
             </Right>
           </Header>
-        </View>
         <View style={styles.logincContainer2}>
           <View style={styles.login_type_view}>
             <Text
@@ -125,15 +148,13 @@ class LoginScreen extends React.Component {
           </View>
           <View style={{ flexDirection: 'row', marginTop: 20 }}>
             <Text style={{ fontFamily: "NotoSans-Regular", marginRight: '50%', color: 'white', fontSize: 12 }} onPress={() => this.props.navigation.navigate('JoinSelect')}>회원가입</Text>
-            <Text style={{ fontFamily: "NotoSans-Regular", fontSize: 12, color: 'white' }} >비밀번호 찾기</Text>
+            <Text style={{ fontFamily: "NotoSans-Regular", fontSize: 12, color: 'white'}} >비밀번호 찾기</Text>
           </View>
-        </View>
-        <View style={styles.logincContainer1}>
         </View>
         <StatusBar
           backgroundColor="#311957"
           style={{ color: "white" }}></StatusBar>
-      </View>
+      </ScrollView>
     )
   }
 }
@@ -148,14 +169,15 @@ const styles = StyleSheet.create({
   },
   logincContainer1: {
     backgroundColor: '#311957',
-    flex: 3,
     alignItems: "center",
     marginTop: 23
   },
   logincContainer2: {
+    paddingTop:'40%',
+    paddingBottom:'10%',
+    
     backgroundColor: '#311957',
     justifyContent: "center",
-    flex: 10,
     alignItems: "center"
   },
   login_type_view: {

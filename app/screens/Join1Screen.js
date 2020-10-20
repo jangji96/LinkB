@@ -18,9 +18,8 @@ const SCREEN_HEIGHT = Dimensions.get("window").height;
 const Join1Screen = ({ navigation, route }) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  console.log('test',isEmail('foo@bar.com'),isLength('foo', { min: 4, max: 15 }),isAlphanumeric('foo123'))
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View>
         <Header style={{ backgroundColor: '#311957' }}>
           <Left style={{ flex: 1 }}>
@@ -34,8 +33,6 @@ const Join1Screen = ({ navigation, route }) => {
           <Right style={{ flex: 1 }}></Right>
         </Header>
       </View>
-      <View style={styles.JoinContainer1}>
-      </View>
       <View style={styles.JoinContainer2}>
         <View style={{ flexDirection: 'row' }}>
           <TextInput
@@ -47,7 +44,6 @@ const Join1Screen = ({ navigation, route }) => {
             onChangeText={email => setEmail(email)}></TextInput>
           <Text style={styles.ButtonStyle}>중복확인</Text>
         </View>
-
         <TextInput
           style={styles.TextInputStyle2}
           placeholder='비밀번호'
@@ -64,17 +60,15 @@ const Join1Screen = ({ navigation, route }) => {
           style={{ marginTop: SCREEN_HEIGHT * 0.1, color: 'white', fontFamily: "NotoSans-Regular", }}
           onPress={() => navigation.navigate('Join2', { email: email, password: password })}>다음단계로</Text>
       </View>
-      <View style={styles.JoinContainer3}></View>
       <StatusBar
           backgroundColor="#311957"
           style={{ color: "white" }}></StatusBar>
-    </View>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'column',
     backgroundColor: '#311957',
   },
@@ -82,21 +76,11 @@ const styles = StyleSheet.create({
     fontFamily: "NotoSans-Bold",
     color: 'white',
   },
-  JoinContainer1: {
-    backgroundColor: '#311957',
-    flex: 3,
-    alignItems: "center"
-  },
   JoinContainer2: {
+    paddingTop:'50%',
+    paddingBottom:'10%',
     backgroundColor: '#311957',
     justifyContent: "center",
-    flex: 8,
-    alignItems: "center"
-  },
-  JoinContainer3: {
-    backgroundColor: '#311957',
-    justifyContent: "center",
-    flex: 3,
     alignItems: "center"
   },
   TextInputStyle1: {

@@ -23,7 +23,7 @@ function Join2Screen({ route, navigation }) {
   const [phoneNum, setPphoneNum] = React.useState('');
   const [activeArea, setActiveArea] = React.useState('');
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View>
         <Header style={{ backgroundColor: '#311957' }}>
           <Left style={{ flex: 1 }}>
@@ -37,7 +37,6 @@ function Join2Screen({ route, navigation }) {
           <Right style={{ flex: 1 }}></Right>
         </Header>
       </View>
-      <View style={styles.JoinContainer1}></View>
       <View style={styles.JoinContainer2}>
         <TextInput
           style={styles.TextInputStyle}
@@ -62,17 +61,15 @@ function Join2Screen({ route, navigation }) {
           onChangeText={activeArea => setActiveArea(activeArea)}></TextInput>
         <Text style={{ marginTop: SCREEN_HEIGHT * 0.1, color: 'white', fontFamily: "NotoSans-Regular", }} onPress={() => navigation.navigate('Join3', { email: email, password: password, name: name, phoneNum: phoneNum, activeArea: activeArea })}>다음단계로</Text>
       </View>
-      <View style={styles.JoinContainer3}></View>
       <StatusBar
           backgroundColor="#311957"
           style={{ color: "white" }}></StatusBar>
-    </View>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'column',
     backgroundColor: '#311957',
   },
@@ -80,22 +77,23 @@ const styles = StyleSheet.create({
     fontFamily: "NotoSans-Bold",
     color: 'white',
   },
-  JoinContainer1: {
-    backgroundColor: '#311957',
-    flex: 3,
-    alignItems: "center"
-  },
   JoinContainer2: {
+    paddingTop:'50%',
+    paddingBottom:'10%',
     backgroundColor: '#311957',
     justifyContent: "center",
-    flex: 8,
     alignItems: "center"
   },
-  JoinContainer3: {
-    backgroundColor: '#311957',
-    justifyContent: "center",
-    flex: 3,
-    alignItems: "center"
+  ButtonStyle: {
+    color: 'white',
+    marginTop: 10,
+    width: '20%',
+    borderColor: 'white',
+    borderRadius: 100,
+    borderWidth: 1,
+    textAlign: 'center',
+    fontFamily: "NotoSans-Regular",
+    textAlignVertical: "center",
   },
   TextInputStyle: {
     marginTop: 10,

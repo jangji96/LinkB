@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Container, Header, Left, Body, Button, Right, Title } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import AsyncStorage from '@react-native-community/async-storage'
 
 import Snackbar from 'react-native-snackbar'
 
@@ -23,8 +24,14 @@ const SettingScreen = ({ navigation, route }) => {
       duration: Snackbar.LENGTH_LONG,
       fontFamily: "NotoSans-Medium",
     });
-    navigation.navigate('Login')
+    AsyncStorage.removeItem('token').then(() => {
+      console.log('remove item');
+      navigation.navigate('Login')
+    }).catch(function (error) {
+      console.log('remove Error ' + error);
+    });
   }
+
 
   return (
     <View style={styles.container}>

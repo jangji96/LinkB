@@ -65,7 +65,10 @@ class MainScreenPresenter extends React.Component {
                             }}>
                             {this.props.select_cover_list.map(cover_image =>
                                 <View key={cover_image.cover_idx} style={styles.select_cover_view}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail', { event_idx: cover_image.cover_idx })}>
                                     <Image source={{ uri: cover_image.cover_mobile }} style={styles.select_cover_image}></Image>
+                                    
+                                </TouchableOpacity>
                                 </View>
                             )}
                         </Swiper>
