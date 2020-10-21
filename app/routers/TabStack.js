@@ -28,7 +28,7 @@ export default function App() {
   }
   return (
     //탭바 포커스 옵션 & 아이콘
-    <Tab.Navigator tabBarOptions={{showLabel:false, style: { backgroundColor: '#311957',borderTopColor:'#311957' } }}
+    <Tab.Navigator initialRouteName='MainStack' tabBarOptions={{showLabel:false, style: { backgroundColor: '#311957',borderTopColor:'#311957' } }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
