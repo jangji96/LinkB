@@ -88,6 +88,11 @@ class LoginScreen extends React.Component {
           });
           navigation.navigate('Drawer')
         } else if (response.data.code.code == '207') {
+          Snackbar.show({
+            text: 'Login fail',
+            duration: Snackbar.LENGTH_LONG,
+            fontFamily: "NotoSans-Medium",
+          });
           console.log('실패');
         } else {
           console.log('음?');

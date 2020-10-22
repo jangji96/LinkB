@@ -8,7 +8,9 @@ import {
     Dimensions,
     Image,
     StatusBar,
-    TouchableOpacity
+    TouchableOpacity,
+    BackHandler,
+    ToastAndroid,
 } from 'react-native';
 import {
     LearnMoreLinks,
@@ -24,6 +26,40 @@ import { color } from "react-native-reanimated";
 const SCREEM_WIDTH = Dimensions.get("window").width;
 
 class MainScreenPresenter extends React.Component {
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    componentWillUnmount() {
+        this.exitApp = false;
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    handleBackButton = () => {
+        // If this screen is not focused, don't do anything
+        if (!this.props.navigation.isFocused()) {
+            return false;
+        }
+
+        // Do what you're doing
+        if (this.exitApp == undefined || !this.exitApp) {
+            ToastAndroid.show('뒤로가기 버튼을 한번 더 누르시면 종료됩니다.', ToastAndroid.SHORT);
+            this.exitApp = true;
+
+            this.timeout = setTimeout(
+                () => {
+                    this.exitApp = false;
+                },
+                2000
+            );
+        } else {
+            clearTimeout(this.timeout);
+
+            BackHandler.exitApp();
+        }
+
+        return true;
+    }
 
     render() {
         return (
@@ -65,10 +101,10 @@ class MainScreenPresenter extends React.Component {
                             }}>
                             {this.props.select_cover_list.map(cover_image =>
                                 <View key={cover_image.cover_idx} style={styles.select_cover_view}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail', { event_idx: cover_image.cover_idx })}>
-                                    <Image source={{ uri: cover_image.cover_mobile }} style={styles.select_cover_image}></Image>
-                                    
-                                </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail', { event_idx: cover_image.cover_idx })}>
+                                        <Image source={{ uri: cover_image.cover_mobile }} style={styles.select_cover_image}></Image>
+
+                                    </TouchableOpacity>
                                 </View>
                             )}
                         </Swiper>
