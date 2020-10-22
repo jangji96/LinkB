@@ -42,8 +42,6 @@ class DetailScreenPresenter extends React.Component {
                 color: '#311957'
             })
         }
-        
-        console.log(y);
       }
 
     render() {
@@ -91,9 +89,11 @@ class DetailScreenPresenter extends React.Component {
                                     </ScrollView>
                                 </View>
                             </View>
-                            <View backgroundColor='#311957' style={{ alignContent: 'center' }}>
-                                <Text style={{ color: 'white', textAlign: 'center', paddingTop: 15, paddingBottom: 15, fontSize: 20, fontWeight: 'bold' }}>참가하기</Text>
-                            </View>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Apply')}>
+                                <View backgroundColor='#311957' style={{ alignContent: 'center' }}>
+                                    <Text style={{ color: 'white', textAlign: 'center', paddingTop: 15, paddingBottom: 15, fontSize: 20, fontWeight: 'bold' }}>참가하기</Text>
+                                </View>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </ScrollView>
