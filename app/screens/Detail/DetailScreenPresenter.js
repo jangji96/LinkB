@@ -19,6 +19,10 @@ const SCREEM_WIDTH = Dimensions.get("window").width;
 const SCREEM_HEIGHT = Dimensions.get("window").height;
 
 class DetailScreenPresenter extends React.Component {
+
+    state = {
+        color: '#00000040',
+    }
     handleClick = () => {
         Linking.canOpenURL(this.props.event_map).then(supported => {
             if (supported) {
@@ -28,11 +32,24 @@ class DetailScreenPresenter extends React.Component {
             }
         })
     };
+    setColor = (y) => {
+        if (y >= -50 && y < 300) {
+            this.setState({
+                color: '#00000040'
+            })
+        } else {
+            this.setState({
+                color: '#311957'
+            })
+        }
+
+        console.log(y);
+    }
 
     render() {
         return (
             <View>
-                <ScrollView>
+                <ScrollView onScroll={event => this.setColor(event.nativeEvent.contentOffset.y)}>
                     <View>
                         <ImageBackground source={{ uri: this.props.event_image }} style={styles.event_image_layout}>
                         </ImageBackground>
@@ -74,13 +91,15 @@ class DetailScreenPresenter extends React.Component {
                                     </ScrollView>
                                 </View>
                             </View>
-                            <View backgroundColor='#311957' style={{ alignContent: 'center' }}>
-                                <Text style={{ color: 'white', textAlign: 'center', paddingTop: 15, paddingBottom: 15, fontSize: 20, fontWeight: 'bold' }}>참가하기</Text>
-                            </View>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Apply')}>
+                                <View backgroundColor='#311957' style={{ alignContent: 'center' }}>
+                                    <Text style={{ color: 'white', textAlign: 'center', paddingTop: 15, paddingBottom: 15, fontSize: 20, fontWeight: 'bold' }}>참가하기</Text>
+                                </View>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </ScrollView>
-                <View style={{ width: '100%', padding: 10, position: 'absolute', backgroundColor: '#00000040', flexDirection: 'row', }}>
+                <View style={{ width: '100%', padding: 10, position: 'absolute', backgroundColor: this.state.color, flexDirection: 'row', }}>
                     <Button transparent onPress={() => this.props.navigation.goBack()} style={{ flex: 1 }}>
                         <AntDesign color='white' name='left' size={25} />
                     </Button>
@@ -88,13 +107,13 @@ class DetailScreenPresenter extends React.Component {
                         flex: 6, textAlign: 'center',
                         textAlignVertical: "center",
                         color: 'white',
-                        fontSize:18,
-                        fontFamily:'NotoSans-Bold'
+                        fontSize: 18,
+                        fontFamily: 'NotoSans-Bold'
                     }}>{this.props.event_name}</Text>
                     <View style={{ flex: 1 }}></View>
                 </View>
                 <StatusBar
-                    backgroundColor="black"
+                    backgroundColor="#311957"
                     style={{ color: "white" }}></StatusBar>
             </View>
         )
