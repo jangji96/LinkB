@@ -23,12 +23,16 @@ const CustomDrawer = ({ navigation, route }) => {
       <View style={{ flex: 5, alignSelf: 'center', justifyContent: 'center' }}>
         <EvilIcons style={styles.user_icon} color='white' name='user' size={70}></EvilIcons>
         <Text style={styles.user_name}>링크비 님,</Text>
-        <Text style={styles.greeting}>오늘도 좋은 하루 보내세요!</Text>
+        <Text style={styles.greeting} onPress={()=>navigation.navigate('MyInfo')}>내 정보</Text>
       </View>
-      <View style={{ flex: 7 }}>
+      <View style={{ flex: 7 }}> 
         <View style={{ flexDirection: 'row', }}>
           <MaterialIcons color='white' name='event-note' size={25} style={{ marginLeft: '20%', }}></MaterialIcons>
-          <Text style={styles.menu_text} >행사목록</Text>
+          <Text style={styles.menu_text} onPress={()=>navigation.navigate('EventRegistration')}>행사등록</Text>
+        </View>
+        <View style={{ flexDirection: 'row', marginTop: '7%', }}>
+          <MaterialIcons color='white' name='event-note' size={25} style={{ marginLeft: '20%', }}></MaterialIcons>
+          <Text style={styles.menu_text}>행사목록</Text>
         </View>
         <View style={{ flexDirection: 'row', marginTop: '7%', }}>
           <Entypo color='white' name='link' size={25} style={{ marginLeft: '20%', }}></Entypo>

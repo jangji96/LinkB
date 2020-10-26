@@ -63,17 +63,17 @@ class IntroScreen extends React.Component {
             <View style={{ width: SCREEN_WIDTH, height: slide_height, resizMode: 'cover' }}>
               <Text style={styles.textStyle1}>개인ㆍ단체ㆍ기업</Text>
               <Text style={styles.textStyle2}>모두의 Business</Text>
-              <Image source={require("./image/intro_1.png")} style={styles.slide_image} />
+              <Image source={require("./image/1.png")} style={styles.slide_image} />
             </View>
             <View style={{ width: SCREEN_WIDTH, height: slide_height, resizMode: 'cover' }}>
               <Text style={styles.textStyle1}>다양한 비지니스를</Text>
               <Text style={styles.textStyle2}>한 번에!</Text>
-              <Image source={require("./image/intro_2.png")} style={styles.slide_image} />
+              <Image source={require("./image/2.png")} style={styles.slide_image} />
             </View>
             <View style={{ width: SCREEN_WIDTH, height: slide_height, resizMode: 'cover' }}>
               <Text style={styles.textStyle1}>궁금한건 바로바로!</Text>
               <Text style={styles.textStyle2}>실시간 채팅 서비스</Text>
-              <Image source={require("./image/intro_3.png")} style={styles.slide_image} />
+              <Image source={require("./image/3.png")} style={styles.slide_image} />
             </View>
           </Swiper>
         </View>
