@@ -51,9 +51,6 @@ const SettingScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.setting_container}>
         <View style={styles.button_view}>
-          <TouchableOpacity onPress={() => navigation.navigate('MyInfo')}>
-            <Text style={[styles.button_text, { color: 'black', marginTop: 25, }]}>내 정보</Text>
-          </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Announcement')}>
           <Text style={[styles.button_text, { color: 'black', marginBottom: 25 }]}>공지사항</Text>
           </TouchableOpacity>
@@ -103,7 +100,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   button_text: {
-    marginVertical: 15,
+    marginVertical: 25,
     marginLeft: SCREEN_WIDTH * 0.07,
     fontSize: 15,
     fontFamily: "NotoSans-Medium",

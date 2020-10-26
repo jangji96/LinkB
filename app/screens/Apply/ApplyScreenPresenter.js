@@ -57,9 +57,7 @@ class ApplySceenPresenter extends React.Component {
                         <Text style={styles.Header_text}>참가하기</Text>
                     </Body>
                     <Right style={{ flex: 1 }}>
-                        <Button transparent>
-                            <Icon color='white' name='ellipsis-vertical' size={20} />
-                        </Button>
+                        
                     </Right>
                 </Header>
                 <View>
