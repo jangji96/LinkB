@@ -26,6 +26,7 @@ import { color } from "react-native-reanimated";
 const SCREEM_WIDTH = Dimensions.get("window").width;
 
 class MainScreenPresenter extends React.Component {
+
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
     }
@@ -63,7 +64,18 @@ class MainScreenPresenter extends React.Component {
 
     render() {
         return (
-            <ScrollView style={{ flex: 1, flexDirection: 'column' }}>
+            <ScrollView style={{ flex: 1, flexDirection: 'column' }}
+                onMomentumScrollEnd={(e) => {
+                    console.log("scrollend Event")
+                    const scrollPosition = e.nativeEvent.contentOffset.y;
+                    const scrollViewHeight = e.nativeEvent.layoutMeasurement.height;
+                    const contentHeight = e.nativeEvent.contentSize.height;
+                    const isScrolledToBottom = scrollViewHeight + scrollPosition;
+
+                    if (isScrolledToBottom >= (contentHeight - 10) && this.props.itemToRender <= this.props.event_list.length) {
+                        this.props.scrollEvent()
+                    }
+                }}>
                 <View style={styles.select_cover_layout}>
                     <View>
                         <Header style={{ backgroundColor: '#311957' }}>
@@ -140,23 +152,26 @@ class MainScreenPresenter extends React.Component {
                         <ScrollView
                             showsHorizontalScrollIndicator={false}>
                             <View style={styles.event}>
-                                {this.props.event_list.map(event =>
-                                    <View key={event.event_idx} style={styles.event_view}>
-                                        <TouchableOpacity style={{ width: '100%', height: '100%' }} onPress={() => this.props.navigation.navigate('Detail', { event_idx: event.event_idx })}>
-                                            <Image source={{ uri: event.event_image }} style={styles.event_image} />
-                                            <View style={styles.event_text_view}>
-                                                <Text style={{
-                                                    textAlignVertical: "center", fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginLeft: 5,
-                                                }}>{event.event_name}</Text>
-                                                <Text
-                                                    style={{
-                                                        textAlignVertical: "center", fontSize: 11, fontFamily: "NotoSans-Light", color: 'gray', marginTop: -3, marginLeft: 5,
-                                                    }}>
-                                                    {(event.event_start_date.slice(0, -9)).replace(/-/gi, ".")}~{(event.event_end_date.slice(0, -9)).replace(/-/gi, ".")}
-                                                </Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                    </View>
+                                {this.props.event_list.map((event, index) => {
+                                    if (index + 1 <= this.props.itemToRender) {
+                                        return <View key={event.event_idx} style={styles.event_view}>
+                                            <TouchableOpacity style={{ width: '100%', height: '100%' }} onPress={() => this.props.navigation.navigate('Detail', { event_idx: event.event_idx })}>
+                                                <Image source={{ uri: event.event_image }} style={styles.event_image} />
+                                                <View style={styles.event_text_view}>
+                                                    <Text style={{
+                                                        textAlignVertical: "center", fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginLeft: 5,
+                                                    }}>{event.event_name}</Text>
+                                                    <Text
+                                                        style={{
+                                                            textAlignVertical: "center", fontSize: 11, fontFamily: "NotoSans-Light", color: 'gray', marginTop: -3, marginLeft: 5,
+                                                        }}>
+                                                        {(event.event_start_date.slice(0, -9)).replace(/-/gi, ".")}~{(event.event_end_date.slice(0, -9)).replace(/-/gi, ".")}
+                                                    </Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                        </View>
+                                    }
+                                }
                                 )}
                             </View>
                         </ScrollView>
