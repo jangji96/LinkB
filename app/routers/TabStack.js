@@ -24,6 +24,8 @@ export default function App() {
         return false;
       case 'Apply':
         return false;
+      case 'ApplyComplete':
+        return false;
     }
   }
   return (
