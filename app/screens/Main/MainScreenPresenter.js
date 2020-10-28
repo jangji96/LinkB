@@ -72,7 +72,7 @@ class MainScreenPresenter extends React.Component {
                     const contentHeight = e.nativeEvent.contentSize.height;
                     const isScrolledToBottom = scrollViewHeight + scrollPosition;
 
-                    if (isScrolledToBottom >= (contentHeight - 10) && this.props.itemToRender <= this.props.event_list.length) {
+                    if (isScrolledToBottom >= (contentHeight - 5) && this.props.itemToRender <= this.props.event_list.length) {
                         this.props.scrollEvent()
                     }
                 }}>

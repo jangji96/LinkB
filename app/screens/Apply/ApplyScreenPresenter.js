@@ -100,11 +100,11 @@ class ApplySceenPresenter extends React.Component {
                             <TextInput
                                 style={[styles.text_input, { flex: 1, marginHorizontal: 5, }]}
                                 value={this.props.phone_number2}
-                                onChangeText={text => this.this.props.inputPhoneNumber2(text)} />
+                                onChangeText={text => this.props.inputPhoneNumber2(text)} />
                             <TextInput
                                 style={[styles.text_input, { flex: 1, marginHorizontal: 5, }]}
                                 value={this.props.phone_number3}
-                                onChangeText={text => this.this.props.inputPhoneNumber3(text)} />
+                                onChangeText={text => this.props.inputPhoneNumber3(text)} />
                         </View>
                     </View>
                     <View>
@@ -113,7 +113,7 @@ class ApplySceenPresenter extends React.Component {
                             style={styles.text_input}
                             placeholder="행사 관련해서 궁금한 점 편하게 물어봐주세요 ^^"
                             value={this.props.active_place}
-                            onChangeText={text => this.this.props.inputPrequestion(text)} />
+                            onChangeText={text => this.props.inputPrequestion(text)} />
                     </View>
                     <View style={{ height: 120 }}></View>
                     <View>

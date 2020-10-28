@@ -36,8 +36,8 @@ const ApplyCompleteScreen = ({ navigation, route }) => {
                     <Text style={styles.Logo_text_1}>참가 신청이 완료되었습니다!</Text>
                 </View>
                 <View style={{ alignItems: 'center', marginTop: '30%' }}>
-                    <Text style={{ width: '55%', height: 40, alignSelf: 'center', borderColor: '#311957', borderWidth: 1.5, backgroundColor: 'white', borderRadius: 100, textAlign: 'center', paddingStart: 5, textAlignVertical: "center", fontSize: 14,color: '#311957',fontSize: 17, fontFamily: "NotoSans-Bold", }}>참개내역 보러가기</Text>
-                    <Text style={{ width: '55%', height: 40, alignSelf: 'center', borderColor: '#311957', borderWidth: 1.5, backgroundColor: '#311957', borderRadius: 100, textAlign: 'center', paddingStart: 5, textAlignVertical: "center", fontSize: 14, marginTop: 10,color: 'white',fontSize: 17, fontFamily: "NotoSans-Bold" }} onPress={() => navigation.navigate('Main')}>홈으로 가기</Text>
+                    <Text style={{ width: '55%', height: 40, alignSelf: 'center', borderColor: '#311957', borderWidth: 1.5, backgroundColor: 'white', borderRadius: 100, textAlign: 'center', paddingStart: 5, textAlignVertical: "center", fontSize: 14, color: '#311957', fontSize: 17, fontFamily: "NotoSans-Bold", }}>참가내역 보러가기</Text>
+                    <Text style={{ width: '55%', height: 40, alignSelf: 'center', borderColor: '#311957', borderWidth: 1.5, backgroundColor: '#311957', borderRadius: 100, textAlign: 'center', paddingStart: 5, textAlignVertical: "center", fontSize: 14, marginTop: 10, color: 'white', fontSize: 17, fontFamily: "NotoSans-Bold" }} onPress={() => navigation.navigate('Main')}>홈으로 가기</Text>
                 </View>
             </View>
 
@@ -82,8 +82,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         textAlign: 'center',
         textAlignVertical: "center",
-        borderColor:'#311957',
-        borderWidth:2,
+        borderColor: '#311957',
+        borderWidth: 2,
         borderRadius: 20,
         margin: 7,
         flexDirection: 'row',
@@ -105,19 +105,19 @@ const styles = StyleSheet.create({
         marginTop: -7,
     },
     button: {
-      width: '75%',
-      height: SCREEN_HEIGHT * 0.08,
-      backgroundColor: 'white',
-      textAlign: 'center',
-      textAlignVertical: "center",
-      borderRadius: 20,
-      margin: 7,
-      flexDirection: 'row',
+        width: '75%',
+        height: SCREEN_HEIGHT * 0.08,
+        backgroundColor: 'white',
+        textAlign: 'center',
+        textAlignVertical: "center",
+        borderRadius: 20,
+        margin: 7,
+        flexDirection: 'row',
     },
     button_text: {
-      color: '#311957',
-      fontSize: 17,
-      fontFamily: "NotoSans-Bold",
+        color: '#311957',
+        fontSize: 17,
+        fontFamily: "NotoSans-Bold",
     },
 });
 
