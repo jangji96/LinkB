@@ -11,6 +11,8 @@ import {
 import { TextInput } from "react-native-gesture-handler";
 import { Container, Header, Left, Body, Button, Right, Title } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Snackbar from 'react-native-snackbar'
+import axios from 'axios';
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
@@ -18,6 +20,60 @@ const SCREEN_HEIGHT = Dimensions.get("window").height;
 const Join1Screen = ({ navigation, route }) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [isDuplicate, setisDuplicate] = React.useState('');
+
+  const duplicate = async () => {
+    var data = new FormData();
+    data.append('email', email);
+    console.log(data);
+    var config = {
+      method: 'post',
+      url: 'http://101.101.161.189/api/index.php/linkb_member/check_email_duplicate',
+      headers: {
+        'apikey': 'starthub',
+      },
+      data: data
+    }
+    axios(config)
+      .then(function (response) {
+        if (response.data.code.code == '200') {
+          console.log('중복안됨');
+          Snackbar.show({
+            text: '사용할 수 있는 아이디입니다.',
+            duration: Snackbar.LENGTH_LONG,
+            fontFamily: "NotoSans-Medium",
+          });
+          setisDuplicate(false)
+        } else if (response.data.code.code == '205') {
+          console.log('중복됨');
+          Snackbar.show({
+            text: '사용할 수 없는 아이디입니다.',
+            duration: Snackbar.LENGTH_LONG,
+            fontFamily: "NotoSans-Medium",
+          });
+          setisDuplicate(true)
+        } else {
+          console.log(response.data.code.code);
+          console.log('음?');
+        }
+      })
+      .catch(function (error) {
+        console.log('에러러러', error);
+      });
+
+  }
+  const gotoJoin2 = async () => {
+    if(isDuplicate==false){
+      navigation.navigate('Join2', { email: email, password: password })
+    }
+    else{
+      Snackbar.show({
+        text: '중복체크해주세요',
+        duration: Snackbar.LENGTH_LONG,
+        fontFamily: "NotoSans-Medium",
+      });
+    }
+  }
   return (
     <ScrollView style={styles.container}>
       <View>
@@ -42,7 +98,7 @@ const Join1Screen = ({ navigation, route }) => {
             color='white'
             value={email}
             onChangeText={email => setEmail(email)}></TextInput>
-          <Text style={styles.ButtonStyle}>중복확인</Text>
+          <Text style={styles.ButtonStyle} onPress={duplicate}>중복확인</Text>
         </View>
         <TextInput
           style={styles.TextInputStyle2}
@@ -58,11 +114,11 @@ const Join1Screen = ({ navigation, route }) => {
           color='white'></TextInput>
         <Text
           style={{ marginTop: SCREEN_HEIGHT * 0.1, color: 'white', fontFamily: "NotoSans-Regular", }}
-          onPress={() => navigation.navigate('Join2', { email: email, password: password })}>다음단계로</Text>
+          onPress={gotoJoin2}>다음단계로</Text>
       </View>
       <StatusBar
-          backgroundColor="#311957"
-          style={{ color: "white" }}></StatusBar>
+        backgroundColor="#311957"
+        style={{ color: "white" }}></StatusBar>
     </ScrollView>
   )
 }
@@ -77,8 +133,8 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   JoinContainer2: {
-    paddingTop:'50%',
-    paddingBottom:'10%',
+    paddingTop: '50%',
+    paddingBottom: '10%',
     backgroundColor: '#311957',
     justifyContent: "center",
     alignItems: "center"

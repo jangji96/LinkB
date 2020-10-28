@@ -15,19 +15,28 @@ import AsyncStorage from '@react-native-community/async-storage'
 
 import Snackbar from 'react-native-snackbar'
 
+import { CommonActions } from '@react-navigation/native'
+
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 const SettingScreen = ({ navigation, route }) => {
   const logout = () => {
-    Snackbar.show({
-      text: 'Logout... Good bye!',
-      duration: Snackbar.LENGTH_LONG,
-      fontFamily: "NotoSans-Medium",
-    });
     AsyncStorage.removeItem('token').then(() => {
       console.log('remove item');
-      navigation.navigate('Login')
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [
+            { name: 'Login' }
+          ]
+        })
+      )
+      Snackbar.show({
+        text: 'Logout... Good bye!',
+        duration: Snackbar.LENGTH_LONG,
+        fontFamily: "NotoSans-Medium",
+      });
     }).catch(function (error) {
       console.log('remove Error ' + error);
     });
@@ -51,11 +60,8 @@ const SettingScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.setting_container}>
         <View style={styles.button_view}>
-          <TouchableOpacity onPress={() => navigation.navigate('MyInfo')}>
-            <Text style={[styles.button_text, { color: 'black', marginTop: 25, }]}>내 정보</Text>
-          </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Announcement')}>
-          <Text style={[styles.button_text, { color: 'black', marginBottom: 25 }]}>공지사항</Text>
+            <Text style={[styles.button_text, { color: 'black', marginBottom: 25 }]}>공지사항</Text>
           </TouchableOpacity>
           <View style={styles.line_style_1}></View>
           <View style={styles.line_style_2}></View>
@@ -103,7 +109,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   button_text: {
-    marginVertical: 15,
+    marginVertical: 25,
     marginLeft: SCREEN_WIDTH * 0.07,
     fontSize: 15,
     fontFamily: "NotoSans-Medium",

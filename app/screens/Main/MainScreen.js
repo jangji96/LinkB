@@ -9,7 +9,9 @@ class MainScreen extends React.Component {
     select_cover_list: [],
     recommend_event_list: [],
     event_list: [],
+    itemToRender: 4,
   }
+
 
   componentDidMount = () => {
     //cover List 받아오기
@@ -23,7 +25,6 @@ class MainScreen extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-
     //Recommend Event List 받아오기
     axios.get('http://101.101.161.189/api/index.php/linkb_event/select_recommend_event_list', { headers: { 'apikey': 'starthub' } })
       .then((response) => {
@@ -35,11 +36,10 @@ class MainScreen extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-
     // Event List 받아오기 
     axios.get('http://101.101.161.189/api/index.php/linkb_event/select_event_list', { headers: { 'apikey': 'starthub' } })
       .then((response) => {
-         console.log('이거임?3', response.data.event_list[0].event_image);
+        console.log('이거임?3', response.data.event_list[0].event_image);
         this.setState({
           event_list: response.data.event_list
         })
@@ -50,9 +50,16 @@ class MainScreen extends React.Component {
 
   }
 
+  scrollEvent = () => {
+    console.log('hello')
+    this.setState({
+      itemToRender: this.state.itemToRender + 4
+    })
+  }
+
   render() {
     return (
-      <MainScreenPresenter {...this.state} clicked={this.clicked} navigation={this.props.navigation}></MainScreenPresenter>
+      <MainScreenPresenter {...this.state} scrollEvent={this.scrollEvent} navigation={this.props.navigation}></MainScreenPresenter>
     );
   }
 }
