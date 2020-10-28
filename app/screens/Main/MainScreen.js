@@ -9,7 +9,7 @@ class MainScreen extends React.Component {
     select_cover_list: [],
     recommend_event_list: [],
     event_list: [],
-    itemToRender: 6,
+    itemToRender: 4,
   }
 
 
@@ -55,7 +55,7 @@ class MainScreen extends React.Component {
   scrollEvent = () => {
     console.log('hello')
     this.setState({
-      itemToRender: this.state.itemToRender + 6
+      itemToRender: this.state.itemToRender + 4
     })
   }
 
