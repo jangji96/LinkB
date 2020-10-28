@@ -19,10 +19,10 @@ const SCREEM_WIDTH = Dimensions.get("window").width;
 const SCREEM_HEIGHT = Dimensions.get("window").height;
 
 class DetailScreenPresenter extends React.Component {
-    
+
     state = {
         color: '#00000040',
-      }
+    }
     handleClick = () => {
         Linking.canOpenURL(this.props.event_map).then(supported => {
             if (supported) {
@@ -33,16 +33,21 @@ class DetailScreenPresenter extends React.Component {
         })
     };
     setColor = (y) => {
-        if(y>=-50 && y<300){
+        if (y >= -50 && y < 300) {
             this.setState({
                 color: '#00000040'
             })
-        }else{
+        } else {
             this.setState({
                 color: '#311957'
             })
         }
-      }
+    }
+
+    goDetail = (idx) => {
+        console.log("goDetail")
+        this.props.navigation.push('Detail', { event_idx: idx })
+    }
 
     render() {
         return (
@@ -71,7 +76,7 @@ class DetailScreenPresenter extends React.Component {
                                         showsHorizontalScrollIndicator={false}>
                                         {this.props.recommend_event_list.map(recommend_event =>
                                             <View key={recommend_event.event_idx} style={styles.recommend_event_view}>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail', { event_idx: recommend_event.event_idx })}>
+                                                <TouchableOpacity onPress={() => this.goDetail(recommend_event.event_idx)}>
                                                     <View style={{ width: "100%", height: "100%", alignItems: "center" }}>
                                                         <Image source={{ uri: recommend_event.event_image }} style={styles.recommend_event_image} />
                                                         <Text style={{ fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginTop: 5 }}>{recommend_event.event_name}</Text>
@@ -91,7 +96,7 @@ class DetailScreenPresenter extends React.Component {
                             </View>
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('Apply')}>
                                 <View backgroundColor='#311957' style={{ alignContent: 'center' }}>
-                                    <Text style={{ color: 'white', textAlign: 'center', paddingTop: 15, paddingBottom: 15, fontSize: 20, fontWeight: 'bold' }}>참가하기</Text>
+                                    <Text style={{ color: 'white', textAlign: 'center', paddingTop: 15, paddingBottom: 15, fontSize: 15, fontWeight: 'bold' }}>참가하기</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -105,8 +110,8 @@ class DetailScreenPresenter extends React.Component {
                         flex: 6, textAlign: 'center',
                         textAlignVertical: "center",
                         color: 'white',
-                        fontSize:18,
-                        fontFamily:'NotoSans-Bold'
+                        fontSize: 18,
+                        fontFamily: 'NotoSans-Bold'
                     }}>{this.props.event_name}</Text>
                     <View style={{ flex: 1 }}></View>
                 </View>
