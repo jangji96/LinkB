@@ -24,7 +24,7 @@ class EventRegistrationScreenPresenter extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state = { today: '2020-10-28', startDate: '', startDate2: '2020-10-28', endDate: '', date: '', dropDownPicker1: 'select', dropDownPicker2: 'select' }
+        this.state = { today: '2020-10-29', startDate: '', startDate2: '2020-10-29', endDate: '', date: '', dropDownPicker1: 'select', dropDownPicker2: 'select' }
     }
     render() {
         return (
@@ -95,8 +95,8 @@ class EventRegistrationScreenPresenter extends React.Component {
                                 showIcon={false}
                                 date={this.state.endDate}
                                 mode="date"
-                                minDate={this.state.startDate2}
-                                placeholder="종료 날짜 선택"
+                                minDate={this.state.today}
+                                placeholder="시작 날짜 선택"
                                 format="YYYY-MM-DD"
                                 onDateChange={(date) => { this.setState({ endDate: date }) }}
                             />
@@ -109,10 +109,10 @@ class EventRegistrationScreenPresenter extends React.Component {
                             <DatePicker
                                 style={{ width: '80%', marginRight: '3%' }}
                                 showIcon={false}
-                                mode='time'
+                                mode="date"
+                                minDate={this.state.startDate2}
                                 placeholder="시작 시간 선택"
-                                format="HH-MM-SS"
-                                onDateChange={(date) => { this.setState({ startDate: date, startDate2: date }) }}
+                                format="YYYY-MM-DD"
                             />
                             <Icon color='black' name='time-outline' size={30} />
                         </View>
@@ -120,10 +120,10 @@ class EventRegistrationScreenPresenter extends React.Component {
                             <DatePicker
                                 style={{ width: '80%', marginRight: '3%' }}
                                 showIcon={false}
-                                mode="time"
+                                mode="date"
+                                minDate={this.state.startDate2}
                                 placeholder="종료 시간 선택"
-                                format="HH:MM:SS"
-                                onDateChange={(date) => { this.setState({ endDate: date }) }}
+                                format="YYYY-MM-DD"
                             />
                             <Icon color='black' name='time-outline' size={30} />
                         </View>
