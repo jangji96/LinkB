@@ -9,12 +9,7 @@ import {
     StatusBar
 } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
-import { TextInput } from "react-native-gesture-handler";
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Icon from 'react-native-vector-icons/Ionicons';
 
-const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 const OpenCompleteScreen = ({ navigation, route }) => {

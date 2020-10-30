@@ -1,5 +1,4 @@
 import React from "react"
-
 import {
     StyleSheet,
     ScrollView,
@@ -15,8 +14,9 @@ import {
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Icon from 'react-native-vector-icons/Ionicons';
-const SCREEM_WIDTH = Dimensions.get("window").width;
-const SCREEM_HEIGHT = Dimensions.get("window").height;
+
+const SCREEN_WIDTH = Dimensions.get("window").width;
+const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 class DetailScreenPresenter extends React.Component {
 
@@ -133,8 +133,8 @@ const Dday = (start) => {
 }
 const styles = StyleSheet.create({
     event_image_layout: {
-        width: SCREEM_WIDTH,
-        height: SCREEM_HEIGHT * 0.5,
+        width: SCREEN_WIDTH,
+        height: SCREEN_HEIGHT * 0.5,
     },
     small_title: {
         marginTop: 25,

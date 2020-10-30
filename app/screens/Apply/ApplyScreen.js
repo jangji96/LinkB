@@ -1,10 +1,6 @@
 import React from "react";
-
-import axios from 'axios';
 import ApplySceenPresenter from "./ApplyScreenPresenter";
-
 import AsyncStorage from '@react-native-community/async-storage'
-
 
 class ApplySceen extends React.Component {
   state = {
@@ -96,7 +92,6 @@ class ApplySceen extends React.Component {
       })
     }
   }
-
 
   render() {
     return (

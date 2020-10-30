@@ -14,7 +14,6 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Snackbar from 'react-native-snackbar'
 import axios from 'axios';
 
-const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 const Join1Screen = ({ navigation, route }) => {
@@ -63,10 +62,10 @@ const Join1Screen = ({ navigation, route }) => {
 
   }
   const gotoJoin2 = async () => {
-    if(isDuplicate==false){
+    if (isDuplicate == false) {
       navigation.navigate('Join2', { email: email, password: password })
     }
-    else{
+    else {
       Snackbar.show({
         text: '중복체크해주세요',
         duration: Snackbar.LENGTH_LONG,
@@ -74,6 +73,7 @@ const Join1Screen = ({ navigation, route }) => {
       });
     }
   }
+
   return (
     <ScrollView style={styles.container}>
       <View>

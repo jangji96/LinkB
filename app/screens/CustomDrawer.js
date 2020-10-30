@@ -9,13 +9,12 @@ import {
   Button,
   StatusBar
 } from 'react-native';
-import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
-const SCREEN_HEIGHT= Dimensions.get("window").height;
+const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 const CustomDrawer = ({ navigation, route }) => {
   return (
@@ -23,12 +22,12 @@ const CustomDrawer = ({ navigation, route }) => {
       <View style={{ flex: 5, alignSelf: 'center', justifyContent: 'center' }}>
         <EvilIcons style={styles.user_icon} color='white' name='user' size={70}></EvilIcons>
         <Text style={styles.user_name}>링크비 님,</Text>
-        <Text style={styles.greeting} onPress={()=>navigation.navigate('MyInfo')}>내 정보</Text>
+        <Text style={styles.greeting} onPress={() => navigation.navigate('MyInfo')}>내 정보</Text>
       </View>
-      <View style={{ flex: 7 }}> 
+      <View style={{ flex: 7 }}>
         <View style={{ flexDirection: 'row', }}>
           <MaterialIcons color='white' name='event-note' size={25} style={{ marginLeft: '20%', }}></MaterialIcons>
-          <Text style={styles.menu_text} onPress={()=>navigation.navigate('EventRegistration')}>행사등록</Text>
+          <Text style={styles.menu_text} onPress={() => navigation.navigate('EventRegistration')}>행사등록</Text>
         </View>
         <View style={{ flexDirection: 'row', marginTop: '7%', }}>
           <MaterialIcons color='white' name='event-note' size={25} style={{ marginLeft: '20%', }}></MaterialIcons>
@@ -80,7 +79,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     backgroundColor: '#503B70',
-    paddingVertical: SCREEN_HEIGHT*0.017,
+    paddingVertical: SCREEN_HEIGHT * 0.017,
     textAlign: 'center',
     textAlignVertical: "center",
   },

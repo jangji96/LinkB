@@ -1,5 +1,4 @@
 import React from "react"
-
 import {
     StyleSheet,
     ScrollView,
@@ -13,7 +12,7 @@ import {
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const SCREEM_WIDTH = Dimensions.get("window").width;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
 class MyInfoScreenPresenter extends React.Component {
     render() {
@@ -34,33 +33,33 @@ class MyInfoScreenPresenter extends React.Component {
                 </Header>
                 <ScrollView style={{ alignSelf: 'center', width: '90%', height: '100%' }} showsVerticalScrollIndicator={false}>
                     <View style={{ flexDirection: 'row', marginTop: '5%' }}>
-                        <Image style={{ width: SCREEM_WIDTH * 0.3, height: SCREEM_WIDTH * 0.3 }} source={require("../image/user.png")}></Image>
-                        <View style={{alignItems:'center',alignSelf:'center',marginLeft:'3%'}}>
-                        <Text numberOfLines={1} style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%' }}>김이름</Text>
-                        <Text numberOfLines={1} style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%' }}>tset@test.com</Text>
-                        <Text numberOfLines={1} style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%' }}>010-1234-5678</Text>
-                        <Text numberOfLines={1} style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%' }}>스타트허브</Text>
+                        <Image style={{ width: SCREEN_WIDTH * 0.3, height: SCREEN_WIDTH * 0.3 }} source={require("../image/user.png")}></Image>
+                        <View style={{ alignItems: 'center', alignSelf: 'center', marginLeft: '3%' }}>
+                            <Text numberOfLines={1} style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%' }}>김이름</Text>
+                            <Text numberOfLines={1} style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%' }}>tset@test.com</Text>
+                            <Text numberOfLines={1} style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%' }}>010-1234-5678</Text>
+                            <Text numberOfLines={1} style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%' }}>스타트허브</Text>
                         </View>
                     </View>
                     <Text style={styles.small_title}># 참가했던 행사</Text>
                     <ScrollView
-                            showsHorizontalScrollIndicator={false}>
-                            <View style={styles.event}>
-                                {this.props.event_list.map(event =>
-                                    <View key={event.event_idx} style={styles.event_view}>
-                                        <TouchableOpacity style={{ width: '100%', height: '100%' }} onPress={() => this.props.navigation.navigate('Detail', { event_idx: event.event_idx })}>
-                                            <Image source={{ uri: event.event_image }} style={styles.event_image} />
-                                            <View style={styles.event_text_view}>
-                                                <Text style={{
-                                                    textAlignVertical: "center", fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginLeft: 5,
-                                                }}>{event.event_name}</Text>
-                                                
-                                            </View>
-                                        </TouchableOpacity>
-                                    </View>
-                                )}
-                            </View>
-                        </ScrollView>
+                        showsHorizontalScrollIndicator={false}>
+                        <View style={styles.event}>
+                            {this.props.event_list.map(event =>
+                                <View key={event.event_idx} style={styles.event_view}>
+                                    <TouchableOpacity style={{ width: '100%', height: '100%' }} onPress={() => this.props.navigation.navigate('Detail', { event_idx: event.event_idx })}>
+                                        <Image source={{ uri: event.event_image }} style={styles.event_image} />
+                                        <View style={styles.event_text_view}>
+                                            <Text style={{
+                                                textAlignVertical: "center", fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginLeft: 5,
+                                            }}>{event.event_name}</Text>
+
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                            )}
+                        </View>
+                    </ScrollView>
 
                 </ScrollView>
 
@@ -79,7 +78,7 @@ const styles = StyleSheet.create({
     },
     event_view: {
         width: "50%",
-        height: ((SCREEM_WIDTH - 10) * 0.47) + 5,
+        height: ((SCREEN_WIDTH - 10) * 0.47) + 5,
         alignItems: "center",
         padding: 5,
         paddingBottom: 10
@@ -92,13 +91,13 @@ const styles = StyleSheet.create({
     },
     event_text_view: {
         width: "100%",
-        height: (SCREEM_WIDTH - 10) * 0.1,
+        height: (SCREEN_WIDTH - 10) * 0.1,
         backgroundColor: "white",
         position: 'absolute',
         justifyContent: 'center',
         borderBottomLeftRadius: 12,
         borderBottomRightRadius: 12,
-        marginTop: ((SCREEM_WIDTH - 10) * 0.47) - ((SCREEM_WIDTH - 10) * 0.15 - 8),
+        marginTop: ((SCREEN_WIDTH - 10) * 0.47) - ((SCREEN_WIDTH - 10) * 0.15 - 8),
     },
     Header_text: {
         fontFamily: "NotoSans-ExtraBold",

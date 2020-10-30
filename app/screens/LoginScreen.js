@@ -14,8 +14,6 @@ import { Container, Header, Left, Body, Right, Button, Title } from 'native-base
 import AsyncStorage from '@react-native-community/async-storage'
 import Snackbar from 'react-native-snackbar'
 
-
-const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 class LoginScreen extends React.Component {
@@ -113,19 +111,19 @@ class LoginScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView style={{backgroundColor:'#311957'}}>
-          <Header style={{ backgroundColor: '#311957' }}>
-            <Left style={{ flex: 1 }}>
+      <ScrollView style={{ backgroundColor: '#311957' }}>
+        <Header style={{ backgroundColor: '#311957' }}>
+          <Left style={{ flex: 1 }}>
 
-            </Left>
-            <Body style={{ flex: 1, alignItems: 'center' }}>
-              <Text style={styles.Logo_text_1}>LINKB</Text>
-              <Text style={styles.Logo_text_2}>WE LINK BUSINESS</Text>
-            </Body>
-            <Right style={{ flex: 1 }}>
+          </Left>
+          <Body style={{ flex: 1, alignItems: 'center' }}>
+            <Text style={styles.Logo_text_1}>LINKB</Text>
+            <Text style={styles.Logo_text_2}>WE LINK BUSINESS</Text>
+          </Body>
+          <Right style={{ flex: 1 }}>
 
-            </Right>
-          </Header>
+          </Right>
+        </Header>
         <View style={styles.logincContainer2}>
           <View style={styles.login_type_view}>
             <Text
@@ -153,7 +151,7 @@ class LoginScreen extends React.Component {
           </View>
           <View style={{ flexDirection: 'row', marginTop: 20 }}>
             <Text style={{ fontFamily: "NotoSans-Regular", marginRight: '50%', color: 'white', fontSize: 12 }} onPress={() => this.props.navigation.navigate('JoinSelect')}>회원가입</Text>
-            <Text style={{ fontFamily: "NotoSans-Regular", fontSize: 12, color: 'white'}} >비밀번호 찾기</Text>
+            <Text style={{ fontFamily: "NotoSans-Regular", fontSize: 12, color: 'white' }} >비밀번호 찾기</Text>
           </View>
         </View>
         <StatusBar
@@ -178,9 +176,9 @@ const styles = StyleSheet.create({
     marginTop: 23
   },
   logincContainer2: {
-    paddingTop:'40%',
-    paddingBottom:'10%',
-    
+    paddingTop: '40%',
+    paddingBottom: '10%',
+
     backgroundColor: '#311957',
     justifyContent: "center",
     alignItems: "center"

@@ -9,7 +9,6 @@ import {
   StatusBar
 } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
-import { TextInput } from "react-native-gesture-handler";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -62,8 +61,8 @@ const JoinSelectScreen = ({ navigation, route }) => {
         </Text>
       </View>
       <StatusBar
-          backgroundColor="#311957"
-          style={{ color: "white" }}></StatusBar>
+        backgroundColor="#311957"
+        style={{ color: "white" }}></StatusBar>
     </View>
   )
 }

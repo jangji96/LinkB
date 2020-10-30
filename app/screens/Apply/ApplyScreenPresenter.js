@@ -1,12 +1,9 @@
 import React from "react"
-
 import {
     StyleSheet,
     ScrollView,
     View,
     Text,
-    Dimensions,
-    Image,
     TextInput,
     StatusBar,
     TouchableOpacity,
@@ -14,12 +11,8 @@ import {
 } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
 import DropDownPicker from 'react-native-dropdown-picker';
-import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
-const SCREEM_WIDTH = Dimensions.get("window").width;
 
 class ApplySceenPresenter extends React.Component {
 

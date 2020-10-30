@@ -1,5 +1,4 @@
 import React from "react"
-
 import {
     StyleSheet,
     ScrollView,
@@ -12,8 +11,6 @@ import {
 } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
-
-const SCREEM_WIDTH = Dimensions.get("window").width;
 
 class MessengerDetailScreenPresenter extends React.Component {
     render() {

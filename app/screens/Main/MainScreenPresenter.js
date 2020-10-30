@@ -1,5 +1,4 @@
 import React from "react"
-
 import {
     StyleSheet,
     ScrollView,
@@ -12,18 +11,11 @@ import {
     BackHandler,
     ToastAndroid,
 } from 'react-native';
-import {
-    LearnMoreLinks,
-    Colors,
-    DebugInstructions,
-    ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import Swiper from 'react-native-swiper'
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { color } from "react-native-reanimated";
 
-const SCREEM_WIDTH = Dimensions.get("window").width;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
 class MainScreenPresenter extends React.Component {
 
@@ -37,12 +29,10 @@ class MainScreenPresenter extends React.Component {
     }
 
     handleBackButton = () => {
-        // If this screen is not focused, don't do anything
         if (!this.props.navigation.isFocused()) {
             return false;
         }
 
-        // Do what you're doing
         if (this.exitApp == undefined || !this.exitApp) {
             ToastAndroid.show('뒤로가기 버튼을 한번 더 누르시면 종료됩니다.', ToastAndroid.SHORT);
             this.exitApp = true;
@@ -55,10 +45,8 @@ class MainScreenPresenter extends React.Component {
             );
         } else {
             clearTimeout(this.timeout);
-
             BackHandler.exitApp();
         }
-
         return true;
     }
 
@@ -95,7 +83,7 @@ class MainScreenPresenter extends React.Component {
                             </Right>
                         </Header>
                     </View>
-                    <View style={{ flex: 1, width: SCREEM_WIDTH, backgroundColor: '#311957', }}>
+                    <View style={{ flex: 1, width: SCREEN_WIDTH, backgroundColor: '#311957', }}>
                         <Swiper
                             key={this.props.select_cover_list.length}
                             autoplay={true}
@@ -107,7 +95,7 @@ class MainScreenPresenter extends React.Component {
                                 <View style={styles.cover_swiper_activeDot} />
                             }
                             paginationStyle={{
-                                bottom: (SCREEM_WIDTH) * 0.76 * 0.07,
+                                bottom: (SCREEN_WIDTH) * 0.76 * 0.07,
                                 left: 1,
                                 right: 1,
                             }}>
@@ -198,18 +186,18 @@ const Dday = (start) => {
 const styles = StyleSheet.create({
     select_cover_layout: {
         backgroundColor: '#311957',
-        width: SCREEM_WIDTH,
-        height: SCREEM_WIDTH * 0.76,
+        width: SCREEN_WIDTH,
+        height: SCREEN_WIDTH * 0.76,
     },
     select_cover_view: {
-        width: SCREEM_WIDTH,
+        width: SCREEN_WIDTH,
         flex: 1,
         alignItems: "center",
         marginTop: 2,
     },
     select_cover_image: {
-        width: SCREEM_WIDTH * 0.85,
-        height: SCREEM_WIDTH * 0.45,
+        width: SCREEN_WIDTH * 0.85,
+        height: SCREEN_WIDTH * 0.45,
         resizeMode: 'cover',
         borderRadius: 15,
     },
@@ -259,7 +247,7 @@ const styles = StyleSheet.create({
     },
     event_view: {
         width: "50%",
-        height: ((SCREEM_WIDTH - 10) * 0.47) + 5,
+        height: ((SCREEN_WIDTH - 10) * 0.47) + 5,
         alignItems: "center",
         padding: 5,
         paddingBottom: 10
@@ -272,13 +260,13 @@ const styles = StyleSheet.create({
     },
     event_text_view: {
         width: "100%",
-        height: (SCREEM_WIDTH - 10) * 0.15,
+        height: (SCREEN_WIDTH - 10) * 0.15,
         backgroundColor: "white",
         position: 'absolute',
         justifyContent: 'center',
         borderBottomLeftRadius: 12,
         borderBottomRightRadius: 12,
-        marginTop: ((SCREEM_WIDTH - 10) * 0.47) - ((SCREEM_WIDTH - 10) * 0.15 + 5),
+        marginTop: ((SCREEN_WIDTH - 10) * 0.47) - ((SCREEN_WIDTH - 10) * 0.15 + 5),
     },
     Logo_text_1: {
         fontFamily: "NotoSans-ExtraBold",

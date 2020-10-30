@@ -1,10 +1,6 @@
 import React from "react";
-
-
 import MyInfoScreenPresenter from './MyInfoScreenPresenter'
-
 import axios from 'axios';
-
 
 class MyInfoScreen extends React.Component {
   state = {
@@ -13,11 +9,10 @@ class MyInfoScreen extends React.Component {
 
   componentDidMount = () => {
 
-
     // Event List 받아오기 
     axios.get('http://101.101.161.189/api/index.php/linkb_event/select_event_list', { headers: { 'apikey': 'starthub' } })
       .then((response) => {
-        console.log('이거임?334', response.data.event_list[0].event_image);
+        // console.log('select_event_list : ', response.data.event_list[0].event_image);
         this.setState({
           event_list: response.data.event_list
         })
@@ -25,12 +20,11 @@ class MyInfoScreen extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-
   }
 
   render() {
     return (
-      <MyInfoScreenPresenter {...this.state} clicked={this.clicked} navigation={this.props.navigation}></MyInfoScreenPresenter>
+      <MyInfoScreenPresenter {...this.state} navigation={this.props.navigation}></MyInfoScreenPresenter>
     );
   }
 }

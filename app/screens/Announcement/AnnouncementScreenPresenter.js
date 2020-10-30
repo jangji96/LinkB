@@ -1,5 +1,4 @@
 import React from "react"
-
 import {
     StyleSheet,
     ScrollView,
@@ -13,8 +12,6 @@ import {
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { WebView } from 'react-native-webview';
-
-const SCREEM_WIDTH = Dimensions.get("window").width;
 
 class AnnouncementlScreenPresenter extends React.Component {
     render() {
@@ -31,14 +28,11 @@ class AnnouncementlScreenPresenter extends React.Component {
                     </Body>
                     <Right style={{ flex: 1 }}>
                     </Right>
-
                 </Header>
-                <View style={{width:'100%',height:'100%'}}>
-                <WebView
-                    source={{ uri: 'https://github.com/' }}
-                    style={{ marginTop: 20 }}
-                />
-
+                <View style={{ width: '100%', height: '100%' }}>
+                    <WebView
+                        source={{ uri: 'https://github.com/' }}
+                        style={{ marginTop: 20 }} />
                 </View>
                 <StatusBar
                     backgroundColor="#311957"

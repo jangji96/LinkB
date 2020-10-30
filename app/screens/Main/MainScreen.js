@@ -1,8 +1,6 @@
 import React from "react";
 import MainScreenPresenter from './MainScreenPresenter'
-
 import axios from 'axios';
-
 
 class MainScreen extends React.Component {
   state = {
@@ -12,12 +10,11 @@ class MainScreen extends React.Component {
     itemToRender: 4,
   }
 
-
   componentDidMount = () => {
     //cover List 받아오기
     axios.get('http://101.101.161.189/api/index.php/linkb_cover/select_cover_list', { headers: { 'apikey': 'starthub' } })
       .then((response) => {
-        // console.log('이거임?1', response.data.cover);
+        // console.log('select_cover_list : ', response.data.cover);
         this.setState({
           select_cover_list: response.data.cover
         })
@@ -28,7 +25,7 @@ class MainScreen extends React.Component {
     //Recommend Event List 받아오기
     axios.get('http://101.101.161.189/api/index.php/linkb_event/select_recommend_event_list', { headers: { 'apikey': 'starthub' } })
       .then((response) => {
-        // console.log('이거임?2', response.data.event_list);
+        // console.log('select_recommend_event_list : ', response.data.event_list);
         this.setState({
           recommend_event_list: response.data.event_list
         })
@@ -39,7 +36,7 @@ class MainScreen extends React.Component {
     // Event List 받아오기 
     axios.get('http://101.101.161.189/api/index.php/linkb_event/select_event_list', { headers: { 'apikey': 'starthub' } })
       .then((response) => {
-        console.log('이거임?3', response.data.event_list[0].event_image);
+        //console.log('select_event_list : ', response.data.event_list[0].event_image);
         this.setState({
           event_list: response.data.event_list
         })
