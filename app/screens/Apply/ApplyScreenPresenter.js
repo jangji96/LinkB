@@ -1,5 +1,6 @@
 import React from "react"
 import {
+    Alert,
     StyleSheet,
     ScrollView,
     View,
@@ -7,17 +8,26 @@ import {
     TextInput,
     StatusBar,
     TouchableOpacity,
-    ToastAndroid
+    ToastAndroid,
+    Modal,
+    Dimensions
 } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import DropDownPicker from 'react-native-dropdown-picker';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
+
 class ApplySceenPresenter extends React.Component {
 
     participate = () => {
-        this.props.navigation.navigate('ApplyComplete')
+        if (this.props.term1 == true && this.props.term2 == true) {
+            this.props.navigation.navigate('ApplyComplete')
+        } else {
+            ToastAndroid.show('서비스 이용 약관동의해주세요', ToastAndroid.SHORT);
+        }
     }
 
     term1 = () => {
@@ -143,6 +153,42 @@ class ApplySceenPresenter extends React.Component {
                         <Text style={{ color: 'white', textAlign: 'center', paddingTop: 15, paddingBottom: 15, fontSize: 15, fontWeight: 'bold' }}>완료</Text>
                     </View>
                 </TouchableOpacity>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={this.props.modalVisible1}
+                    onRequestClose={() => {
+                        this.props.setModalVisible1()
+                    }}
+                >
+                    <View style={{ width:  SCREEN_WIDTH * 0.8, height: SCREEN_HEIGHT*0.5, backgroundColor: 'white',alignSelf:'center',marginTop: SCREEN_HEIGHT * 0.2,borderColor:'#311954',borderWidth:2,borderRadius:10 }}>
+                    <Text style={{width:'100%',textAlign:'center',fontSize:20,marginTop:10}}>서비스 이용 약관</Text>
+                    <Text style={{width:'100%',height:'72.5%',textAlign:'center',fontSize:20,marginTop:10}}></Text>
+                    <TouchableOpacity onPress={() => this.props.setTermColor1()}>
+                        <View backgroundColor='#311957' style={{ alignContent: 'center',borderBottomLeftRadius:9,borderBottomRightRadius:9 }}>
+                            <Text style={{ color: 'white', textAlign: 'center', paddingTop: 15, paddingBottom: 15, fontSize: 15, fontWeight: 'bold' }}>동의합니다</Text>
+                        </View>
+                    </TouchableOpacity>
+                    </View>
+                    </Modal>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={this.props.modalVisible2}
+                    onRequestClose={() => {
+                        this.props.setModalVisible2()
+                    }}
+                >
+                    <View style={{ width:  SCREEN_WIDTH * 0.8, height: SCREEN_HEIGHT*0.5, backgroundColor: 'white',alignSelf:'center',marginTop: SCREEN_HEIGHT * 0.2,borderColor:'#311954',borderWidth:2,borderRadius:10 }}>
+                    <Text style={{width:'100%',textAlign:'center',fontSize:20,marginTop:10}}>개인정보 처리방침</Text>
+                    <Text style={{width:'100%',height:'72.5%',textAlign:'center',fontSize:20,marginTop:10}}></Text>
+                    <TouchableOpacity onPress={() => this.props.setTermColor2()}>
+                        <View backgroundColor='#311957' style={{ alignContent: 'center',borderBottomLeftRadius:9,borderBottomRightRadius:9 }}>
+                            <Text style={{ color: 'white', textAlign: 'center', paddingTop: 15, paddingBottom: 15, fontSize: 15, fontWeight: 'bold' }}>동의합니다</Text>
+                        </View>
+                    </TouchableOpacity>
+                    </View>
+                    </Modal>
                 <StatusBar
                     backgroundColor="#311957"
                     style={{ color: "white" }}></StatusBar>

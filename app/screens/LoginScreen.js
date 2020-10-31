@@ -75,6 +75,7 @@ class LoginScreen extends React.Component {
       .then(function (response) {
         if (response.data.code.code == '200') {
           Snackbar.show({
+            backgroundColor:'#A9F5A9',
             text: 'Login success',
             duration: Snackbar.LENGTH_LONG,
             fontFamily: "NotoSans-Medium",
@@ -87,6 +88,7 @@ class LoginScreen extends React.Component {
           navigation.navigate('Drawer')
         } else if (response.data.code.code == '207') {
           Snackbar.show({
+            backgroundColor:'#F5A9A9',
             text: 'Login fail',
             duration: Snackbar.LENGTH_LONG,
             fontFamily: "NotoSans-Medium",

@@ -145,8 +145,7 @@ const styles = StyleSheet.create({
         fontFamily: 'NotoSans-Bold',
     },
     recommend_event_view: {
-        width: 170,
-        height: 250,
+        width: 150,
         margin: 5,
     },
     recommend_event_image: {

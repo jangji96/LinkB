@@ -52,7 +52,7 @@ class MyInfoScreenPresenter extends React.Component {
                                         <View style={styles.event_text_view}>
                                             <Text style={{
                                                 textAlignVertical: "center", fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginLeft: 5,
-                                            }}>{event.event_name}</Text>
+                                            }} numberOfLines={1}>{event.event_name}</Text>
 
                                         </View>
                                     </TouchableOpacity>

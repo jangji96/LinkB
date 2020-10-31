@@ -121,7 +121,7 @@ class MainScreenPresenter extends React.Component {
                                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail', { event_idx: recommend_event.event_idx })}>
                                         <View style={{ width: "100%", height: "100%", alignItems: "center" }}>
                                             <Image source={{ uri: recommend_event.event_image }} style={styles.recommend_event_image} />
-                                            <Text style={{ fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginTop: 5 }}>{recommend_event.event_name}</Text>
+                                            <Text numberOfLines={1} style={{ fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginTop: 5 }}>{recommend_event.event_name}</Text>
                                             <Text
                                                 style={{ fontSize: 11, fontFamily: "NotoSans-Light", color: 'gray', marginTop: -3 }}>
                                                 {(recommend_event.event_start_date.slice(0, -9)).replace(/-/gi, ".")}~{(recommend_event.event_end_date.slice(0, -9)).replace(/-/gi, ".")}
@@ -146,7 +146,7 @@ class MainScreenPresenter extends React.Component {
                                             <TouchableOpacity style={{ width: '100%', height: '100%' }} onPress={() => this.props.navigation.navigate('Detail', { event_idx: event.event_idx })}>
                                                 <Image source={{ uri: event.event_image }} style={styles.event_image} />
                                                 <View style={styles.event_text_view}>
-                                                    <Text style={{
+                                                    <Text numberOfLines={1} style={{
                                                         textAlignVertical: "center", fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginLeft: 5,
                                                     }}>{event.event_name}</Text>
                                                     <Text

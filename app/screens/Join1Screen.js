@@ -38,6 +38,7 @@ const Join1Screen = ({ navigation, route }) => {
         if (response.data.code.code == '200') {
           console.log('중복안됨');
           Snackbar.show({
+            backgroundColor:'#A9F5A9',
             text: '사용할 수 있는 아이디입니다.',
             duration: Snackbar.LENGTH_LONG,
             fontFamily: "NotoSans-Medium",
@@ -46,6 +47,7 @@ const Join1Screen = ({ navigation, route }) => {
         } else if (response.data.code.code == '205') {
           console.log('중복됨');
           Snackbar.show({
+            backgroundColor:'#F5A9A9',
             text: '사용할 수 없는 아이디입니다.',
             duration: Snackbar.LENGTH_LONG,
             fontFamily: "NotoSans-Medium",
