@@ -81,25 +81,34 @@ class ApplySceen extends React.Component {
   }
 
   _setTerm1 = () => {
-    this.setState({
-      term1: !this.state.term1,
+    if (!this.state.term1) {
+      this.setState({
+        modalVisible1: true
+      })
+    } else {
+      this.setState({
+        term1: false,
         color1: "#D5D5D5",
-      modalVisible1: true
-    })
+      })
+    }
   }
 
   _setTerm2 = () => {
-    this.setState({
-      term2: !this.state.term2,
+    if (!this.state.term2) {
+      this.setState({
+        modalVisible2: true
+      })
+    } else {
+      this.setState({
+        term2: false,
         color2: "#D5D5D5",
-      modalVisible2: true
-    })
-
+      })
+    }
   }
 
   _setTermColor1 = () => {
     this.setState({
-      term1: !this.state.term1,
+      term1: true,
       color1: "#311957",
       modalVisible1: false
     })
@@ -108,7 +117,7 @@ class ApplySceen extends React.Component {
 
   _setTermColor2 = () => {
     this.setState({
-      term2: !this.state.term2,
+      term2: true,
       color2: "#311957",
       modalVisible2: false
     })

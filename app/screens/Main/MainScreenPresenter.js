@@ -19,37 +19,6 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
 
 class MainScreenPresenter extends React.Component {
 
-    componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-    }
-
-    componentWillUnmount() {
-        this.exitApp = false;
-        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-    }
-
-    handleBackButton = () => {
-        if (!this.props.navigation.isFocused()) {
-            return false;
-        }
-
-        if (this.exitApp == undefined || !this.exitApp) {
-            ToastAndroid.show('뒤로가기 버튼을 한번 더 누르시면 종료됩니다.', ToastAndroid.SHORT);
-            this.exitApp = true;
-
-            this.timeout = setTimeout(
-                () => {
-                    this.exitApp = false;
-                },
-                2000
-            );
-        } else {
-            clearTimeout(this.timeout);
-            BackHandler.exitApp();
-        }
-        return true;
-    }
-
     render() {
         return (
             <ScrollView style={{ flex: 1, flexDirection: 'column' }}
@@ -60,7 +29,7 @@ class MainScreenPresenter extends React.Component {
                     const contentHeight = e.nativeEvent.contentSize.height;
                     const isScrolledToBottom = scrollViewHeight + scrollPosition;
 
-                    if (isScrolledToBottom >= (contentHeight - 5) && this.props.itemToRender <= this.props.event_list.length) {
+                    if (isScrolledToBottom >= (contentHeight - 5)) {
                         this.props.scrollEvent()
                     }
                 }}>
@@ -139,28 +108,28 @@ class MainScreenPresenter extends React.Component {
                         <Text style={styles.small_title}># 다양한 행사들을 확인하세요</Text>
                         <ScrollView
                             showsHorizontalScrollIndicator={false}>
-                            <View style={styles.event}>
-                                {this.props.event_list.map((event, index) => {
-                                    if (index + 1 <= this.props.itemToRender) {
-                                        return <View key={event.event_idx} style={styles.event_view}>
-                                            <TouchableOpacity style={{ width: '100%', height: '100%' }} onPress={() => this.props.navigation.navigate('Detail', { event_idx: event.event_idx })}>
-                                                <Image source={{ uri: event.event_image }} style={styles.event_image} />
-                                                <View style={styles.event_text_view}>
-                                                    <Text numberOfLines={1} style={{
-                                                        textAlignVertical: "center", fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginLeft: 5,
-                                                    }}>{event.event_name}</Text>
-                                                    <Text
-                                                        style={{
-                                                            textAlignVertical: "center", fontSize: 11, fontFamily: "NotoSans-Light", color: 'gray', marginTop: -3, marginLeft: 5,
-                                                        }}>
-                                                        {(event.event_start_date.slice(0, -9)).replace(/-/gi, ".")}~{(event.event_end_date.slice(0, -9)).replace(/-/gi, ".")}
-                                                    </Text>
-                                                </View>
-                                            </TouchableOpacity>
-                                        </View>
-                                    }
-                                }
+                            <View style={[styles.event]}>
+                                {this.props.event_list.map(event =>
+                                    <View key={event.event_idx} style={styles.event_view}>
+                                        <TouchableOpacity style={{ width: '100%', height: '100%' }} onPress={() => this.props.navigation.navigate('Detail', { event_idx: event.event_idx })}>
+                                            <Image source={{ uri: event.event_image }} style={styles.event_image} />
+                                            <View style={styles.event_text_view}>
+                                                <Text numberOfLines={1} style={{
+                                                    textAlignVertical: "center", fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginLeft: 5,
+                                                }}>{event.event_name}</Text>
+                                                <Text
+                                                    style={{
+                                                        textAlignVertical: "center", fontSize: 11, fontFamily: "NotoSans-Light", color: 'gray', marginTop: -3, marginLeft: 5,
+                                                    }}>
+                                                    {(event.event_start_date.slice(0, -9)).replace(/-/gi, ".")}~{(event.event_end_date.slice(0, -9)).replace(/-/gi, ".")}
+                                                </Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    </View>
                                 )}
+                                <View style={{ width: '100%', height: 40, justifyContent: 'center', }}>
+                                    <Text style={{ color: "gray", fontSize: 13, textAlign: 'center', textAlignVertical: "center", }}>{this.props.textValue}</Text>
+                                </View>
                             </View>
                         </ScrollView>
                     </View>
