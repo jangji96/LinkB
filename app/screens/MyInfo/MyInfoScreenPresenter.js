@@ -53,16 +53,13 @@ class MyInfoScreenPresenter extends React.Component {
                                             <Text style={{
                                                 textAlignVertical: "center", fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginLeft: 5,
                                             }} numberOfLines={1}>{event.event_name}</Text>
-
                                         </View>
                                     </TouchableOpacity>
                                 </View>
                             )}
                         </View>
                     </ScrollView>
-
                 </ScrollView>
-
                 <StatusBar
                     backgroundColor="#311957"
                     style={{ color: "white" }}></StatusBar>
@@ -75,6 +72,7 @@ const styles = StyleSheet.create({
     event: {
         flexDirection: "row",
         flexWrap: "wrap",
+        marginBottom: 70,
     },
     event_view: {
         width: "50%",
@@ -97,7 +95,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderBottomLeftRadius: 12,
         borderBottomRightRadius: 12,
-        marginTop: ((SCREEN_WIDTH - 10) * 0.47) - ((SCREEN_WIDTH - 10) * 0.15 - 8),
+        marginTop: ((SCREEN_WIDTH - 10) * 0.47) - ((SCREEN_WIDTH - 10) * 0.15 - 10)
     },
     Header_text: {
         fontFamily: "NotoSans-ExtraBold",
