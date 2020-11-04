@@ -1,5 +1,4 @@
 import React from "react"
-
 import {
     StyleSheet,
     ScrollView,
@@ -12,55 +11,13 @@ import {
     BackHandler,
     ToastAndroid,
 } from 'react-native';
-import {
-    LearnMoreLinks,
-    Colors,
-    DebugInstructions,
-    ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import Swiper from 'react-native-swiper'
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { color } from "react-native-reanimated";
 
-const SCREEM_WIDTH = Dimensions.get("window").width;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
 class MainScreenPresenter extends React.Component {
-
-    componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-    }
-
-    componentWillUnmount() {
-        this.exitApp = false;
-        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-    }
-
-    handleBackButton = () => {
-        // If this screen is not focused, don't do anything
-        if (!this.props.navigation.isFocused()) {
-            return false;
-        }
-
-        // Do what you're doing
-        if (this.exitApp == undefined || !this.exitApp) {
-            ToastAndroid.show('뒤로가기 버튼을 한번 더 누르시면 종료됩니다.', ToastAndroid.SHORT);
-            this.exitApp = true;
-
-            this.timeout = setTimeout(
-                () => {
-                    this.exitApp = false;
-                },
-                2000
-            );
-        } else {
-            clearTimeout(this.timeout);
-
-            BackHandler.exitApp();
-        }
-
-        return true;
-    }
 
     render() {
         return (
@@ -72,7 +29,7 @@ class MainScreenPresenter extends React.Component {
                     const contentHeight = e.nativeEvent.contentSize.height;
                     const isScrolledToBottom = scrollViewHeight + scrollPosition;
 
-                    if (isScrolledToBottom >= (contentHeight - 5) && this.props.itemToRender <= this.props.event_list.length) {
+                    if (isScrolledToBottom >= (contentHeight - 5)) {
                         this.props.scrollEvent()
                     }
                 }}>
@@ -95,7 +52,7 @@ class MainScreenPresenter extends React.Component {
                             </Right>
                         </Header>
                     </View>
-                    <View style={{ flex: 1, width: SCREEM_WIDTH, backgroundColor: '#311957', }}>
+                    <View style={{ flex: 1, width: SCREEN_WIDTH, backgroundColor: '#311957', }}>
                         <Swiper
                             key={this.props.select_cover_list.length}
                             autoplay={true}
@@ -107,7 +64,7 @@ class MainScreenPresenter extends React.Component {
                                 <View style={styles.cover_swiper_activeDot} />
                             }
                             paginationStyle={{
-                                bottom: (SCREEM_WIDTH) * 0.76 * 0.07,
+                                bottom: (SCREEN_WIDTH) * 0.76 * 0.07,
                                 left: 1,
                                 right: 1,
                             }}>
@@ -133,7 +90,7 @@ class MainScreenPresenter extends React.Component {
                                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail', { event_idx: recommend_event.event_idx })}>
                                         <View style={{ width: "100%", height: "100%", alignItems: "center" }}>
                                             <Image source={{ uri: recommend_event.event_image }} style={styles.recommend_event_image} />
-                                            <Text style={{ fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginTop: 5 }}>{recommend_event.event_name}</Text>
+                                            <Text numberOfLines={1} style={{ fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginTop: 5 }}>{recommend_event.event_name}</Text>
                                             <Text
                                                 style={{ fontSize: 11, fontFamily: "NotoSans-Light", color: 'gray', marginTop: -3 }}>
                                                 {(recommend_event.event_start_date.slice(0, -9)).replace(/-/gi, ".")}~{(recommend_event.event_end_date.slice(0, -9)).replace(/-/gi, ".")}
@@ -151,28 +108,28 @@ class MainScreenPresenter extends React.Component {
                         <Text style={styles.small_title}># 다양한 행사들을 확인하세요</Text>
                         <ScrollView
                             showsHorizontalScrollIndicator={false}>
-                            <View style={styles.event}>
-                                {this.props.event_list.map((event, index) => {
-                                    if (index + 1 <= this.props.itemToRender) {
-                                        return <View key={event.event_idx} style={styles.event_view}>
-                                            <TouchableOpacity style={{ width: '100%', height: '100%' }} onPress={() => this.props.navigation.navigate('Detail', { event_idx: event.event_idx })}>
-                                                <Image source={{ uri: event.event_image }} style={styles.event_image} />
-                                                <View style={styles.event_text_view}>
-                                                    <Text style={{
-                                                        textAlignVertical: "center", fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginLeft: 5,
-                                                    }}>{event.event_name}</Text>
-                                                    <Text
-                                                        style={{
-                                                            textAlignVertical: "center", fontSize: 11, fontFamily: "NotoSans-Light", color: 'gray', marginTop: -3, marginLeft: 5,
-                                                        }}>
-                                                        {(event.event_start_date.slice(0, -9)).replace(/-/gi, ".")}~{(event.event_end_date.slice(0, -9)).replace(/-/gi, ".")}
-                                                    </Text>
-                                                </View>
-                                            </TouchableOpacity>
-                                        </View>
-                                    }
-                                }
+                            <View style={[styles.event]}>
+                                {this.props.event_list.map(event =>
+                                    <View key={event.event_idx} style={styles.event_view}>
+                                        <TouchableOpacity style={{ width: '100%', height: '100%' }} onPress={() => this.props.navigation.navigate('Detail', { event_idx: event.event_idx })}>
+                                            <Image source={{ uri: event.event_image }} style={styles.event_image} />
+                                            <View style={styles.event_text_view}>
+                                                <Text numberOfLines={1} style={{
+                                                    textAlignVertical: "center", fontSize: 14, fontFamily: "NotoSans-Bold", color: 'black', marginLeft: 5,
+                                                }}>{event.event_name}</Text>
+                                                <Text
+                                                    style={{
+                                                        textAlignVertical: "center", fontSize: 11, fontFamily: "NotoSans-Light", color: 'gray', marginTop: -3, marginLeft: 5,
+                                                    }}>
+                                                    {(event.event_start_date.slice(0, -9)).replace(/-/gi, ".")}~{(event.event_end_date.slice(0, -9)).replace(/-/gi, ".")}
+                                                </Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    </View>
                                 )}
+                                <View style={{ width: '100%', height: 40, justifyContent: 'center', }}>
+                                    <Text style={{ color: "gray", fontSize: 13, textAlign: 'center', textAlignVertical: "center", }}>{this.props.textValue}</Text>
+                                </View>
                             </View>
                         </ScrollView>
                     </View>
@@ -198,18 +155,18 @@ const Dday = (start) => {
 const styles = StyleSheet.create({
     select_cover_layout: {
         backgroundColor: '#311957',
-        width: SCREEM_WIDTH,
-        height: SCREEM_WIDTH * 0.76,
+        width: SCREEN_WIDTH,
+        height: SCREEN_WIDTH * 0.76,
     },
     select_cover_view: {
-        width: SCREEM_WIDTH,
+        width: SCREEN_WIDTH,
         flex: 1,
         alignItems: "center",
         marginTop: 2,
     },
     select_cover_image: {
-        width: SCREEM_WIDTH * 0.85,
-        height: SCREEM_WIDTH * 0.45,
+        width: SCREEN_WIDTH * 0.85,
+        height: SCREEN_WIDTH * 0.45,
         resizeMode: 'cover',
         borderRadius: 15,
     },
@@ -259,7 +216,7 @@ const styles = StyleSheet.create({
     },
     event_view: {
         width: "50%",
-        height: ((SCREEM_WIDTH - 10) * 0.47) + 5,
+        height: ((SCREEN_WIDTH - 10) * 0.47) + 5,
         alignItems: "center",
         padding: 5,
         paddingBottom: 10
@@ -272,13 +229,13 @@ const styles = StyleSheet.create({
     },
     event_text_view: {
         width: "100%",
-        height: (SCREEM_WIDTH - 10) * 0.15,
+        height: (SCREEN_WIDTH - 10) * 0.15,
         backgroundColor: "white",
         position: 'absolute',
         justifyContent: 'center',
         borderBottomLeftRadius: 12,
         borderBottomRightRadius: 12,
-        marginTop: ((SCREEM_WIDTH - 10) * 0.47) - ((SCREEM_WIDTH - 10) * 0.15 + 5),
+        marginTop: ((SCREEN_WIDTH - 10) * 0.47) - ((SCREEN_WIDTH - 10) * 0.15 + 5),
     },
     Logo_text_1: {
         fontFamily: "NotoSans-ExtraBold",

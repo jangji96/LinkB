@@ -12,7 +12,6 @@ import { TextInput } from "react-native-gesture-handler";
 import { Container, Header, Left, Body, Button, Right, Title } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 function Join2Screen({ route, navigation }) {
@@ -62,8 +61,8 @@ function Join2Screen({ route, navigation }) {
         <Text style={{ marginTop: SCREEN_HEIGHT * 0.1, color: 'white', fontFamily: "NotoSans-Regular", }} onPress={() => navigation.navigate('Join3', { email: email, password: password, name: name, phoneNum: phoneNum, activeArea: activeArea })}>다음단계로</Text>
       </View>
       <StatusBar
-          backgroundColor="#311957"
-          style={{ color: "white" }}></StatusBar>
+        backgroundColor="#311957"
+        style={{ color: "white" }}></StatusBar>
     </ScrollView>
   )
 }
@@ -78,8 +77,8 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   JoinContainer2: {
-    paddingTop:'50%',
-    paddingBottom:'10%',
+    paddingTop: '50%',
+    paddingBottom: '10%',
     backgroundColor: '#311957',
     justifyContent: "center",
     alignItems: "center"

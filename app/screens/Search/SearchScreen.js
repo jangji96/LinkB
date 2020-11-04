@@ -19,10 +19,12 @@ class SearchScreen extends React.Component {
         console.log(error);
       });
   }
+
   render() {
     return (
       <SearchScreenPresenter {...this.state} navigation={this.props.navigation}></SearchScreenPresenter>
     )
   }
 }
+
 export default SearchScreen;

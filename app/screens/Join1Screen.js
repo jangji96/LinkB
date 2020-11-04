@@ -14,7 +14,6 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Snackbar from 'react-native-snackbar'
 import axios from 'axios';
 
-const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 const Join1Screen = ({ navigation, route }) => {
@@ -39,6 +38,7 @@ const Join1Screen = ({ navigation, route }) => {
         if (response.data.code.code == '200') {
           console.log('중복안됨');
           Snackbar.show({
+            backgroundColor:'#A9F5A9',
             text: '사용할 수 있는 아이디입니다.',
             duration: Snackbar.LENGTH_LONG,
             fontFamily: "NotoSans-Medium",
@@ -47,6 +47,7 @@ const Join1Screen = ({ navigation, route }) => {
         } else if (response.data.code.code == '205') {
           console.log('중복됨');
           Snackbar.show({
+            backgroundColor:'#F5A9A9',
             text: '사용할 수 없는 아이디입니다.',
             duration: Snackbar.LENGTH_LONG,
             fontFamily: "NotoSans-Medium",
@@ -63,10 +64,10 @@ const Join1Screen = ({ navigation, route }) => {
 
   }
   const gotoJoin2 = async () => {
-    if(isDuplicate==false){
+    if (isDuplicate == false) {
       navigation.navigate('Join2', { email: email, password: password })
     }
-    else{
+    else {
       Snackbar.show({
         text: '중복체크해주세요',
         duration: Snackbar.LENGTH_LONG,
@@ -74,6 +75,7 @@ const Join1Screen = ({ navigation, route }) => {
       });
     }
   }
+
   return (
     <ScrollView style={styles.container}>
       <View>

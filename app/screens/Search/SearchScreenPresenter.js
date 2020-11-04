@@ -1,5 +1,4 @@
 import React from "react"
-
 import {
     StyleSheet,
     ScrollView,
@@ -10,19 +9,16 @@ import {
     TextInput,
     StatusBar,
     TouchableOpacity,
-    TouchableHighlight
 } from 'react-native';
-import { Button } from "native-base";
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
-const SCREEN_HEIGHT = Dimensions.get("window").height;
-
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 class SearchScreenPresenter extends React.Component {
     state = {
         searchString: ''
     }
+
     render() {
         return (
             <ScrollView>
@@ -90,7 +86,7 @@ const styles = StyleSheet.create({
         borderWidth: 1
     },
     main_layout: {
-        width: SCREEN_WIDTH * 0.9,
+        width: '90%',
         backgroundColor: 'white',
         borderRadius: 15,
         marginTop: 20,

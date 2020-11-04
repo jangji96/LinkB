@@ -12,13 +12,10 @@ import {
 import { Container, Header, Left, Body, Button, Right, Title } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import AsyncStorage from '@react-native-community/async-storage'
-
 import Snackbar from 'react-native-snackbar'
-
 import { CommonActions } from '@react-navigation/native'
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
-const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 const SettingScreen = ({ navigation, route }) => {
   const logout = () => {

@@ -1,10 +1,6 @@
 import React from "react";
-
-import axios from 'axios';
 import ApplySceenPresenter from "./ApplyScreenPresenter";
-
 import AsyncStorage from '@react-native-community/async-storage'
-
 
 class ApplySceen extends React.Component {
   state = {
@@ -21,6 +17,9 @@ class ApplySceen extends React.Component {
 
     color1: "#D5D5D5",
     color2: "#D5D5D5",
+    modalVisible1: false,
+
+    modalVisible2: false
   }
 
   componentDidMount = () => {
@@ -69,32 +68,59 @@ class ApplySceen extends React.Component {
     })
   }
 
+  _setModalVisible1 = () => {
+    this.setState({
+      modalVisible1: false
+    })
+  }
+
+  _setModalVisible2 = () => {
+    this.setState({
+      modalVisible2: false
+    })
+  }
+
   _setTerm1 = () => {
-    if (this.state.term1) {
+    if (!this.state.term1) {
       this.setState({
-        term1: !this.state.term1,
-        color1: "#D5D5D5"
+        modalVisible1: true
       })
     } else {
       this.setState({
-        term1: !this.state.term1,
-        color1: "#311957"
+        term1: false,
+        color1: "#D5D5D5",
       })
     }
   }
 
   _setTerm2 = () => {
-    if (this.state.term2) {
+    if (!this.state.term2) {
       this.setState({
-        term2: !this.state.term2,
-        color2: "#D5D5D5"
+        modalVisible2: true
       })
     } else {
       this.setState({
-        term2: !this.state.term2,
-        color2: "#311957"
+        term2: false,
+        color2: "#D5D5D5",
       })
     }
+  }
+
+  _setTermColor1 = () => {
+    this.setState({
+      term1: true,
+      color1: "#311957",
+      modalVisible1: false
+    })
+
+  }
+
+  _setTermColor2 = () => {
+    this.setState({
+      term2: true,
+      color2: "#311957",
+      modalVisible2: false
+    })
   }
 
 
@@ -109,8 +135,13 @@ class ApplySceen extends React.Component {
         inputPhoneNumber2={this._inputPhoneNumber2}
         inputPhoneNumber3={this._inputPhoneNumber3}
         inputPrequestion={this._inputPrequestion}
+        setModalVisible1={this._setModalVisible1}
+        setModalVisible2={this._setModalVisible2}
         setTerm1={this._setTerm1}
-        setTerm2={this._setTerm2}></ApplySceenPresenter>
+        setTerm2={this._setTerm2}
+        setTermColor1={this._setTermColor1}
+        setTermColor2={this._setTermColor2}
+      ></ApplySceenPresenter>
     );
   }
 }

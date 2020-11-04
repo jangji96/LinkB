@@ -10,10 +10,7 @@ import {
 } from 'react-native';
 import { Container, Header, Left, Body, Button, Right, Title } from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
-import { color } from "react-native-reanimated";
 
-
-const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 const Join4Screen = ({ navigation, route }) => {
@@ -23,7 +20,7 @@ const Join4Screen = ({ navigation, route }) => {
         <Header style={{ backgroundColor: '#311957' }}>
           <Left style={{ flex: 1 }}></Left>
           <Body style={{ flex: 2, alignItems: 'center' }}>
-            <Text style={[styles.title_text, { fontSize: 18}]}>회원가입 완료!</Text>
+            <Text style={[styles.title_text, { fontSize: 18 }]}>회원가입 완료!</Text>
           </Body>
           <Right style={{ flex: 1 }}></Right>
         </Header>
@@ -36,8 +33,8 @@ const Join4Screen = ({ navigation, route }) => {
       </View>
       <View style={styles.JoinContainer3}></View>
       <StatusBar
-          backgroundColor="#311957"
-          style={{ color: "white" }}></StatusBar>
+        backgroundColor="#311957"
+        style={{ color: "white" }}></StatusBar>
     </View>
   )
 }
@@ -88,4 +85,5 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
   }
 });
+
 export default Join4Screen;

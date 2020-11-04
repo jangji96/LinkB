@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-
 import {
   StyleSheet,
   ScrollView,
@@ -10,22 +9,11 @@ import {
   Button,
   StatusBar
 } from 'react-native';
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
 import Swiper from 'react-native-swiper'
-import { log } from "react-native-reanimated";
-
-let imagePath = require("./image/intro_1.png");
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
-const slide_height = SCREEN_HEIGHT * 0.84;
+const SLIDE_HEIGHT = SCREEN_HEIGHT * 0.84;
 
 class IntroScreen extends React.Component {
   constructor(props) {
@@ -44,7 +32,6 @@ class IntroScreen extends React.Component {
             (<Text style={styles.botton2} onPress={() => this.props.navigation.navigate('Login')}>시작하기</Text>)
             : (<Text style={styles.botton1} onPress={() => this.props.navigation.navigate('Login')}>건너뛰기</Text>)
         }
-
         <View style={styles.imgSlider}>
           <Swiper
             autoplay={false}
@@ -60,17 +47,17 @@ class IntroScreen extends React.Component {
               right: SCREEN_WIDTH * 0.55,
             }}
             loop={false}>
-            <View style={{ width: SCREEN_WIDTH, height: slide_height, resizMode: 'cover' }}>
+            <View style={{ width: SCREEN_WIDTH, height: SLIDE_HEIGHT, resizMode: 'cover' }}>
               <Text style={styles.textStyle1}>개인ㆍ단체ㆍ기업</Text>
               <Text style={styles.textStyle2}>모두의 Business</Text>
               <Image source={require("./image/1.png")} style={styles.slide_image} />
             </View>
-            <View style={{ width: SCREEN_WIDTH, height: slide_height, resizMode: 'cover' }}>
+            <View style={{ width: SCREEN_WIDTH, height: SLIDE_HEIGHT, resizMode: 'cover' }}>
               <Text style={styles.textStyle1}>다양한 비지니스를</Text>
               <Text style={styles.textStyle2}>한 번에!</Text>
               <Image source={require("./image/2.png")} style={styles.slide_image} />
             </View>
-            <View style={{ width: SCREEN_WIDTH, height: slide_height, resizMode: 'cover' }}>
+            <View style={{ width: SCREEN_WIDTH, height: SLIDE_HEIGHT, resizMode: 'cover' }}>
               <Text style={styles.textStyle1}>궁금한건 바로바로!</Text>
               <Text style={styles.textStyle2}>실시간 채팅 서비스</Text>
               <Image source={require("./image/3.png")} style={styles.slide_image} />
@@ -117,7 +104,7 @@ const styles = StyleSheet.create({
   },
   imgSlider: {
     width: "100%",
-    height: slide_height,
+    height: SLIDE_HEIGHT,
     marginTop: SCREEN_HEIGHT * 0.16
   },
   textStyle1: {
@@ -136,17 +123,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     alignSelf: 'center',
   },
-  // logincContainer1: {
-  //   backgroundColor: '#704591',
-  //   flex: 3,
-  //   alignItems: "center"
-  // },
-  // logincContainer2: {
-  //   backgroundColor: '#704591',
-  //   justifyContent: "center",
-  //   flex: 4,
-  //   alignItems: "center"
-  // },
   swiper_dot: {
     backgroundColor: '#DDDDDD',
     width: 30,
