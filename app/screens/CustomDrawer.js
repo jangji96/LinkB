@@ -35,7 +35,7 @@ const CustomDrawer = ({ navigation, route }) => {
         </View>
         <View style={{ flexDirection: 'row', marginTop: '7%', }}>
           <Entypo color='white' name='link' size={25} style={{ marginLeft: '20%', }}></Entypo>
-          <Text style={styles.menu_text}>행사참여하기</Text>
+          <Text style={styles.menu_text} onPress={() => navigation.navigate('CodeApply')}>행사참여하기</Text>
         </View>
       </View>
       <Text style={styles.setting_view} onPress={() => navigation.navigate('Setting')}>
