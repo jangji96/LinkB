@@ -94,7 +94,7 @@ class DetailScreenPresenter extends React.Component {
                                     </ScrollView>
                                 </View>
                             </View>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Apply')}>
+                            <TouchableOpacity>
                                 <View backgroundColor='#311957' style={{ alignContent: 'center' }}>
                                     <Text style={{ color: 'white', textAlign: 'center', paddingTop: 15, paddingBottom: 15, fontSize: 15, fontWeight: 'bold' }}>참가하기</Text>
                                 </View>
