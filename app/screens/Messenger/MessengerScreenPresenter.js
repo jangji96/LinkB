@@ -41,14 +41,11 @@ class MessengerScreenPresenter extends React.Component {
                             </View>
                         </View>
                     </TouchableOpacity>
-
                 </ScrollView>
                 <StatusBar
                     backgroundColor="#311957"
                     style={{ color: "white" }}></StatusBar>
             </View>
-
-
         )
     }
 }
