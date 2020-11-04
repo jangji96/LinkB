@@ -2,6 +2,11 @@ import React from "react";
 import MainScreenPresenter from './MainScreenPresenter'
 import axios from 'axios';
 import { BackHandler, ToastAndroid, Animated } from 'react-native'
+import { get_data, post_data } from '../module/Axios'
+
+const select_cover_url = 'http://101.101.161.189/api/index.php/linkb_cover/select_cover_list'
+const recommend_event_url = 'http://101.101.161.189/api/index.php/linkb_event/select_recommend_event_list'
+const event_url = 'http://101.101.161.189/api/index.php/linkb_event/select_event_list'
 
 class MainScreen extends React.Component {
   state = {
@@ -15,39 +20,9 @@ class MainScreen extends React.Component {
   componentDidMount = () => {
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
 
-    //cover List 받아오기
-    axios.get('http://101.101.161.189/api/index.php/linkb_cover/select_cover_list', { headers: { 'apikey': 'starthub' } })
-      .then((response) => {
-        // console.log('select_cover_list : ', response.data.cover);
-        this.setState({
-          select_cover_list: response.data.cover
-        })
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    //Recommend Event List 받아오기
-    axios.get('http://101.101.161.189/api/index.php/linkb_event/select_recommend_event_list', { headers: { 'apikey': 'starthub' } })
-      .then((response) => {
-        // console.log('select_recommend_event_list : ', response.data.event_list);
-        this.setState({
-          recommend_event_list: response.data.event_list
-        })
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    // Event List 받아오기 
-    axios.get('http://101.101.161.189/api/index.php/linkb_event/select_event_list', { headers: { 'apikey': 'starthub' } })
-      .then((response) => {
-        console.log('select_event_list : ', response.data.event_list[0].event_idx);
-        this.setState({
-          event_list: response.data.event_list
-        })
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    get_data(select_cover_url, { 'apikey': 'starthub' }, {}, this._get_select_cover)
+    get_data(recommend_event_url, { 'apikey': 'starthub' }, {}, this._get_recommend_event)
+    get_data(event_url, { 'apikey': 'starthub' }, {}, this._get_event)
 
   }
 
@@ -56,6 +31,7 @@ class MainScreen extends React.Component {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
+  //뒤로가기 두번 누를 시 앱 종료 이벤트
   handleBackButton = () => {
     if (!this.props.navigation.isFocused()) {
       return false;
@@ -78,6 +54,7 @@ class MainScreen extends React.Component {
     return true;
   }
 
+  //무한스크롤 이벤트
   scrollEvent = () => {
     this.setState({
       textValue: "loading..."
@@ -86,24 +63,40 @@ class MainScreen extends React.Component {
     const { event_list } = this.state;
     const length = event_list.length
 
-    axios.get('http://101.101.161.189/api/index.php/linkb_event/select_event_list', { headers: { 'apikey': 'starthub' }, params: { 'last_idx': event_list[length - 1].event_idx }, })
-      .then((response) => {
-        if (response.data.event_list.length == 0) {
-          this.setState({
-            textValue: "end"
-          })
-        }
-        else {
-          this.setState({
-            event_list: event_list.concat(response.data.event_list),
-            textValue: ""
-          })
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    get_data(event_url, { 'apikey': 'starthub' }, { 'last_idx': event_list[length - 1].event_idx }, this._get_more_event)
 
+  }
+
+  _get_select_cover = (data) => {
+    this.setState({
+      select_cover_list: data.cover
+    })
+  }
+
+  _get_recommend_event = (data) => {
+    this.setState({
+      recommend_event_list: data.event_list
+    })
+  }
+
+  _get_event = (data) => {
+    this.setState({
+      event_list: data.event_list
+    })
+  }
+
+  _get_more_event = (data) => {
+    if (data.event_list.length == 0) {
+      this.setState({
+        textValue: "end"
+      })
+    }
+    else {
+      this.setState({
+        event_list: this.state.event_list.concat(data.event_list),
+        textValue: ""
+      })
+    }
   }
 
   render() {
