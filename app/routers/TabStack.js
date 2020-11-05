@@ -2,10 +2,12 @@ import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SearchScreen from "../screens/Search/SearchScreen";
 import NoticeScreen from "../screens/Notice/NoticeScreen";
-import MainStack from "../routers/MainStack"
-import MessengerStack from "./MessengerStack"
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import MainScreen from "../screens/Main/MainScreen";
+import MainStack from "../routers/MainStack";
+import MessengerScreen from "../screens/Messenger/MessengerScreen";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 const Tab = createBottomTabNavigator();
 
@@ -28,6 +30,7 @@ export default function App() {
         return false;
     }
   }
+  
   return (
     //탭바 포커스 옵션 & 아이콘
     <Tab.Navigator initialRouteName='MainStack' tabBarOptions={{showLabel:false, style: { backgroundColor: '#311957',borderTopColor:'#311957' } }}
@@ -35,7 +38,7 @@ export default function App() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === 'MainStack') {
+          if (route.name === 'Main') {
             iconName = 'home-sharp'
             color = focused
               ? 'white'
@@ -52,7 +55,7 @@ export default function App() {
               ? 'white'
               : '#978cab';
           }
-          else if (route.name === 'MessengerStack') {
+          else if (route.name === 'Messenger') {
             iconName = 'chatbox-ellipses-sharp'
             color = focused
               ? 'white'
@@ -61,13 +64,13 @@ export default function App() {
           return <Icon name={iconName} size={size} color={color} />;
         },
       })} >
-      <Tab.Screen name="MainStack" component={MainStack}
+      <Tab.Screen name="Main" component={MainStack}
         options={({ route }) => ({
           tabBarVisible: getHeaderTitle(route)
         })} />
       <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="Notice" component={NoticeScreen} />
-      <Tab.Screen name="MessengerStack" component={MessengerStack}
+      <Tab.Screen name="Messenger" component={MessengerScreen}
         options={({ route }) => ({
           tabBarVisible: getHeaderTitle(route),
         })} />

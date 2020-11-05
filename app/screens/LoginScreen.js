@@ -73,13 +73,7 @@ class LoginScreen extends React.Component {
 
     axios(config)
       .then(function (response) {
-        if (response.data.code.code == '200') {
-          Snackbar.show({
-            backgroundColor:'#A9F5A9',
-            text: 'Login success',
-            duration: Snackbar.LENGTH_LONG,
-            fontFamily: "NotoSans-Medium",
-          });
+        if (response.data.code.code == '200') {          
           AsyncStorage.setItem('token', JSON.stringify({ 'email': email, 'password': password })).then(() => {
             console.log("setItem");
           }).catch(function (error) {
