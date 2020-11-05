@@ -47,7 +47,7 @@ class MainScreenPresenter extends React.Component {
                             </Body>
                             <Right style={{ flex: 1 }}>
                                 <Button transparent>
-                                    <Icon color='white' name='refresh' size={30} />
+                                    <Icon color='white' name='scan-outline' size={20} />
                                 </Button>
                             </Right>
                         </Header>

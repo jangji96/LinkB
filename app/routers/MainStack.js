@@ -8,10 +8,18 @@ import { createStackNavigator,CardStyleInterpolators } from "@react-navigation/s
 const MainStack = createStackNavigator();
 
 export default function App({navigation,route}) {
+  React.useLayoutEffect(() => {
+    console.log(route.state.index);
+    if(route.state.index==0){
+      navigation.dangerouslyGetParent().setOptions({gestureEnabled: true})
+    }else{
+      navigation.dangerouslyGetParent().setOptions({gestureEnabled: false})
+    }
+  }, [navigation, route]);
   return (
     <MainStack.Navigator headerMode='none' screenOptions={{animationEnabled:false}}>
       <MainStack.Screen name="Main" component={MainScreen} />
-      <MainStack.Screen name="Detail" component={DetailScreen} />      
+      <MainStack.Screen name="Detail" component={DetailScreen} options={{drawerLockMode: 'locked-closed'}}/>      
       <MainStack.Screen name="Apply" component={ApplyScreen} />     
       <MainStack.Screen name="ApplyComplete" component={ApplyCompleteScreen} />
     </MainStack.Navigator>
