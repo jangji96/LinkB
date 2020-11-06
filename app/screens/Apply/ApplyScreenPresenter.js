@@ -32,14 +32,6 @@ class ApplySceenPresenter extends React.Component {
         }
     }
 
-    term1 = () => {
-        this.props.setTerm1()
-    }
-
-    term2 = () => {
-        this.props.setTerm2()
-    }
-
     render() {
         return (
             <ScrollView style={{ backgroundColor: '#FFFFFF' }}>
@@ -128,7 +120,7 @@ class ApplySceenPresenter extends React.Component {
                                     <FontAwesome color={this.props.color1} name='check' size={20} />
                                     <Text style={styles.term_text}>서비스 이용 약관 (필수)</Text>
                                 </View>
-                                <TouchableOpacity style={{ flex: 1, }} onPress={() => this.term1()}>
+                                <TouchableOpacity style={{ flex: 1, }}>
                                     <View style={{ justifyContent: "center", alignItems: "center" }}>
                                         <AntDesign color='#A6A6A6' name='right' size={15} />
                                     </View>
@@ -141,7 +133,7 @@ class ApplySceenPresenter extends React.Component {
                                     <FontAwesome color={this.props.color2} name='check' size={20} />
                                     <Text style={styles.term_text}>개인정보 처리방침 (필수)</Text>
                                 </View>
-                                <TouchableOpacity style={{ flex: 1, }} onPress={() => this.term2()}>
+                                <TouchableOpacity style={{ flex: 1, }}>
                                     <View style={{ justifyContent: "center", alignItems: "center" }}>
                                         <AntDesign color='#A6A6A6' name='right' size={15} />
                                     </View>

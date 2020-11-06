@@ -38,7 +38,7 @@ class MainScreenPresenter extends React.Component {
                         <Header style={{ backgroundColor: '#311957' }}>
                             <Left style={{ flex: 1 }}>
                                 <Button transparent onPress={() => this.props.navigation.toggleDrawer()}>
-                                    <Icon color='white' name='menu' size={30} />
+                                    <Icon color='white' name='menu' size={30}/>
                                 </Button>
                             </Left>
                             <Body style={{ flex: 1, alignItems: 'center' }}>
@@ -46,8 +46,8 @@ class MainScreenPresenter extends React.Component {
                                 <Text style={styles.Logo_text_2}>WE LINK BUSINESS</Text>
                             </Body>
                             <Right style={{ flex: 1 }}>
-                                <Button transparent>
-                                    <Icon color='white' name='refresh' size={30} />
+                                <Button transparent onPress={()=>this.props.navigation.navigate('Scan')}>
+                                    <Icon color='white' name='scan-outline' size={20} />
                                 </Button>
                             </Right>
                         </Header>
