@@ -14,6 +14,7 @@ import DetailScreen from '../screens/Detail/DetailScreen';
 import ApplyCompleteScreen from '../screens/ApplyComplete';
 import ApplyScreen from '../screens/Apply/ApplyScreen';
 import MessengerDetailScreen from '../screens/MessengerDetail/MessengerDetailScreen';
+import ScanScreen from '../screens/ScanScreen'
 
 const Drawer = createDrawerNavigator();
 
@@ -30,6 +31,7 @@ export default function App() {
       <Drawer.Screen name="EventRegistration" component={EventRegistrationScreen} options={{gestureEnabled:false}}/>
       <Drawer.Screen name="OpenComplete" component={OpenCompleteScreen} options={{gestureEnabled:false}}/>
       <Drawer.Screen name="CodeApply" component={CodeApplyScreen} options={{gestureEnabled:false}}/>
+      <Drawer.Screen name="Scan" component={ScanScreen} options={{gestureEnabled:false}}/>
     </Drawer.Navigator>
   );
 }
