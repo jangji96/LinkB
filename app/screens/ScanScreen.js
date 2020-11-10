@@ -69,50 +69,6 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 17,
     },
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: '#311957',
-    },
-    // title_text: {
-    //     fontFamily: "NotoSans-Bold",
-    //     color: 'white',
-    // },
-    // JoinContainer1: {
-    //     backgroundColor: '#311957',
-    //     flex: 2,
-    //     alignItems: "center"
-    // },
-    // JoinContainer2: {
-    //     backgroundColor: '#311957',
-    //     justifyContent: "center",
-    //     flex: 9,
-    //     alignItems: "center"
-    // },
-    // JoinContainer3: {
-    //     backgroundColor: '#311957',
-    //     justifyContent: "center",
-    //     flex: 3,
-    //     alignItems: "center"
-    // },
-    // welcome_text: {
-    //     marginTop: SCREEN_HEIGHT * 0.07,
-    //     color: 'white',
-    //     fontFamily: "NotoSans-Light",
-    //     textAlign: 'center',
-    // },
-    // ButtonStyle: {
-    //     color: 'white',
-    //     marginTop: SCREEN_HEIGHT * 0.16,
-    //     width: '35%',
-    //     height: SCREEN_HEIGHT * 0.05,
-    //     borderColor: 'white',
-    //     borderRadius: 100,
-    //     borderWidth: 1,
-    //     textAlign: 'center',
-    //     fontFamily: "NotoSans-Regular",
-    //     textAlignVertical: "center",
-    // }
 });
 
 export default ScanScreen;
