@@ -2,11 +2,13 @@ import React from "react";
 import MainScreenPresenter from './MainScreenPresenter'
 import axios from 'axios';
 import { BackHandler, ToastAndroid, Animated } from 'react-native'
-import { get_data, post_data } from '../module/Axios'
+import APIManager from '../module/APIManager'
 
 const select_cover_url = 'http://101.101.161.189/api/index.php/linkb_cover/select_cover_list'
 const recommend_event_url = 'http://101.101.161.189/api/index.php/linkb_event/select_recommend_event_list'
 const event_url = 'http://101.101.161.189/api/index.php/linkb_event/select_event_list'
+
+let am;
 
 class MainScreen extends React.Component {
   state = {
@@ -20,10 +22,16 @@ class MainScreen extends React.Component {
   componentDidMount = () => {
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
 
-    get_data(select_cover_url, { 'apikey': 'starthub' }, {}, this._get_select_cover)
-    get_data(recommend_event_url, { 'apikey': 'starthub' }, {}, this._get_recommend_event)
-    get_data(event_url, { 'apikey': 'starthub' }, {}, this._get_event)
+    am = new APIManager();
 
+    am.url = select_cover_url
+    am.get(data => { this.setState({ select_cover_list: data.cover }) })
+
+    am.url = recommend_event_url
+    am.get(data => { this.setState({ recommend_event_list: data.event_list }) })
+
+    am.url = event_url
+    am.get(data => { this.setState({ event_list: data.event_list }) })
   }
 
   componentWillUnmount() {
@@ -63,40 +71,28 @@ class MainScreen extends React.Component {
     const { event_list } = this.state;
     const length = event_list.length
 
-    get_data(event_url, { 'apikey': 'starthub' }, { 'last_idx': event_list[length - 1].event_idx }, this._get_more_event)
+    am.url = event_url
 
-  }
-
-  _get_select_cover = (data) => {
-    this.setState({
-      select_cover_list: data.cover
-    })
-  }
-
-  _get_recommend_event = (data) => {
-    this.setState({
-      recommend_event_list: data.event_list
-    })
-  }
-
-  _get_event = (data) => {
-    this.setState({
-      event_list: data.event_list
-    })
-  }
-
-  _get_more_event = (data) => {
-    if (data.event_list.length == 0) {
-      this.setState({
-        textValue: "end"
-      })
+    if (length == 0) {
+      am.params = {}
+    } else {
+      am.params = { 'last_idx': event_list[length - 1].event_idx }
     }
-    else {
-      this.setState({
-        event_list: this.state.event_list.concat(data.event_list),
-        textValue: ""
-      })
-    }
+
+    am.get(data => {
+      if (data.event_list.length == 0) {
+        this.setState({
+          textValue: "end"
+        })
+      }
+      else {
+        this.setState({
+          event_list: this.state.event_list.concat(data.event_list),
+          textValue: ""
+        })
+      }
+    })
+
   }
 
   render() {
