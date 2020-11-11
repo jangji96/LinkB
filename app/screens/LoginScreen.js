@@ -13,8 +13,11 @@ import axios from 'axios';
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import AsyncStorage from '@react-native-community/async-storage'
 import Snackbar from 'react-native-snackbar'
+import APIManager from './module/APIManager'
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
+
+let am;
 
 class LoginScreen extends React.Component {
   state = {
@@ -61,41 +64,41 @@ class LoginScreen extends React.Component {
     data.append('email', email);
     data.append('password', password);
 
-    var config = {
-      method: 'post',
-      url: 'http://101.101.161.189/api/index.php/linkb_member/login_member',
-      headers: {
-        'apikey': 'starthub',
-      },
-      data: data
-    }
-    var navigation = this.props.navigation
+    am = new APIManager();
 
-    axios(config)
-      .then(function (response) {
-        if (response.data.code.code == '200') {          
-          AsyncStorage.setItem('token', JSON.stringify({ 'email': email, 'password': password })).then(() => {
-            console.log("setItem");
-          }).catch(function (error) {
-            console.log('set Error ' + error);
-          });
-          navigation.navigate('Drawer')
-        } else if (response.data.code.code == '207') {
-          Snackbar.show({
-            backgroundColor:'#F5A9A9',
-            text: 'Login fail',
-            duration: Snackbar.LENGTH_LONG,
-            fontFamily: "NotoSans-Medium",
-          });
-          console.log('실패');
-        } else {
-          console.log('음?');
-        }
-      })
-      .catch(function (error) {
-        console.log('에러러러', error);
-      });
+    am.url = "http://101.101.161.189/api/index.php/linkb_member/login_member"
+    am.data = data
+    am.post(data => { this.login_code_check(data) })
   };
+
+  login_code_check = (data) => {
+    var navigation = this.props.navigation
+    var email = this.state.email;
+    var password = this.state.password;
+
+    if (data.code.code == '200') {
+      //토큰 세션에 아이디 비번 저장
+      AsyncStorage.setItem('token', JSON.stringify({ 'email': email, 'password': password })).then(() => {
+        console.log("setItem");
+      }).catch(function (error) {
+        console.log('set Error ' + error);
+      });
+
+      //메인으로 이동
+      navigation.navigate('Drawer')
+    } else if (data.code.code == '207') {
+      //로그인 실패
+      Snackbar.show({
+        backgroundColor: '#F5A9A9',
+        text: 'Login fail',
+        duration: Snackbar.LENGTH_LONG,
+        fontFamily: "NotoSans-Medium",
+      });
+      console.log('로그인 실패');
+    } else {
+      console.log('strange code 입력됨');
+    }
+  }
 
   user_login = () => {
     this.setState({ color1: '#311957', color2: '#ffffff' })
