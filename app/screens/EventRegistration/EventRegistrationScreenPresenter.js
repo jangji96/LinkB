@@ -7,6 +7,8 @@ import {
   Dimensions,
   StatusBar,
   TouchableOpacity,
+  Modal,
+  ToastAndroid
 } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import { TextInput } from "react-native-gesture-handler";
@@ -14,6 +16,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import DropDownPicker from 'react-native-dropdown-picker';
 import DatePicker from 'react-native-datepicker'
 import DateTimePicker from '@react-native-community/datetimepicker';
+import ApplySceenPresenter from "../Apply/ApplyScreenPresenter";
+
+const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 class EventRegistrationScreenPresenter extends React.Component {
   constructor(props) {
@@ -27,6 +32,14 @@ class EventRegistrationScreenPresenter extends React.Component {
       dropDownPicker2: 'select'
     }
   }
+  participate = () => {
+    if (!this.props.isAllCheck) {
+        ToastAndroid.show('약관에 동의해주세요. ', ToastAndroid.SHORT);
+    } else {
+        this.props.apply()
+        this.props.navigation.navigate('OpenComplete')
+    }
+}
   render() {
     return (
       <ScrollView backgroundColor='white'>
@@ -185,7 +198,34 @@ class EventRegistrationScreenPresenter extends React.Component {
               dropDownStyle={{ backgroundColor: 'white' }}
               onChangeItem={(item) => this.setState({ dropDownPicker1: item })} />
           </View>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('OpenComplete')}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.props.modalVisible}
+            onRequestClose={() => {
+              this.props.setModalVisible()
+            }}
+          >
+            <View style={{ height: '100%', width: '100%', backgroundColor: '#00000080' }}>
+              <View style={{ width: '100%', height: SCREEN_HEIGHT * 0.28, marginTop: SCREEN_HEIGHT * 0.6, backgroundColor: 'white', alignSelf: 'center', borderColor: '#311954', borderWidth: 2, borderRadius: 10 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 15 }}>
+                  <Icon onPress={() => this.props.allCheck()} color={this.props.allCheckColor} name='checkmark-circle-outline' size={30} style={{ marginLeft: 15, marginRight: 15, fontSize: 25 }} />
+                  <Text style={{ width: '100%', height: '100%', fontSize: 20, marginTop: 10, fontSize: 16 }}>약관에 모두 동의합니다.</Text>
+                </View>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 25 }}>
+                  <Icon onPress={() => this.props.isCheck1()} color={this.props.checkColor1} name='checkmark-outline' size={30} style={{ marginLeft: 15, marginRight: 15, fontSize: 25 }} />
+                  <Text style={{ width: '100%', height: '100%', fontSize: 20, marginTop: 10, fontSize: 14 }}>서비스 이용 약관 (필수)</Text>
+                </View>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 15 }}>
+                  <Icon onPress={() => this.props.isCheck2()} color={this.props.checkColor2} name='checkmark-outline' size={30} style={{ marginLeft: 15, marginRight: 15, fontSize: 25,marginBottom:SCREEN_HEIGHT*0.03 }} />
+                  <Text style={{ width: '100%', height: '100%', fontSize: 20, marginTop: 10, fontSize: 14 }}>개인정보 처리방침 (필수)</Text>
+                </View>
+                <Text onPress={() => this.participate()} style={{ backgroundColor:'#311957',color: 'white', textAlign: 'center', paddingTop: 15, paddingBottom: 15, fontSize: 15, fontWeight: 'bold',borderBottomLeftRadius: 9, borderBottomRightRadius: 9,width:'100%' , borderWidth: 2 }}>동의합니다</Text>
+                  
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => this.props.setTerm()}>
             <View backgroundColor='#311957' style={{ alignContent: 'center', marginTop: 50 }}>
               <Text style={{ color: 'white', textAlign: 'center', paddingTop: 15, paddingBottom: 15, fontSize: 20, fontWeight: 'bold' }}>참가하기</Text>
             </View>
