@@ -69,14 +69,13 @@ class MainScreen extends React.Component {
     })
 
     const { event_list } = this.state;
-    const length = event_list.length
 
     am.url = event_url
 
-    if (length == 0) {
+    if (event_list.length == 0) {
       am.params = {}
     } else {
-      am.params = { 'last_idx': event_list[length - 1].event_idx }
+      am.params = { 'last_idx': event_list[event_list.length - 1].event_idx }
     }
 
     am.get(data => {
