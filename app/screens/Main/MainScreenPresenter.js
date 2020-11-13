@@ -20,10 +20,16 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
 class MainScreenPresenter extends React.Component {
 
     render() {
+        let loading = null;
+
+        if (this.props.image) {
+            loading = <Image source={require("../image/loading.gif")} style={styles.loading_img} />
+        } else {
+            loading = <Text style={{ color: "gray", fontSize: 13, textAlign: 'center', textAlignVertical: "center", }}>{this.props.textValue}</Text>
+        }
         return (
             <ScrollView style={{ flex: 1, flexDirection: 'column' }}
                 onMomentumScrollEnd={(e) => {
-                    console.log("scrollend Event")
                     const scrollPosition = e.nativeEvent.contentOffset.y;
                     const scrollViewHeight = e.nativeEvent.layoutMeasurement.height;
                     const contentHeight = e.nativeEvent.contentSize.height;
@@ -38,7 +44,7 @@ class MainScreenPresenter extends React.Component {
                         <Header style={{ backgroundColor: '#311957' }}>
                             <Left style={{ flex: 1 }}>
                                 <Button transparent onPress={() => this.props.navigation.toggleDrawer()}>
-                                    <Icon color='white' name='menu' size={30}/>
+                                    <Icon color='white' name='menu' size={30} />
                                 </Button>
                             </Left>
                             <Body style={{ flex: 1, alignItems: 'center' }}>
@@ -46,7 +52,7 @@ class MainScreenPresenter extends React.Component {
                                 <Text style={styles.Logo_text_2}>WE LINK BUSINESS</Text>
                             </Body>
                             <Right style={{ flex: 1 }}>
-                                <Button transparent onPress={()=>this.props.navigation.navigate('Scan')}>
+                                <Button transparent onPress={() => this.props.navigation.navigate('Scan')}>
                                     <Icon color='white' name='scan-outline' size={20} />
                                 </Button>
                             </Right>
@@ -127,8 +133,8 @@ class MainScreenPresenter extends React.Component {
                                         </TouchableOpacity>
                                     </View>
                                 )}
-                                <View style={{ width: '100%', height: 40, justifyContent: 'center', }}>
-                                    <Text style={{ color: "gray", fontSize: 13, textAlign: 'center', textAlignVertical: "center", }}>{this.props.textValue}</Text>
+                                <View style={{ width: '100%', height: 40, justifyContent: 'center', alignItems: "center", }}>
+                                    {loading}
                                 </View>
                             </View>
                         </ScrollView>
@@ -255,6 +261,10 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: 'black',
         fontFamily: 'NotoSans-Bold',
+    },
+    loading_img: {
+        width: 30,
+        height: 30,
     }
 });
 

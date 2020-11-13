@@ -16,6 +16,7 @@ class MainScreen extends React.Component {
     recommend_event_list: [],
     event_list: [],
 
+    image: false,
     textValue: "",
   }
 
@@ -65,7 +66,8 @@ class MainScreen extends React.Component {
   //무한스크롤 이벤트
   scrollEvent = () => {
     this.setState({
-      textValue: "loading..."
+      image: true,
+      textValue: "",
     })
 
     const { event_list } = this.state;
@@ -81,12 +83,14 @@ class MainScreen extends React.Component {
     am.get(data => {
       if (data.event_list.length == 0) {
         this.setState({
+          image: false,
           textValue: "end"
         })
       }
       else {
         this.setState({
           event_list: this.state.event_list.concat(data.event_list),
+          image: false,
           textValue: ""
         })
       }
