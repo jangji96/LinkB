@@ -1,6 +1,5 @@
 import React from "react";
 import MainScreenPresenter from './MainScreenPresenter'
-import axios from 'axios';
 import { BackHandler, ToastAndroid, Animated } from 'react-native'
 import APIManager from '../module/APIManager'
 
