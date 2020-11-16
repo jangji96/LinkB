@@ -14,6 +14,7 @@ import {
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Icon from 'react-native-vector-icons/Ionicons';
+import WebView from "react-native-webview";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
@@ -62,11 +63,13 @@ class DetailScreenPresenter extends React.Component {
                             <Icon name='person-outline' size={16} style={{ marginTop: 20, marginLeft: '10%' }}>  {this.props.cnt}명 / 150명</Icon>
                             <Icon name='location-outline' size={16} style={{ marginTop: 20, marginLeft: '10%' }}>  {this.props.event_host}</Icon>
                             <Text style={{ width: '70%', height: 40, alignSelf: 'center', borderColor: 'black', borderWidth: 1.5, backgroundColor: 'white', borderRadius: 12, textAlign: 'center', paddingStart: 5, textAlignVertical: "center", fontSize: 14, marginTop: 20, marginBottom: 20 }} onPress={this.handleClick}>지도보기</Text>
-                            <View style={{ borderTopWidth: 1, paddingTop: 40, paddingBottom: 40, borderTopColor: '#dddddd' }}>
-                                <Text style={{ marginLeft: '10%', fontSize: 12 }}>{this.props.event_introduce.substr(5, 7)}</Text>
+                            <View style={{ borderTopWidth: 1, borderTopColor: '#dddddd' }}>
+                                <View style={{width:'100%',height:SCREEN_HEIGHT*0.1}}>
+                                    <WebView scalesPageToFit={false} style={{width:'100%',height:'100%',marginLeft:18,marginTop:18}} source={{html: this.props.event_introduce}} />
+                                </View>
                             </View>
                             <View backgroundColor='#dddddd' style={{ paddingTop: 10, paddingBottom: 10 }}>
-                                <Text style={{ height: 70, backgroundColor: 'white', textAlignVertical: "center", paddingLeft: '10%', fontSize: 12 }}>{this.props.company_name}</Text>
+                                <Text style={{ height: 70, backgroundColor: 'white', textAlignVertical: "center", paddingLeft: 25, fontSize: 16 }}>{this.props.company_name}</Text>
                             </View>
                             <View>
                                 <View style={{ height: 300, margin: 5 }}>
