@@ -15,9 +15,6 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 class SearchScreenPresenter extends React.Component {
-    state = {
-        searchString: ''
-    }
 
     render() {
         return (
@@ -31,19 +28,19 @@ class SearchScreenPresenter extends React.Component {
                                 placeholder="검색어를 입력하세요"
                                 placeholderTextColor="white"
                                 maxLength={20}
-                                value={this.state.searchString}
-                                onChangeText={searchString => this.setState({ searchString: searchString })}></TextInput>
+                                value={this.props.searchString}
+                                onChangeText={searchString => this.props.input_searchString(searchString)}></TextInput>
                         </View>
                         <View style={{ width: '90%', height: '100%', position: 'absolute', alignItems: "flex-end", justifyContent: "center", }}>
-                            <EvilIcons color='white' name='search' size={25}></EvilIcons>
+                            <TouchableOpacity onPress={() => this.props.search()}><EvilIcons color='white' name='search' size={25}></EvilIcons></TouchableOpacity>
                         </View>
                     </View>
                     <View style={styles.main_layout}>
-                        <Text style={styles.small_title}>💜당신에게 꼭 맞는 추천행사💜</Text>
+                        <Text style={styles.small_title}>{this.props.title_text}</Text>
                         <ScrollView
                             showsHorizontalScrollIndicator={false}>
                             <View style={styles.event}>
-                                {this.props.recommend_event_list.map(event =>
+                                {this.props.event_list.map(event =>
                                     <View key={event.event_idx} style={styles.event_view}>
                                         <TouchableOpacity style={{ width: '100%', height: '100%' }} onPress={() => this.props.navigation.navigate('Detail', { event_idx: event.event_idx })}>
                                             <Image source={{ uri: event.event_image }} style={styles.event_image} />

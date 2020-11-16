@@ -1,28 +1,43 @@
 import React from "react";
 import SearchScreenPresenter from './SearchScreenPresenter'
-import axios from 'axios';
+import APIManager from '../module/APIManager'
+
+const recommend_event_url = 'http://101.101.161.189/api/index.php/linkb_event/select_recommend_event_list'
+const event_url = 'http://101.101.161.189/api/index.php/linkb_event/select_event_list'
+
+let am;
 
 class SearchScreen extends React.Component {
   state = {
-    recommend_event_list: [],
+    event_list: [],
+    title_text: "💜당신에게 꼭 맞는 추천행사💜",
+    searchString: "",
   }
 
   componentDidMount = () => {
-    axios.get('http://101.101.161.189/api/index.php/linkb_event/select_recommend_event_list', { headers: { 'apikey': 'starthub' } })
-      .then((response) => {
-        // console.log('recommend', response.data.event_list);
-        this.setState({
-          recommend_event_list: response.data.event_list
-        })
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    am = new APIManager();
+
+    am.url = recommend_event_url
+    am.get(data => { this.setState({ event_list: data.event_list }) })
+  }
+
+  input_searchString = (text) => {
+    this.setState({
+      searchString: text
+    })
+  }
+
+  search = () => {
+    am.url = event_url
+    am.get(data => { this.setState({ event_list: data.event_list }) })
+    this.setState({
+      title_text: this.state.searchString + "에 대한 검색결과입니다. "
+    })
   }
 
   render() {
     return (
-      <SearchScreenPresenter {...this.state} navigation={this.props.navigation}></SearchScreenPresenter>
+      <SearchScreenPresenter {...this.state} navigation={this.props.navigation} input_searchString={this.input_searchString} search={this.search}></SearchScreenPresenter>
     )
   }
 }
