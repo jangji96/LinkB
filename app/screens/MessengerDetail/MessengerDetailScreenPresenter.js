@@ -45,6 +45,7 @@ class MessengerDetailScreenPresenter extends React.Component {
             messages: this.state.messages.concat(this.state.input)
         })
         console.log(this.state.messages);
+        this.refs.TextInput.clear() 
         this.refs.scrollView.scrollToEnd({})
     }
     
@@ -96,6 +97,7 @@ class MessengerDetailScreenPresenter extends React.Component {
                     </ScrollView>
                     <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#f8f8f8' }}>
                         <TextInput
+                            ref='TextInput'
                             placeholder='메세지 보내기'
                             onChangeText={this.setInput}
                             style={{
