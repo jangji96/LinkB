@@ -22,6 +22,7 @@
     "native-base": "^2.13.14",
     "react": "16.13.1",
     "react-native": "0.63.2",
+    "react-native-barcode-mask": "^1.2.4",
     "react-native-camera": "^3.40.0",
     "react-native-datepicker": "^1.7.2",
     "react-native-dropdown-picker": "^3.7.1",

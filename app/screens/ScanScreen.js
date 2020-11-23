@@ -52,8 +52,9 @@ class ScanScreen extends React.Component {
                         showMarker={true}
                         checkAndroid6Permissions={true}
                         markerStyle={{ borderColor: "#311957" }}
-                        cameraStyle={{ height: SCREEN_HEIGHT }}
-                    />
+                        cameraStyle={{ height: SCREEN_HEIGHT}}
+                    >
+                    </QRCodeScanner>
                 </View>
                 <StatusBar
                     backgroundColor="#311957"
