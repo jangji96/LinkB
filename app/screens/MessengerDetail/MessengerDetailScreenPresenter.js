@@ -54,7 +54,7 @@ class MessengerDetailScreenPresenter extends React.Component {
             <View style={{ backgroundColor: 'white', height: '100%' }}>
                 <Header style={{ backgroundColor: '#311957' }}>
                     <Left style={{ flex: 1 }}>
-                        <Button transparent onPress={() => this.props.navigation.navigate("Messenger")}>
+                        <Button transparent onPress={() => this.props.navigation.goBack()}>
                             <Icon color='white' name='chevron-back-outline' size={30} />
                         </Button>
                     </Left>

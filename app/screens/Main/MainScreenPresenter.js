@@ -10,6 +10,7 @@ import {
     TouchableOpacity,
     BackHandler,
     ToastAndroid,
+    RefreshControl
 } from 'react-native';
 import Swiper from 'react-native-swiper'
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
@@ -18,7 +19,18 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 class MainScreenPresenter extends React.Component {
-
+    state = {
+        refreshing: false
+    }
+    onRefresh = () => {
+        this.setState({
+            refreshing: true
+        })
+        setTimeout(()=>this.setState({
+            refreshing: false
+        }),1000)
+        
+    }
     render() {
         let loading = null;
 
@@ -38,7 +50,11 @@ class MainScreenPresenter extends React.Component {
                     if (isScrolledToBottom >= (contentHeight - 5)) {
                         this.props.scrollEvent()
                     }
-                }}>
+                }}
+                refreshControl={
+                    <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
+                }
+                >
                 <View style={styles.select_cover_layout}>
                     <View>
                         <Header style={{ backgroundColor: '#311957' }}>

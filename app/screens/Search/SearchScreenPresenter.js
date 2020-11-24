@@ -9,16 +9,32 @@ import {
     TextInput,
     StatusBar,
     TouchableOpacity,
+    RefreshControl
 } from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 class SearchScreenPresenter extends React.Component {
-
+    state = {
+        refreshing: false
+    }
+    onRefresh = () => {
+        this.setState({
+            refreshing: true
+        })
+        setTimeout(()=>this.setState({
+            refreshing: false
+        }),1000)
+        
+    }
     render() {
         return (
-            <ScrollView>
+            <ScrollView
+                refreshControl={
+                    <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
+                }
+            >
                 <View style={styles.background_layout}></View>
                 <View style={{ width: '100%', alignItems: "center", justifyContent: 'center', }}>
                     <View style={{ width: '100%', height: 45, flexDirection: 'row', marginTop: 23 }}>
@@ -38,7 +54,8 @@ class SearchScreenPresenter extends React.Component {
                     <View style={styles.main_layout}>
                         <Text style={styles.small_title}>{this.props.title_text}</Text>
                         <ScrollView
-                            showsHorizontalScrollIndicator={false}>
+                            showsHorizontalScrollIndicator={false}                            
+                        >
                             <View style={styles.event}>
                                 {this.props.event_list.map(event =>
                                     <View key={event.event_idx} style={styles.event_view}>

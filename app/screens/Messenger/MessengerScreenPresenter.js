@@ -7,7 +7,8 @@ import {
     Dimensions,
     Image,
     StatusBar,
-    TouchableOpacity
+    TouchableOpacity,
+    RefreshControl
 } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -15,6 +16,18 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 class MessengerScreenPresenter extends React.Component {
+    state = {
+        refreshing: false
+    }
+    onRefresh = () => {
+        this.setState({
+            refreshing: true
+        })
+        setTimeout(()=>this.setState({
+            refreshing: false
+        }),1000)
+        
+    }
     render() {
         return (
             <View>
@@ -28,7 +41,11 @@ class MessengerScreenPresenter extends React.Component {
                         </Button>
                     </Right>
                 </Header>
-                <ScrollView style={{ alignSelf: 'center', marginTop: 20, width: '90%', height: '100%' }}>
+                <ScrollView style={{ alignSelf: 'center', marginTop: 20, width: '90%', height: '100%' }}
+                    refreshControl={
+                        <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
+                    }
+                >
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('MessengerDetail')}>
                         <View style={{ flexDirection: 'row' }}>
                             <Image style={{ width: SCREEN_WIDTH * 0.18, height: SCREEN_WIDTH * 0.18 }} source={require("../image/user.png")}></Image>
