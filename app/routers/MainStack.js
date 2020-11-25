@@ -4,6 +4,7 @@ import DetailScreen from "../screens/Detail/DetailScreen";
 import ApplyScreen from "../screens/Apply/ApplyScreen";
 import ApplyCompleteScreen from "../screens/ApplyComplete";
 import { createStackNavigator, CardStyleInterpolators } from "@react-navigation/stack";
+import MyInfoScreen from "../screens/MyInfo/MyInfoScreen";
 
 const MainStack = createStackNavigator();
 
@@ -24,6 +25,7 @@ export default function App({ navigation, route }) {
       <MainStack.Screen name="Main" component={MainScreen} />
       <MainStack.Screen name="Detail" component={DetailScreen} options={{ drawerLockMode: 'locked-closed' }} />
       <MainStack.Screen name="Apply" component={ApplyScreen} />
+      <MainStack.Screen name="MyInfo" component={MyInfoScreen} options={{gestureEnabled:false}}/>
       <MainStack.Screen name="ApplyComplete" component={ApplyCompleteScreen} />
     </MainStack.Navigator>
   );
