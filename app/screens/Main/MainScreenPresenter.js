@@ -19,18 +19,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 class MainScreenPresenter extends React.Component {
-    state = {
-        refreshing: false
-    }
-    onRefresh = () => {
-        this.setState({
-            refreshing: true
-        })
-        setTimeout(()=>this.setState({
-            refreshing: false
-        }),1000)
-        
-    }
+
     render() {
         let loading = null;
 
@@ -52,9 +41,9 @@ class MainScreenPresenter extends React.Component {
                     }
                 }}
                 refreshControl={
-                    <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
+                    <RefreshControl refreshing={this.props.refreshing} onRefresh={this.props.onRefresh} />
                 }
-                >
+            >
                 <View style={styles.select_cover_layout}>
                     <View>
                         <Header style={{ backgroundColor: '#311957' }}>

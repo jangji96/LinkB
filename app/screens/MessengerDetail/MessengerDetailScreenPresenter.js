@@ -19,25 +19,25 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
 var hours = new Date().getHours(); //Current Hours
 var min = new Date().getMinutes();
 var ampm
-if(hours>11){
-    ampm='오후';
-    hours=hours-12;
-    
-}else{
-    ampm='오전'
-}
-if(min<10){
-    min='0'+min
-}
+if (hours > 11) {
+    ampm = '오후';
+    hours = hours - 12;
 
+} else {
+    ampm = '오전'
+}
+if (min < 10) {
+    min = '0' + min
+}
+var keyNum = 3
 class MessengerDetailScreenPresenter extends React.Component {
     state = {
         input: '',
         messages: [
-            {name:'사용자',time:'오후 2:30',content:'안녕하세요 스타트허브입니다.\n다음주 목요일 미팅 괜찮으신가요?',color:'#f7f7f7',flex:'flex-end',direction:'row'},
-            {name:'스타트허브',time:'오후 2:30',content:'네 괜찮습니다.',color:'#ebe6f3',flex:'flex-start',direction:'row-reverse'}
+            { idx: '1', name: '사용자', time: '오후 2:30', content: '안녕하세요 스타트허브입니다.\n다음주 목요일 미팅 괜찮으신가요?', color: '#f7f7f7', flex: 'flex-end', direction: 'row' },
+            { idx: '2', name: '스타트허브', time: '오후 2:30', content: '네 괜찮습니다.', color: '#ebe6f3', flex: 'flex-start', direction: 'row-reverse' }
         ]
-        
+
     };
     setInput = (input) => {
         this.setState({
@@ -45,15 +45,15 @@ class MessengerDetailScreenPresenter extends React.Component {
         })
     }
     chat = () => {
-        var jsonArray = [{name:'사용자',time:ampm + hours +':'+ min ,content:this.state.input,color:'#f7f7f7',flex:'flex-end',direction:'row'}]
+        var jsonArray = [{ idx: keyNum, name: '사용자', time: ampm + hours + ':' + min, content: this.state.input, color: '#f7f7f7', flex: 'flex-end', direction: 'row' }]
+        keyNum += 1
         this.setState({
             messages: this.state.messages.concat(jsonArray)
         })
         console.log(this.state.messages);
-        this.refs.TextInput.clear() 
-        this.refs.scrollView.scrollToEnd({})
+        this.refs.TextInput.clear()
     }
-    
+
     render() {
         return (
             <View style={{ backgroundColor: 'white', height: '100%' }}>
@@ -73,13 +73,16 @@ class MessengerDetailScreenPresenter extends React.Component {
                     </Right>
                 </Header>
                 <View style={{ flex: 1 }}>
-                    <ScrollView ref="scrollView" style={{paddingHorizontal:15}}>
+                    <ScrollView
+                        ref={ref => { this.scrollView = ref }}
+                        onContentSizeChange={() => this.scrollView.scrollToEnd({ animated: false })}
+                        style={{ paddingHorizontal: 15 }}>
                         <Text style={{ alignSelf: 'center', marginTop: 10 }}>----------------------  2020년 11월 04일 ----------------------</Text>
                         {this.state.messages.map(messages =>
-                            <View style={{ flexDirection: messages.direction, alignSelf: messages.flex }}>
+                            <View key={messages.idx} style={{ flexDirection: messages.direction, alignSelf: messages.flex }}>
                                 <View style={{ width: SCREEN_WIDTH * 0.3 }}></View>
-                                <Text style={{ alignSelf: 'flex-end', fontSize: 12 }}>{messages.time }</Text>
-                                <Text style={{ alignSelf: messages.flex, marginTop: 10, backgroundColor:messages.color , padding: 10, marginRight: 15 }}>{messages.content}</Text>
+                                <Text style={{ alignSelf: 'flex-end', fontSize: 12 }}>{messages.time}</Text>
+                                <Text style={{ alignSelf: messages.flex, marginTop: 10, backgroundColor: messages.color, padding: 10, marginRight: 15 }}>{messages.content}</Text>
                             </View>
                         )}
                     </ScrollView>

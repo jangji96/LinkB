@@ -17,11 +17,21 @@ class MainScreen extends React.Component {
 
     image: false,
     textValue: "",
+
+    refreshing: false
   }
 
   componentDidMount = () => {
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+    this.dataSetting()
+  }
 
+  componentWillUnmount() {
+    this.exitApp = false;
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  dataSetting = () => {
     am = new APIManager();
 
     am.url = select_cover_url
@@ -32,11 +42,7 @@ class MainScreen extends React.Component {
 
     am.url = event_url
     am.get(data => { this.setState({ event_list: data.event_list }) })
-  }
 
-  componentWillUnmount() {
-    this.exitApp = false;
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
   //뒤로가기 두번 누를 시 앱 종료 이벤트
@@ -94,12 +100,21 @@ class MainScreen extends React.Component {
         })
       }
     })
+  }
 
+  onRefresh = () => {
+    this.setState({
+      refreshing: true
+    })
+    this.dataSetting()
+    this.setState({
+      refreshing: false
+    })
   }
 
   render() {
     return (
-      <MainScreenPresenter {...this.state} scrollEvent={this.scrollEvent} navigation={this.props.navigation}></MainScreenPresenter>
+      <MainScreenPresenter {...this.state} scrollEvent={this.scrollEvent} onRefresh={this.onRefresh} navigation={this.props.navigation}></MainScreenPresenter>
     );
   }
 }
