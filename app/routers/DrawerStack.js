@@ -15,23 +15,25 @@ import ApplyCompleteScreen from '../screens/ApplyComplete';
 import ApplyScreen from '../screens/Apply/ApplyScreen';
 import MessengerDetailScreen from '../screens/MessengerDetail/MessengerDetailScreen';
 import ScanScreen from '../screens/ScanScreen'
+import MainScreen from '../screens/Main/MainScreen';
+import ApplySceen from '../screens/Apply/ApplyScreen';
+import MessengerScreen from '../screens/Messenger/MessengerScreen';
+import MainStack from '../routers/MainStack'
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <Drawer.Navigator initialRouteName="TabStack" drawerContent={(props) => <CustomDrawer {...props} />}>
+    <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />}>
       <Drawer.Screen name="TabStack" component={TabStack}/>    
-      <Drawer.Screen name="Apply" component={ApplyScreen} options={{ gestureEnabled: false }}/>     
-      <Drawer.Screen name="ApplyComplete" component={ApplyCompleteScreen} options={{ gestureEnabled: false }}/>
       <Drawer.Screen name="MessengerDetail" component={MessengerDetailScreen} options={{ gestureEnabled: false }} />
       <Drawer.Screen name="Setting" component={SettingScreen} options={{gestureEnabled:false}}/>
-      <Drawer.Screen name="MyInfo" component={MyInfoScreen} options={{gestureEnabled:false}}/>
       <Drawer.Screen name="Announcement" component={AnnouncementlScreen} options={{gestureEnabled:false}}/>
       <Drawer.Screen name="EventRegistration" component={EventRegistrationScreen} options={{gestureEnabled:false}}/>
       <Drawer.Screen name="OpenComplete" component={OpenCompleteScreen} options={{gestureEnabled:false}}/>
       <Drawer.Screen name="CodeApply" component={CodeApplyScreen} options={{gestureEnabled:false}}/>
       <Drawer.Screen name="Scan" component={ScanScreen} options={{gestureEnabled:false}}/>
+      <Drawer.Screen name="Messenger" component={MessengerScreen} />
     </Drawer.Navigator>
   );
 }
