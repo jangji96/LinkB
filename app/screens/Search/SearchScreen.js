@@ -12,13 +12,19 @@ class SearchScreen extends React.Component {
     event_list: [],
     title_text: "💜당신에게 꼭 맞는 추천행사💜",
     searchString: "",
+
+    refreshing: false
   }
 
   componentDidMount = () => {
+    this.dataSetting()
+  }
+
+  dataSetting = () => {
     am = new APIManager();
 
     am.url = recommend_event_url
-    am.get(data => { this.setState({ event_list: data.event_list }) })
+    am.get(data => { this.setState({ event_list: data.event_list, title_text: "💜당신에게 꼭 맞는 추천행사💜", searchString: "" }) })
   }
 
   input_searchString = (text) => {
@@ -35,9 +41,20 @@ class SearchScreen extends React.Component {
     })
   }
 
+  onRefresh = () => {
+    this.setState({
+      refreshing: true
+    })
+    this.dataSetting()
+    this.setState({
+      refreshing: false
+    })
+
+  }
+
   render() {
     return (
-      <SearchScreenPresenter {...this.state} navigation={this.props.navigation} input_searchString={this.input_searchString} search={this.search}></SearchScreenPresenter>
+      <SearchScreenPresenter {...this.state} navigation={this.props.navigation} input_searchString={this.input_searchString} search={this.search} onRefresh={this.onRefresh}></SearchScreenPresenter>
     )
   }
 }
