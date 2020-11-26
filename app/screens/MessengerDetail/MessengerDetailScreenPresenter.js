@@ -81,8 +81,8 @@ class MessengerDetailScreenPresenter extends React.Component {
                         {this.state.messages.map(messages =>
                             <View key={messages.idx} style={{ flexDirection: messages.direction, alignSelf: messages.flex }}>
                                 <View style={{ width: SCREEN_WIDTH * 0.3 }}></View>
-                                <Text style={{ alignSelf: 'flex-end', fontSize: 12 }}>{messages.time}</Text>
-                                <Text style={{ alignSelf: messages.flex, marginTop: 10, backgroundColor: messages.color, padding: 10, marginRight: 15 }}>{messages.content}</Text>
+                                <Text style={{ alignSelf: 'flex-end', fontSize: 12, marginBottom: 5, marginRight: 5, }}>{messages.time}</Text>
+                                <Text style={{ alignSelf: messages.flex, marginTop: 5, marginBottom: 5, backgroundColor: messages.color, padding: 10, marginRight: 15 }}>{messages.content}</Text>
                             </View>
                         )}
                     </ScrollView>
