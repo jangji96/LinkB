@@ -105,7 +105,7 @@ class NoticeScreenPresenter extends React.Component {
                         <TouchableOpacity onPress={() => this.navigate(messages.code)}>
                             <View style={{ flexDirection: 'row', marginTop: '5%' }} >
                                 {this._renderCancel(messages.num)}    
-                                <Image style={{ width: SCREEN_WIDTH * 0.14, height: SCREEN_WIDTH * 0.14 }} source={require("../image/user.png")}></Image>
+                                <Image style={{ width: SCREEN_WIDTH * 0.14, height: SCREEN_WIDTH * 0.14 ,marginLeft:'2%'}} source={require("../image/user.png")}></Image>
                                 <Text style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%' }}>{messages.content}</Text>
                             </View>
                         </TouchableOpacity>

@@ -45,7 +45,7 @@ class MessengerScreenPresenter extends React.Component {
             loading =
                 <View>
                     {this.props.messenger_list.map(messenger =>
-                        <TouchableOpacity key={messenger.messenger_idx} onPress={() => this.props.navigation.navigate('MessengerDetail', { messenger_idx: messenger.messenger_idx })}>
+                        <TouchableOpacity style={{marginTop:6}} key={messenger.messenger_idx} onPress={() => this.props.navigation.navigate('MessengerDetail', { messenger_idx: messenger.messenger_idx })}>
                             <View style={{ flexDirection: 'row' }}>
                                 <Image style={{ width: SCREEN_WIDTH * 0.18, height: SCREEN_WIDTH * 0.18 }} source={require("../image/user.png")}></Image>
                                 <View style={{ width: '57%' }}>
@@ -73,7 +73,7 @@ class MessengerScreenPresenter extends React.Component {
                         </Button>
                     </Right>
                 </Header>
-                {<ScrollView style={{ alignSelf: 'center', marginTop: 20, width: '90%', height: '100%' }}
+                {<ScrollView style={{ alignSelf: 'center', width: '97%', height: '100%' }}
                     refreshControl={
                         <RefreshControl refreshing={this.props.refreshing} onRefresh={this.props.onRefresh} />
                     }
