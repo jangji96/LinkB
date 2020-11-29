@@ -1,29 +1,110 @@
 import React from "react";
 import MessengerScreenPresenter from './MessengerScreenPresenter'
 
+var temporary_data = [
+  {
+    messenger_idx: 1,
+    opponent: "스타트허브",
+    lastMessage: "안녕하세요 스타트허브입니다. 다음주 목요일 미팅 괜찮으신가요?",
+    lastMessageTime: "오전 10:00",
+  },
+  {
+    messenger_idx: 2,
+    opponent: "카카오톡",
+    lastMessage: "안녕하세요 카카오톡입니다. 다음주 금요일 미팅 괜찮으신가요?",
+    lastMessageTime: "오전 11:00",
+  },
+  {
+    messenger_idx: 3,
+    opponent: "카카오맵",
+    lastMessage: "안녕하세요 카카오톡입니다. 다음주 토요일 미팅 괜찮으신가요?",
+    lastMessageTime: "오전 12:00",
+  },
+]
+
 class MessengerScreen extends React.Component {
   state = {
-    event_list: [],
+    messenger_list: [],
+    save_messenger_list: [],
+
+    searchState: false,
+    searchString: "",
+
+    image: false,
+    textValue: "",
+
+    refreshing: false
   }
 
   componentDidMount = () => {
+    this.dataSetting()
+  }
 
-    // axios.get('http://101.101.161.189/api/index.php/linkb_event/select_event_list', { headers: { 'apikey': 'starthub' } })
-    //   .then((response) => {
-    //      console.log('이거임?3', response.data.event_list[0].event_image);
-    //     this.setState({
-    //       event_list: response.data.event_list
-    //     })
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+  dataSetting = () => {
+    this.setState({
+      messenger_list: temporary_data,
+      save_messenger_list: temporary_data,
+      searchState: false,
+      searchString: "",
+
+      image: false,
+      textValue: "",
+    })
+  }
+
+  input_searchString = (text) => {
+    this.setState({
+      searchString: text
+    })
+  }
+
+  click_search = () => {
+    this.setState({
+      image: true,
+      textValue: "",
+    })
+
+    var data = [];
+    var word = this.state.searchString;
+
+    if (this.state.searchState) {
+      for (var i = 0; i < this.state.save_messenger_list.length; i++) {
+        var result1 = this.state.save_messenger_list[i].opponent.indexOf(word)
+        // var result2 = this.state.save_messenger_list[i].lastMessage.indexOf(word)
+        if (result1 != -1) {
+          data.push(this.state.save_messenger_list[i])
+        }
+      }
+      console.log(data)
+      this.setState({
+        messenger_list: data,
+        searchState: false
+      })
+    } else {
+      this.setState({
+        searchState: true
+      })
+    }
+    this.setState({
+      image: false,
+      textValue: "검색 결과가 없습니다. "
+    })
+  }
+
+  onRefresh = () => {
+    this.setState({
+      refreshing: true
+    })
+    this.dataSetting()
+    this.setState({
+      refreshing: false
+    })
 
   }
 
   render() {
     return (
-      <MessengerScreenPresenter {...this.state} navigation={this.props.navigation}></MessengerScreenPresenter>
+      <MessengerScreenPresenter {...this.state} input_searchString={this.input_searchString} click_search={this.click_search} onRefresh={this.onRefresh} navigation={this.props.navigation}></MessengerScreenPresenter>
     );
   }
 }

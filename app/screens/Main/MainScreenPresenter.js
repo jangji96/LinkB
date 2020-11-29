@@ -10,6 +10,7 @@ import {
     TouchableOpacity,
     BackHandler,
     ToastAndroid,
+    RefreshControl
 } from 'react-native';
 import Swiper from 'react-native-swiper'
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
@@ -38,7 +39,11 @@ class MainScreenPresenter extends React.Component {
                     if (isScrolledToBottom >= (contentHeight - 5)) {
                         this.props.scrollEvent()
                     }
-                }}>
+                }}
+                refreshControl={
+                    <RefreshControl refreshing={this.props.refreshing} onRefresh={this.props.onRefresh} />
+                }
+            >
                 <View style={styles.select_cover_layout}>
                     <View>
                         <Header style={{ backgroundColor: '#311957' }}>

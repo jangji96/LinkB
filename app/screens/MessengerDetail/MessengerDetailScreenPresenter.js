@@ -19,21 +19,25 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
 var hours = new Date().getHours(); //Current Hours
 var min = new Date().getMinutes();
 var ampm
-if(hours>11){
-    ampm='오후';
-    hours=hours-12;
-    
-}else{
-    ampm='오전'
-}
-if(min<10){
-    min='0'+min
-}
+if (hours > 11) {
+    ampm = '오후';
+    hours = hours - 12;
 
+} else {
+    ampm = '오전'
+}
+if (min < 10) {
+    min = '0' + min
+}
+var keyNum = 3
 class MessengerDetailScreenPresenter extends React.Component {
     state = {
         input: '',
-        messages: []
+        messages: [
+            { idx: '1', name: '사용자', time: '오후 2:30', content: '안녕하세요 스타트허브입니다.\n다음주 목요일 미팅 괜찮으신가요?', color: '#f7f7f7', flex: 'flex-end', direction: 'row' },
+            { idx: '2', name: '스타트허브', time: '오후 2:30', content: '네 괜찮습니다.', color: '#ebe6f3', flex: 'flex-start', direction: 'row-reverse' }
+        ]
+
     };
     setInput = (input) => {
         this.setState({
@@ -41,20 +45,21 @@ class MessengerDetailScreenPresenter extends React.Component {
         })
     }
     chat = () => {
+        var jsonArray = [{ idx: keyNum, name: '사용자', time: ampm + hours + ':' + min, content: this.state.input, color: '#f7f7f7', flex: 'flex-end', direction: 'row' }]
+        keyNum += 1
         this.setState({
-            messages: this.state.messages.concat(this.state.input)
+            messages: this.state.messages.concat(jsonArray)
         })
         console.log(this.state.messages);
-        this.refs.TextInput.clear() 
-        this.refs.scrollView.scrollToEnd({})
+        this.refs.TextInput.clear()
     }
-    
+
     render() {
         return (
             <View style={{ backgroundColor: 'white', height: '100%' }}>
                 <Header style={{ backgroundColor: '#311957' }}>
                     <Left style={{ flex: 1 }}>
-                        <Button transparent onPress={() => this.props.navigation.navigate("Messenger")}>
+                        <Button transparent onPress={() => this.props.navigation.goBack()}>
                             <Icon color='white' name='chevron-back-outline' size={30} />
                         </Button>
                     </Left>
@@ -68,30 +73,16 @@ class MessengerDetailScreenPresenter extends React.Component {
                     </Right>
                 </Header>
                 <View style={{ flex: 1 }}>
-                    <ScrollView ref="scrollView">
-                        <Text style={{ alignSelf: 'center', marginTop: 10 }}>-------------------------  2020년 11월 04일 -------------------------</Text>
-                        <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
-                            <View style={{ width: SCREEN_WIDTH * 0.3 }}></View>
-                            <Text style={{ alignSelf: 'flex-end', marginRight: 10, fontSize: 12 }}>오후 2:00</Text>
-                            <Text style={{ alignSelf: 'flex-end', marginTop: 10, backgroundColor: '#f7f7f7', padding: 10, marginRight: 15 }}>안녕하세요 스타트허브입니다.{"\n"}다음주 목요일 미팅 괜찮으신가요?</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row-reverse', alignSelf: 'flex-start' }}>
-                            <Text style={{ alignSelf: 'flex-end', marginLeft: 10, fontSize: 12 }}>오후 2:15</Text>
-                            <Text style={{ alignSelf: 'flex-start', marginTop: 10, backgroundColor: '#ebe6f3', padding: 10, marginLeft: 15 }}>네 괜찮습니다~</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
-                            <Text style={{ alignSelf: 'flex-end', marginRight: 10, fontSize: 12 }}>오후 2:45</Text>
-                            <Text style={{ alignSelf: 'flex-end', marginTop: 10, backgroundColor: '#f7f7f7', padding: 10, marginRight: 15 }}>네 내일 뵙겠습니다!</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row-reverse', alignSelf: 'flex-start' }}>
-                            <Text style={{ alignSelf: 'flex-end', marginLeft: 10, fontSize: 12 }}>오후 3:23</Text>
-                            <Text style={{ alignSelf: 'flex-start', marginTop: 10, backgroundColor: '#ebe6f3', padding: 10, marginLeft: 15 }}>네~</Text>
-                        </View>
+                    <ScrollView
+                        ref={ref => { this.scrollView = ref }}
+                        onContentSizeChange={() => this.scrollView.scrollToEnd({ animated: false })}
+                        style={{ paddingHorizontal: 15 }}>
+                        <Text style={{ alignSelf: 'center', marginTop: 10 }}>----------------------  2020년 11월 04일 ----------------------</Text>
                         {this.state.messages.map(messages =>
-                            <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
+                            <View key={messages.idx} style={{ flexDirection: messages.direction, alignSelf: messages.flex }}>
                                 <View style={{ width: SCREEN_WIDTH * 0.3 }}></View>
-                                <Text style={{ alignSelf: 'flex-end', marginRight: 10, fontSize: 12 }}>{ampm +' '+ hours + ':' + min }</Text>
-                                <Text style={{ alignSelf: 'flex-end', marginTop: 10, backgroundColor: '#f7f7f7', padding: 10, marginRight: 15 }}>{messages}</Text>
+                                <Text style={{ alignSelf: 'flex-end', fontSize: 12, marginBottom: 5, marginRight: 5, }}>{messages.time}</Text>
+                                <Text style={{ alignSelf: messages.flex, marginTop: 5, marginBottom: 5, backgroundColor: messages.color, padding: 10, marginRight: 15 }}>{messages.content}</Text>
                             </View>
                         )}
                     </ScrollView>

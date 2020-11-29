@@ -9,6 +9,7 @@ import {
     TextInput,
     StatusBar,
     TouchableOpacity,
+    RefreshControl
 } from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
@@ -18,7 +19,11 @@ class SearchScreenPresenter extends React.Component {
 
     render() {
         return (
-            <ScrollView>
+            <ScrollView
+                refreshControl={
+                    <RefreshControl refreshing={this.props.refreshing} onRefresh={this.props.onRefresh} />
+                }
+            >
                 <View style={styles.background_layout}></View>
                 <View style={{ width: '100%', alignItems: "center", justifyContent: 'center', }}>
                     <View style={{ width: '100%', height: 45, flexDirection: 'row', marginTop: 23 }}>
@@ -38,7 +43,8 @@ class SearchScreenPresenter extends React.Component {
                     <View style={styles.main_layout}>
                         <Text style={styles.small_title}>{this.props.title_text}</Text>
                         <ScrollView
-                            showsHorizontalScrollIndicator={false}>
+                            showsHorizontalScrollIndicator={false}
+                        >
                             <View style={styles.event}>
                                 {this.props.event_list.map(event =>
                                     <View key={event.event_idx} style={styles.event_view}>
