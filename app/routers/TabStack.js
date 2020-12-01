@@ -28,6 +28,8 @@ export default function App() {
         return false;
       case 'ApplyComplete':
         return false;
+        case 'MyInfo':
+        return false;
     }
   }
   
