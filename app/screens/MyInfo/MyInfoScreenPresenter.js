@@ -7,14 +7,18 @@ import {
     Dimensions,
     Image,
     StatusBar,
-    TouchableOpacity
+    TouchableOpacity,
+    RefreshControl
 } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
+import axios from 'axios';
+
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-class MyInfoScreenPresenter extends React.Component {
+class MyInfoScreenPresenter extends React.Component {    
     render() {
         return (
             <View>
@@ -31,19 +35,24 @@ class MyInfoScreenPresenter extends React.Component {
                     </Right>
 
                 </Header>
-                <ScrollView style={{ alignSelf: 'center', width: '90%', height: '100%' }} showsVerticalScrollIndicator={false}>
-                    <View style={{ flexDirection: 'row', marginTop: '5%' }}>
-                        <Image style={{ width: SCREEN_WIDTH * 0.3, height: SCREEN_WIDTH * 0.3 }} source={require("../image/user.png")}></Image>
-                        <View style={{ alignItems: 'center', alignSelf: 'center', marginLeft: '3%' }}>
-                            <Text numberOfLines={1} style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%' }}>김이름</Text>
-                            <Text numberOfLines={1} style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%' }}>tset@test.com</Text>
-                            <Text numberOfLines={1} style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%' }}>010-1234-5678</Text>
-                            <Text numberOfLines={1} style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%' }}>스타트허브</Text>
+                <ScrollView
+                    refreshControl={
+                        <RefreshControl refreshing={this.props.refreshing} onRefresh={this.props.onRefresh} />
+                    }
+                    style={{ alignSelf: 'center', width: '100%', height: '100%' }} showsVerticalScrollIndicator={false}>
+                    <View style={{ flexDirection: 'row', padiingTop: '5%', backgroundColor: '#311957' }}>
+                        <EvilIcons style={styles.user_icon} color='white' name='user' size={90}></EvilIcons>
+                        <View style={{ alignItems: 'center', alignSelf: 'center', paddingLeft: '3%' }}>
+                            <Text numberOfLines={1} style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%', color: 'white' }}>김이름</Text>
+                            <Text numberOfLines={1} style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%', color: 'white' }}>tset@test.com</Text>
+                            <Text numberOfLines={1} style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%', color: 'white' }}>010-1234-5678</Text>
+                            <Text numberOfLines={1} style={{ marginLeft: 10, fontSize: 14, textAlignVertical: 'center', width: '100%', color: 'white' }}>스타트허브</Text>
                         </View>
                     </View>
-                    <Text style={styles.small_title}># 참가했던 행사</Text>
                     <ScrollView
+                        style={{paddingHorizontal:'2%'}}
                         showsHorizontalScrollIndicator={false}>
+                        <Text style={styles.small_title}># 참가했던 행사</Text>
                         <View style={styles.event}>
                             {this.props.event_list.map(event =>
                                 <View key={event.event_idx} style={styles.event_view}>
@@ -109,7 +118,12 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: 'black',
         fontFamily: 'NotoSans-Bold',
-    }
+    }, user_icon: {
+        paddingVertical: '10%',
+        marginLeft: '5%',
+        alignSelf: 'center',
+        justifyContent: 'center'
+    },
 })
 
 export default MyInfoScreenPresenter;
