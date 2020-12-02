@@ -7,7 +7,8 @@ import {
     Dimensions,
     Image,
     StatusBar,
-    TouchableOpacity
+    TouchableOpacity,
+    Keyboard
 } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -19,6 +20,19 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
 
 var keyNum = 3
 class MessengerDetailScreenPresenter extends React.Component {
+    constructor(props) {
+        super(props)
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow.bind(this));
+    }
+
+    componentWillUnmount = () => {
+        this.keyboardDidShowListener.remove();
+    }
+
+    _keyboardDidShow = () => {
+        this.refs.scrollView.scrollToEnd({ animated: false })
+    }
+
     state = {
         input: '',
         messages: [
@@ -54,7 +68,7 @@ class MessengerDetailScreenPresenter extends React.Component {
         this.refs.TextInput.clear()
     }
     moveEnd = () => {
-        console.log('on?'); 
+        console.log('on?');
         this.refs.scrollView.scrollToEnd()
     }
 
