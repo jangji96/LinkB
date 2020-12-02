@@ -7,7 +7,9 @@ import {
     Dimensions,
     Image,
     StatusBar,
-    TouchableOpacity
+    TouchableOpacity,
+    KeyboardAvoidingView,
+    Keyboard
 } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -30,7 +32,22 @@ if (min < 10) {
     min = '0' + min
 }
 var keyNum = 3
+var scrollPosition
+
 class MessengerDetailScreenPresenter extends React.Component {
+    constructor(props) {
+        super(props)
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow.bind(this));
+    }
+
+    componentWillUnmount = () => {
+        this.keyboardDidShowListener.remove();
+    }
+
+    _keyboardDidShow = () => {
+        this.refs.ScrollView.scrollToEnd({ animated: false })
+    }
+
     state = {
         input: '',
         messages: [
@@ -72,10 +89,11 @@ class MessengerDetailScreenPresenter extends React.Component {
                         </Button>
                     </Right>
                 </Header>
-                <View style={{ flex: 1 }}>
+                <View
+                    style={{ flex: 1 }}>
                     <ScrollView
-                        ref={ref => { this.scrollView = ref }}
-                        onContentSizeChange={() => this.scrollView.scrollToEnd({ animated: false })}
+                        ref='ScrollView'
+                        onContentSizeChange={() => this.refs.ScrollView.scrollToEnd({ animated: false })}
                         style={{ paddingHorizontal: 15 }}>
                         <Text style={{ alignSelf: 'center', marginTop: 10 }}>----------------------  2020년 11월 04일 ----------------------</Text>
                         {this.state.messages.map(messages =>
