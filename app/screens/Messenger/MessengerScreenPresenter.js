@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Highlighter from 'react-native-highlight-words';
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
@@ -45,12 +46,23 @@ class MessengerScreenPresenter extends React.Component {
             loading =
                 <View>
                     {this.props.messenger_list.map(messenger =>
-                        <TouchableOpacity style={{marginTop:6}} key={messenger.messenger_idx} onPress={() => this.props.navigation.navigate('MessengerDetail', { messenger_idx: messenger.messenger_idx })}>
+                        <TouchableOpacity style={{ marginTop: 6 }} key={messenger.messenger_idx} onPress={() => this.props.navigation.navigate('MessengerDetail', { messenger_idx: messenger.messenger_idx })}>
                             <View style={{ flexDirection: 'row' }}>
                                 <Image style={{ width: SCREEN_WIDTH * 0.18, height: SCREEN_WIDTH * 0.18 }} source={require("../image/user.png")}></Image>
                                 <View style={{ width: '57%' }}>
-                                    <Text style={{ fontSize: 16 }}>{messenger.opponent}</Text>
-                                    <Text numberOfLines={2} style={{ fontSize: 12 }}>{messenger.lastMessage}</Text>
+                                    <Highlighter                                    
+                                        style={{ fontSize: 16 }}
+                                        highlightStyle={{ backgroundColor: 'yellow' }}
+                                        searchWords={[this.props.searchString]}
+                                        textToHighlight={messenger.opponent}
+                                    />
+                                    <Highlighter
+                                        style={{ fontSize: 12 }}
+                                        numberOfLines={2}
+                                        highlightStyle={{ backgroundColor: 'yellow' }}
+                                        searchWords={['and', 'or', 'the']}
+                                        textToHighlight={messenger.lastMessage}
+                                    />
                                 </View>
                                 <View style={{}}>
                                     <Text>{messenger.lastMessageTime}</Text>

@@ -7,7 +7,8 @@ import {
     Dimensions,
     Image,
     StatusBar,
-    TouchableOpacity
+    TouchableOpacity,
+    Keyboard
 } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -16,21 +17,22 @@ import { TextInput } from "react-native-gesture-handler";
 import { useValue } from "react-native-reanimated";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
-var hours = new Date().getHours(); //Current Hours
-var min = new Date().getMinutes();
-var ampm
-if (hours > 11) {
-    ampm = '오후';
-    hours = hours - 12;
 
-} else {
-    ampm = '오전'
-}
-if (min < 10) {
-    min = '0' + min
-}
 var keyNum = 3
 class MessengerDetailScreenPresenter extends React.Component {
+    constructor(props) {
+        super(props)
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow.bind(this));
+    }
+
+    componentWillUnmount = () => {
+        this.keyboardDidShowListener.remove();
+    }
+
+    _keyboardDidShow = () => {
+        this.refs.scrollView.scrollToEnd({ animated: false })
+    }
+
     state = {
         input: '',
         messages: [
@@ -45,13 +47,29 @@ class MessengerDetailScreenPresenter extends React.Component {
         })
     }
     chat = () => {
+        var hours = new Date().getHours(); //Current Hours
+        var min = new Date().getMinutes();
+        var ampm
+        if (hours > 11) {
+            ampm = '오후';
+            hours = hours - 12;
+
+        } else {
+            ampm = '오전'
+        }
+        if (min < 10) {
+            min = '0' + min
+        }
         var jsonArray = [{ idx: keyNum, name: '사용자', time: ampm + hours + ':' + min, content: this.state.input, color: '#f7f7f7', flex: 'flex-end', direction: 'row' }]
         keyNum += 1
         this.setState({
             messages: this.state.messages.concat(jsonArray)
         })
-        console.log(this.state.messages);
         this.refs.TextInput.clear()
+    }
+    moveEnd = () => {
+        console.log('on?');
+        this.refs.scrollView.scrollToEnd()
     }
 
     render() {
@@ -74,8 +92,8 @@ class MessengerDetailScreenPresenter extends React.Component {
                 </Header>
                 <View style={{ flex: 1 }}>
                     <ScrollView
-                        ref={ref => { this.scrollView = ref }}
-                        onContentSizeChange={() => this.scrollView.scrollToEnd({ animated: false })}
+                        ref='scrollView'
+                        onContentSizeChange={() => this.refs.scrollView.scrollToEnd({ animated: false })}
                         style={{ paddingHorizontal: 15 }}>
                         <Text style={{ alignSelf: 'center', marginTop: 10 }}>----------------------  2020년 11월 04일 ----------------------</Text>
                         {this.state.messages.map(messages =>
@@ -88,6 +106,7 @@ class MessengerDetailScreenPresenter extends React.Component {
                     </ScrollView>
                     <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#f8f8f8' }}>
                         <TextInput
+                            onFocus={() => this.moveEnd()}
                             ref='TextInput'
                             placeholder='메세지 보내기'
                             onChangeText={this.setInput}
